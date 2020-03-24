@@ -41,7 +41,22 @@ chrome.runtime.onConnect.addListener(function (client) {
     });
 
     function saveUrl() {
-        variable.url = client.sender.origin;
+        let url;
+        if (typeof client.sender.origin != "undefined") {
+            // 如果有origin了话使用
+            url = client.sender.origin;
+        } else {
+            // 个别浏览器没有origin需要自己处理
+            let a = client.sender.url;
+            let b = a.indexOf("?");
+            if (b != -1) {
+                a = a.substr(0, b);
+            } else {
+                a = a.substr(0);
+            }
+            url = a;
+        }
+        variable.url = url;
     }
 
     // 判断数据是否有效
