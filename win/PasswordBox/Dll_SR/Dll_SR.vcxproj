@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{42F9FED2-9AF2-47E8-950D-9AF532513150}</ProjectGuid>
+    <RootNamespace>DllSR</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <ProjectName>Dll_SRW</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>SRW</TargetName>
+    <IncludePath>$(RemoteDebuggerWorkingDirectory);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>SRW</TargetName>
+    <IncludePath>$(RemoteDebuggerWorkingDirectory);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>SR</TargetName>
+    <IncludePath>$(SolutionDir)Dll_SR\Weteoes;$(SolutionDir)Dll_SR\Weteoes\More\openssl\include\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>SR</TargetName>
+    <IncludePath>$(SolutionDir)Dll_SR\Weteoes;$(SolutionDir)Dll_SR\Weteoes\More\openssl\include\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="DllSRW.cpp" />
+    <ClCompile Include="Weteoes\Application\Config.cpp" />
+    <ClCompile Include="Weteoes\Variable.cpp" />
+    <ClCompile Include="Weteoes\Application\Web\WebOperating.cpp" />
+    <ClCompile Include="Weteoes\Dll\ConfigDll.cpp" />
+    <ClCompile Include="Weteoes\Dll\ManagementDll.cpp" />
+    <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp" />
+    <ClCompile Include="Weteoes\Application\RSA.cpp" />
+    <ClCompile Include="Weteoes\Model\Sockets\CSocket.cpp" />
+    <ClCompile Include="Weteoes\Model\Sockets\SSocket.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Weteoes\Application\Actions\Software.h" />
+    <ClInclude Include="Weteoes\Application\Config.h" />
+    <ClInclude Include="Weteoes\Application\Sockets\WebSocket.h" />
+    <ClInclude Include="Weteoes\Variable.h" />
+    <ClInclude Include="Weteoes\Application\Web\WebOperating.h" />
+    <ClInclude Include="Weteoes\Dll\ConfigDll.h" />
+    <ClInclude Include="Weteoes\Dll\ManagementDll.h" />
+    <ClInclude Include="Weteoes\Dll\WeteoesDll.h" />
+    <ClInclude Include="Weteoes\Loading.h" />
+    <ClInclude Include="Weteoes\Model\Sockets\CSocket.h" />
+    <ClInclude Include="Weteoes\Model\Sockets\SSocket.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\aes.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1err.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1t.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1_mac.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\async.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asyncerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bio.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bioerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\blowfish.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bn.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bnerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\buffer.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\buffererr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\camellia.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cast.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cmac.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cms.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cmserr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\comp.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\comperr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\conf.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\conferr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\conf_api.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\crypto.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cryptoerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ct.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cterr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\des.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dh.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dherr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dsa.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dsaerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dtls1.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ebcdic.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ec.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ecdh.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ecdsa.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ecerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\engine.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\engineerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\err.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\evp.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\evperr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\e_os2.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\hmac.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\idea.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\kdf.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\kdferr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\lhash.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\md2.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\md4.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\md5.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\mdc2.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\modes.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\objects.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\objectserr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\obj_mac.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ocsp.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ocsperr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\opensslconf.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\opensslv.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ossl_typ.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pem.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pem2.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pemerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs12.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs12err.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs7.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs7err.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rand.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\randerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rand_drbg.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rc2.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rc4.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rc5.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ripemd.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rsa.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rsaerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\safestack.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\seed.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\sha.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\srp.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\srtp.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ssl.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ssl2.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ssl3.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\sslerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\stack.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\store.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\storeerr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\symhacks.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\tls1.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ts.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\tserr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\txt_db.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ui.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\uierr.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\whrlpool.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509err.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509v3.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509v3err.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509_vfy.h" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="Weteoes\Application\RSA.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source.def" />
+    <None Include="Weteoes\More\openssl\lib\libcrypto.def" />
+    <None Include="Weteoes\More\openssl\lib\libssl.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Weteoes\More\openssl\lib\libcrypto.lib" />
+    <Library Include="Weteoes\More\openssl\lib\libssl.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Dll_SR.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

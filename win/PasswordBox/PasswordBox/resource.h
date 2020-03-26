@@ -3,16 +3,19 @@
 // 供 PasswordBox.rc 使用
 //
 #define IDD_PASSWORDBOX_DIALOG          102
+#define IDD_DIALOG_Login                102
 #define IDR_MAINFRAME                   128
-#define IDC_CEF                         1000
+#define IDD_DIALOG_Main                 130
+#define IDC_LOGIN_STATIC_CEF            1001
+#define IDC_MAIN_STATIC_CEF             1003
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        130
+#define _APS_NEXT_RESOURCE_VALUE        132
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_CONTROL_VALUE         1004
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

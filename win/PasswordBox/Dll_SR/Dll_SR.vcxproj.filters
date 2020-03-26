@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Application\RSA.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Dll\ManagementDll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Dll\ConfigDll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DllSRW.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Model\Sockets\CSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Model\Sockets\SSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Application\Web\WebOperating.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Variable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Application\Config.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\__DECC_INCLUDE_EPILOGUE.H">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\__DECC_INCLUDE_PROLOGUE.H">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\aes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1_mac.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1err.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asn1t.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\async.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\asyncerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bio.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bioerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\blowfish.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\bnerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\buffererr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\camellia.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cast.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cmac.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cms.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cmserr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\comp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\comperr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\conf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\conf_api.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\conferr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\crypto.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cryptoerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\cterr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\des.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dherr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dsa.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dsaerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\dtls1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\e_os2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ebcdic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ec.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ecdh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ecdsa.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ecerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\engine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\engineerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\err.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\evp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\evperr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\hmac.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\idea.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\kdf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\kdferr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\lhash.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\md2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\md4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\md5.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\mdc2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\modes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\obj_mac.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\objects.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\objectserr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ocsp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ocsperr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\opensslconf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\opensslv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ossl_typ.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pem2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pemerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs7.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs7err.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs12.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\pkcs12err.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rand_drbg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\randerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rc2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rc4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rc5.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ripemd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rsa.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\rsaerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\safestack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\seed.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\sha.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\srp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\srtp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ssl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ssl2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ssl3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\sslerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\store.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\storeerr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\symhacks.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\tls1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ts.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\tserr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\txt_db.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\ui.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\uierr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\whrlpool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509_vfy.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509err.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509v3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\openssl\include\openssl\x509v3err.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Dll\WeteoesDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\RSA.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Loading.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Actions\Software.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Dll\ManagementDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Dll\ConfigDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Sockets\WebSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Model\Sockets\CSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Model\Sockets\SSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Web\WebOperating.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Variable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source.def">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="Weteoes\More\openssl\lib\libcrypto.def">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="Weteoes\More\openssl\lib\libssl.def">
+      <Filter>源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Weteoes\More\openssl\lib\libcrypto.lib" />
+    <Library Include="Weteoes\More\openssl\lib\libssl.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Dll_SR.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

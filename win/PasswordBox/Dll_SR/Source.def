@@ -1,0 +1,4 @@
+LIBRARY "SR"
+EXPORTS
+	RSA_Encode
+	RSA_UnEncode

@@ -5,10 +5,9 @@
 #include <Weteoes/More/CEF/include/cef_app.h>
 
 #ifdef _DEBUG
-#pragma comment(lib, "CEF/Debug/libcef_dll_wrapper.lib")
+#pragma comment(lib, "CEF/libcef_dll_wrapper_d.lib")
 #else
-#pragma comment(lib, "CEF/Release/libcef_dll_wrapper.lib")
-
+#pragma comment(lib, "CEF/libcef_dll_wrapper.lib")
 #endif
 #pragma comment(lib, "CEF/libcef.lib")
 

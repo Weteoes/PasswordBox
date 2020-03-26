@@ -10,7 +10,12 @@
 // 添加要在此处预编译的标头
 #include "framework.h"
 #include <string>
+#include <thread>
 
+#include <Weteoes/Dll/WeteoesDll.h>
+#include <Weteoes/Dll/ManagementDll.h>
+#include <Weteoes/Dll/SRWDll.h>
+#include <Weteoes/Variable.h>
 using namespace std;
 
 #endif //PCH_H

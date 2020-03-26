@@ -29,9 +29,10 @@ CefSettings AppCefClass::GetSetting()
 }
 
 std::string AppCefClass::GetUrl(std::string url) {
-	std::string URL_Client = ManagementDll::Get("URL_Client");
-	if (URL_Client.empty()) { return url; }
-	url = URL_Client + url;
+	std::string Software_UI_Host = ManagementDll::Get("Software_UI_Host");
+	std::string Software_UI_Port = ManagementDll::Get("Software_UI_Port");
+	if (Software_UI_Host.empty() && Software_UI_Port.empty()) { return url; }
+	url = Software_UI_Host + ":" + Software_UI_Port + url;
 	return url;
 }
 

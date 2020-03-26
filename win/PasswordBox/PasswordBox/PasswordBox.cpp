@@ -5,9 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "PasswordBox.h"
-#include <Weteoes/Dlg/PasswordBoxDlg.h>
-#include <Weteoes/Dll/WeteoesDll.h>
-#include <Weteoes/Dll/ManagementDll.h>
+#include <Weteoes/Dlg/Login_Dlg.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -42,6 +40,7 @@ CPasswordBoxApp theApp;
 bool CPasswordBoxApp::Ready_Dll() {
 	if (!WeteoesDll().Loading()) { return false; }
 	if (!ManagementDll().Loading()) { return false; }
+	if (!SRWDll().Loading()) { return false; }
 	return true;
 }
 
@@ -82,7 +81,7 @@ BOOL CPasswordBoxApp::InitInstance()
 	// 例如修改为公司或组织名
 	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
 
-	CPasswordBoxDlg dlg;
+	Login_Dlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

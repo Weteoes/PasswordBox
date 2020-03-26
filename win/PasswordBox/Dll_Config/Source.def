@@ -1,0 +1,4 @@
+LIBRARY "Config"
+EXPORTS
+	Config_CreateUser
+	Config_ReadUser

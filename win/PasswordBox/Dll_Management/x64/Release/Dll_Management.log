@@ -1,9 +1,1 @@
-﻿  Dll_Management.cpp
-  Convert.cpp
-  Management.cpp
-    正在创建库 E:\IT\Project\GitHub\Computer-Management\Computer Management Project\x64\Release\Management.lib 和对象 E:\IT\Project\GitHub\Computer-Management\Computer Management Project\x64\Release\Management.exp
-  正在生成代码
-  Previous IPDB not found, fall back to full compilation.
-  All 80 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  已完成代码的生成
-  Dll_Management.vcxproj -> E:\IT\Project\GitHub\Computer-Management\Computer Management Project\x64\Release\Management.dll
+﻿  Dll_Management.vcxproj -> E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Management.dll
