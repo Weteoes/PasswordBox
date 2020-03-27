@@ -121,7 +121,7 @@ void Login_Dlg::Ready_Dlg() {
 // 初始化CEF
 void Login_Dlg::Ready_CEF()
 {
-	AppCefClass::Url = AppCefClass().GetUrl("/1.html");
+	AppCefClass::Url = AppCefClass().GetUrl("/operating/console/getAll");
 	CefMainArgs mainArgs(AfxGetInstanceHandle());
 	CefRefPtr<CEF_Login_App> app(new CEF_Login_App);
 	CefExecuteProcess(mainArgs, app.get(), NULL);

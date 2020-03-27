@@ -1,3 +1,4 @@
+#include <pch.h>
 #ifndef SRWDll_CPP
 #define SRWDll_CPP
 #include "SRWDll.h"

@@ -18,31 +18,34 @@
     <ClCompile Include="DllConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weteoes\XML.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Weteoes\More\tinyxml2\tinyxml2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weteoes\Application\ReadXMLConfig.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Weteoes\Application\ReturnXMLStruct.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Weteoes\Application\CreateXMLConfig.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Weteoes\Application\ConfigFile.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weteoes\Application\SetXMLConfig.cpp">
+    <ClCompile Include="Weteoes\Dll\SRWDll.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weteoes\Dll\SRWDll.cpp">
+    <ClCompile Include="Weteoes\Application\XML.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Variable.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Application\Operating\CreateXMLConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Application\Operating\ReadXMLConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Application\Operating\ReturnXMLStruct.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Weteoes\Application\Operating\SetXMLConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -52,37 +55,40 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Weteoes\XML.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Weteoes\More\tinyxml2\tinyxml2.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\Dll\WeteoesDll.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Weteoes\Application\ReturnXMLStruct.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Weteoes\Application\ReadXMLConfig.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Weteoes\Application\CreateXMLConfig.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Weteoes\Application\ConfigFile.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Weteoes\Loading.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Weteoes\Application\SetXMLConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\Dll\SRWDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\XML.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Variable.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Operating\CreateXMLConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Operating\ReadXMLConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Operating\ReturnXMLStruct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Operating\SetXMLConfig.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

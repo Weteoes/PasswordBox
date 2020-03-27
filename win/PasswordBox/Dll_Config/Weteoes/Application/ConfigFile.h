@@ -1,9 +1,9 @@
-#include <Weteoes/Loading.h>
+#include <pch.h>
 
 class ConfigFileClass
 {
 public:
-	static std::string User;
+	static std::string UserAndPassword;
 	static std::string Computer;
 };
 

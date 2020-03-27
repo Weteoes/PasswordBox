@@ -1,4 +1,6 @@
 LIBRARY "Config"
 EXPORTS
-	Config_CreateUser
-	Config_ReadUser
+	Config_CreateUserAndPassword
+	Config_ReadUserAndPassword
+	Config_ReadAllUserAndPassword
+	Config_DelUserAndPassword

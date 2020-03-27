@@ -94,7 +94,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -135,7 +135,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -166,7 +166,7 @@
     <ClInclude Include="Weteoes\Dll\ConfigDll.h" />
     <ClInclude Include="Weteoes\Dll\ManagementDll.h" />
     <ClInclude Include="Weteoes\Dll\WeteoesDll.h" />
-    <ClInclude Include="Weteoes\Loading.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="Weteoes\Model\Sockets\CSocket.h" />
     <ClInclude Include="Weteoes\Model\Sockets\SSocket.h" />
     <ClInclude Include="Weteoes\More\openssl\include\openssl\aes.h" />

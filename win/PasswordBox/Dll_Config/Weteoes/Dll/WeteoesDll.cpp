@@ -1,3 +1,4 @@
+#include <pch.h>
 #include "WeteoesDll.h"
 
 WeteoesDll::Basics_GetNowFilePath_ WeteoesDll::Basics_GetNowFilePath;

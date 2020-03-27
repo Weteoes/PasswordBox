@@ -1,6 +1,6 @@
 #ifndef WebSocketClass_H
 #define WebSocketClass_H
-#include <Weteoes/Loading.h>
+#include <pch.h>
 #include <Weteoes/Model/Sockets/SSocket.h>
 
 class WebSocketClass : public SSocketClass

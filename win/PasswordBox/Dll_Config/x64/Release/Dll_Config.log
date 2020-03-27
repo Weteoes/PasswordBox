@@ -8,9 +8,11 @@
   tinyxml2.cpp
   XML.cpp
   CreateXMLConfig.cpp
-    正在创建库 E:\IT\Project\GitHub\Computer-Management\Computer Management Project\x64\Release\Config.lib 和对象 E:\IT\Project\GitHub\Computer-Management\Computer Management Project\x64\Release\Config.exp
+  Variable.cpp
+LINK : warning C4727: 具有相同时间戳的名为 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\config.pch 的 PCH 已存在于 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\tinyxml2.obj 和 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\weteoesdll.obj 中。 使用第一个 PCH。
+    正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.exp
   正在生成代码
   Previous IPDB not found, fall back to full compilation.
-  All 485 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 525 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
-  Dll_Config.vcxproj -> E:\IT\Project\GitHub\Computer-Management\Computer Management Project\x64\Release\Config.dll
+  Dll_Config.vcxproj -> E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.dll

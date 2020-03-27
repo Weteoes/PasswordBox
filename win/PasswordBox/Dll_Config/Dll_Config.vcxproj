@@ -95,6 +95,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
@@ -134,6 +136,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -144,30 +148,32 @@
   <ItemGroup>
     <ClCompile Include="Weteoes\Application\ConfigFile.cpp" />
     <ClCompile Include="DllConfig.cpp" />
-    <ClCompile Include="Weteoes\Application\ReadXMLConfig.cpp" />
-    <ClCompile Include="Weteoes\Application\ReturnXMLStruct.cpp" />
-    <ClCompile Include="Weteoes\Application\SetXMLConfig.cpp" />
+    <ClCompile Include="Weteoes\Application\Operating\ReadXMLConfig.cpp" />
+    <ClCompile Include="Weteoes\Application\Operating\ReturnXMLStruct.cpp" />
+    <ClCompile Include="Weteoes\Application\Operating\SetXMLConfig.cpp" />
     <ClCompile Include="Weteoes\Dll\SRWDll.cpp" />
     <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp" />
     <ClCompile Include="Weteoes\More\tinyxml2\tinyxml2.cpp" />
-    <ClCompile Include="Weteoes\XML.cpp" />
-    <ClCompile Include="Weteoes\Application\CreateXMLConfig.cpp" />
+    <ClCompile Include="Weteoes\Application\XML.cpp" />
+    <ClCompile Include="Weteoes\Application\Operating\CreateXMLConfig.cpp" />
+    <ClCompile Include="Weteoes\Variable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Weteoes\Application\ConfigFile.h" />
-    <ClInclude Include="Weteoes\Application\ReadXMLConfig.h" />
-    <ClInclude Include="Weteoes\Application\SetXMLConfig.h" />
+    <ClInclude Include="Weteoes\Application\Operating\ReadXMLConfig.h" />
+    <ClInclude Include="Weteoes\Application\Operating\SetXMLConfig.h" />
     <ClInclude Include="Weteoes\Dll\SRWDll.h" />
     <ClInclude Include="Weteoes\Dll\WeteoesDll.h" />
-    <ClInclude Include="Weteoes\Loading.h" />
     <ClInclude Include="Weteoes\More\tinyxml2\tinyxml2.h" />
-    <ClInclude Include="Weteoes\XML.h" />
-    <ClInclude Include="Weteoes\Application\CreateXMLConfig.h" />
-    <ClInclude Include="Weteoes\Application\ReturnXMLStruct.h" />
+    <ClInclude Include="Weteoes\Application\XML.h" />
+    <ClInclude Include="Weteoes\Application\Operating\CreateXMLConfig.h" />
+    <ClInclude Include="Weteoes\Application\Operating\ReturnXMLStruct.h" />
+    <ClInclude Include="Weteoes\Variable.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dll_Config.rc" />

@@ -371,9 +371,6 @@
     <ClInclude Include="Weteoes\Application\RSA.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Weteoes\Loading.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -402,6 +399,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\Application\Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
