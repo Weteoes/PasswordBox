@@ -1,52 +1,147 @@
-chrome.runtime.onConnect.addListener(function (client) {
-    // È«¾Ö±äÁ¿
-    let variable = {};
-    // ±£´æ·ÃÎÊURL
-    saveUrl();
-    log(variable.url, "connect");
-    // »ñÈ¡ÕË»§ĞÅÏ¢
-    getUserPassbyUrl();
-
-    function getUserPassbyUrl() {
-        let a = localStorage.getItem(variable.url);
-        if (a == null) { return; }
-        a = JSON.parse(a);
-        let user = a.user, pass = a.pass;
-        if (user != undefined && pass != undefined) {
-            // Èç¹ûÓĞÊı¾İ
-            client.postMessage( { api:"getUserPassbyUrl", "user": user, "pass": pass }, ()=> {})
+ï»¿var Weteoes = {
+    // é…ç½®
+    config: {
+        // ä½¿ç”¨è½¯ä»¶å­˜å‚¨
+        userSoftware: true,
+    },
+    // è¿æ¥è½¯ä»¶
+    software: {
+        url: {
+            get: "http://127.0.0.1:23340/operating/browser/get",
+            create: "http://127.0.0.1:23340/operating/browser/create",
+            del: "http://127.0.0.1:23340/operating/browser/del",
+        },
+        operating: {
+            get(client, host) {
+                let data = { Host: host };
+                Weteoes.basic.axios(
+                    Weteoes.software.url.get, 
+                    data, 
+                (r)=>{
+                    let data = r.data;
+                    if (data.Code == 0) {
+                        client.postMessage( { api:"getUserPassbyUrl", "user": data.Data.User, "pass": data.Data.Pass }, ()=> {})
+                        log("get ok");
+                    }
+                },(e)=>{
+                    log(e);
+                });  
+            },
+            create(host, user, pass) {
+                let data = { Host: host, User: user, Pass: pass };
+                Weteoes.basic.axios(
+                    Weteoes.software.url.create,
+                    data, 
+                (r)=>{
+                    let data = r.data;
+                    if (data.Code == 0) {
+                        log("create ok");
+                    }
+                },(e)=>{
+                    log(e);
+                }); 
+            },
+            del(host) {
+                let data = { Host: host };
+                Weteoes.basic.axios(
+                    Weteoes.software.url.del, 
+                    data, 
+                (r)=>{
+                    let data = r.data;
+                    if (data.Code == 0) {
+                        log("del ok");
+                    }
+                },(e)=>{
+                    log(e);
+                }); 
+            },
+        }
+    },
+    // æœ¬åœ°æ“ä½œ
+    localStorage: {
+        operating: {
+            get(client, host) {
+                let a = localStorage.getItem(host);
+                if (a == null) { return; }
+                a = JSON.parse(a);
+                let user = a.user, pass = a.pass;
+                if (user != undefined && pass != undefined) {
+                    // å¦‚æœæœ‰æ•°æ®
+                    client.postMessage( { api:"getUserPassbyUrl", "user": user, "pass": pass }, ()=> {})
+                }
+            },
+            create(host) {
+                localStorage.setItem(host, JSON.stringify(variable));
+            },
+        }
+    },
+    basic: {
+        axios(url, data, success, error) {
+            if (typeof success != "function") { success = ()=>{}; }
+            if (typeof error != "function") { error = ()=>{}; }
+            axios.get(url, {
+                params: data
+            }).then((r) => {
+                success(r);
+            }).catch((e)=>{
+                error(e);
+            })
         }
     }
+};
+if (Weteoes.config.userSoftware) {
+    log("å°†ä½¿ç”¨è½¯ä»¶å­˜å‚¨,å®‰å…¨æ€§é«˜");
+}else {
+    log("å°†ä½¿ç”¨æ’ä»¶å­˜å‚¨,å®‰å…¨æ€§è¾ƒä½");
+}
+chrome.runtime.onConnect.addListener(function (client) {
+    // å…¨å±€å˜é‡
+    let variable = {};
+    // ä¿å­˜è®¿é—®URL
+    saveUrl();
+    log(variable.Host, "connect");
+    // è·å–è´¦æˆ·ä¿¡æ¯
+    getUserPassbyUrl();
 
     client.onDisconnect.addListener(function() {
         if (pd_data()) {
-            console.log(variable);
-            localStorage.setItem(variable.url, JSON.stringify(variable));
+            if (Weteoes.config.userSoftware) {
+                Weteoes.software.operating.create(variable.Host, variable.User, variable.Pass);
+            } else {
+                Weteoes.localStorage.operating.create(variable.Host);
+            }
         }
-        //localStorage.setItem();
     });
 
     client.onMessage.addListener(function(msg) {
         switch(msg.api) {
-            // ÓÃ»§ÃûÌá½»api
+            // ç”¨æˆ·åæäº¤api
             case "user":
-                variable.user = msg.user;
+                variable.User = msg.user;
                 break;
 
-            // ÃÜÂëÌá½»api
+            // å¯†ç æäº¤api
             case "pass":
-                variable.pass = msg.pass;
+                variable.Pass = msg.pass;
                 break;   
         }
     });
 
+    function getUserPassbyUrl() {
+        if (Weteoes.config.userSoftware) {
+            Weteoes.software.operating.get(client, variable.Host);
+        } else {
+            Weteoes.localStorage.operating.get(client, variable.Host);
+        }
+    }
+
     function saveUrl() {
         let url;
         if (typeof client.sender.origin != "undefined") {
-            // Èç¹ûÓĞoriginÁË»°Ê¹ÓÃ
+            // å¦‚æœæœ‰originäº†è¯ä½¿ç”¨
             url = client.sender.origin;
         } else {
-            // ¸ö±ğä¯ÀÀÆ÷Ã»ÓĞoriginĞèÒª×Ô¼º´¦Àí
+            // ä¸ªåˆ«æµè§ˆå™¨æ²¡æœ‰originéœ€è¦è‡ªå·±å¤„ç†
             let a = client.sender.url;
             let b = a.indexOf("?");
             if (b != -1) {
@@ -56,22 +151,22 @@ chrome.runtime.onConnect.addListener(function (client) {
             }
             url = a;
         }
-        variable.url = url;
+        variable.Host = url;
     }
 
-    // ÅĞ¶ÏÊı¾İÊÇ·ñÓĞĞ§
+    // åˆ¤æ–­æ•°æ®æ˜¯å¦æœ‰æ•ˆ
     function pd_data() {
         if (
-            typeof variable.url != "undefined" &&
-            typeof variable.user != "undefined" && 
-            typeof variable.pass != "undefined"
+            typeof variable.Host != "undefined" &&
+            typeof variable.User != "undefined" && 
+            typeof variable.Pass != "undefined"
             ) {
                 return true;
             }
         return false;
     }
-
-    function log(...msg) {
-        console.log(...msg);
-    }
 });
+
+function log(...msg) {
+    console.log(...msg);
+}

@@ -17,7 +17,7 @@ ReturnXMLStruct::Struct_UserAndPassword ReadXMLConfigClass::ReadUserAndPassword(
 	}
 	vector<ReturnXMLStruct::Struct_UserAndPassword> list = ReadAllUserAndPassword();
 	for (int i = 0; i < list.size(); i++) {
-		if (list[i].Host == host) {
+		if (string(list[i].Host) == host) {
 			return list[i];
 		}
 	}

@@ -14,8 +14,5 @@ private:
 	string operating_operating_browser_create(string data);
 	string operating_operating_console_getAll(string data);
 
-private:
-	string get_HtmlConfig(string data, string configName);
-
 };
 #endif

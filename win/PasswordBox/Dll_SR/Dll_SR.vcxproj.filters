@@ -45,6 +45,9 @@
     <ClCompile Include="Weteoes\Application\Config.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Weteoes\Application\Web\WebBasic.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Weteoes\More\openssl\include\openssl\__DECC_INCLUDE_EPILOGUE.H">
@@ -402,6 +405,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\Web\WebBasic.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -92,6 +92,7 @@ void Login_Dlg::Ready() {
 	Ready_Dlg();
 	VariableClass::app_Dll_SWR.Start(0);
 	Ready_CEF();
+	SRWDll::Set_Variable("LoginIn", "1");
 }
 
 // 初始化窗口
@@ -146,6 +147,7 @@ HCURSOR Login_Dlg::OnQueryDragIcon()
 void Login_Dlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	exit(0);
 	Main_Dlg a;
 	a.DoModal();
 }

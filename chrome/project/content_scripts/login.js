@@ -46,17 +46,29 @@ function addDocumentEvent() {
 }
 
 function addInputEvent(userInput, passInput) {
+    function PostMessageUser(user) {
+        variable.RunTimeConnect.postMessage( { api:"user", "user": user }, ()=> {})
+    }
+    function PostMessagePass(pass) {
+        variable.RunTimeConnect.postMessage( { api:"pass", "pass": pass }, ()=> {})
+    }
+    let user = userInput.value;
+    let pass = passInput.value;
+    if (user != "") {
+        PostMessageUser(user);
+    }
+    if (pass != "") {
+        PostMessagePass(pass);
+    }
     userInput.onchange = () => {
         let user = userInput.value;
         if (user == "") { return; }
-        log("user", user);
-        variable.RunTimeConnect.postMessage( { api:"user", "user": user }, ()=> {})
+        PostMessageUser(user);
     }
     passInput.onchange = () => {
         let pass = passInput.value;
         if (pass == "") { return; }
-        log("pass", pass);
-        variable.RunTimeConnect.postMessage( { api:"pass", "pass": pass }, ()=> {})
+        PostMessagePass(pass);
     }
 }
 

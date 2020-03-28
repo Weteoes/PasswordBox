@@ -1,4 +1,6 @@
-LIBRARY "SR"
+LIBRARY "SRW"
 EXPORTS
+	Web_Entrance
 	RSA_Encode
 	RSA_UnEncode
+	Set_Variable

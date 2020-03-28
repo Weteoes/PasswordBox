@@ -7,6 +7,7 @@
 SRWDll::Web_Entrance_ SRWDll::Web_Entrance;
 SRWDll::RSA_Encode_ SRWDll::RSA_Encode;
 SRWDll::RSA_UnEncode_ SRWDll::RSA_UnEncode;
+SRWDll::Set_Variable_ SRWDll::Set_Variable;
 
 bool SRWDll::Loading()
 {
@@ -18,6 +19,8 @@ bool SRWDll::Loading()
 		(RSA_Encode_)GetProcAddress(dll, "RSA_Encode");
 	RSA_UnEncode =
 		(RSA_UnEncode_)GetProcAddress(dll, "RSA_UnEncode");
+	Set_Variable =
+		(Set_Variable_)GetProcAddress(dll, "Set_Variable");
 	return true;
 }
 #endif
