@@ -46,7 +46,7 @@ public:
 	static CRect CEF_CRect;
 
 private:
-    virtual void OnWebKitInitialized_() = 0;
+    virtual void OnWebKitInitialized_();
 };
 
 #endif

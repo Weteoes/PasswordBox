@@ -116,32 +116,20 @@ void Main_Dlg::Ready_Dlg() {
 }
 
 // 初始化CEF
-void Main_Dlg::Ready_CEF()
-{
-	AppCefClass::Url = AppCefClass().GetUrl("");
+void Main_Dlg::Ready_CEF() {
+	string url = AppCefClass().GetUrl("");
 	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();;
 	GetDlgItem(IDC_MAIN_STATIC_CEF)->GetClientRect(&CEF_Main_App::CEF_CRect);
 	CEF_Main_App::CEF_HWND = GetSafeHwnd();
 	CefBrowserSettings browser_settings;
 	CefWindowInfo window_info;
 	window_info.SetAsChild(CEF_Main_App::CEF_HWND, CEF_Main_App::CEF_CRect);
-	CefBrowserHost::CreateBrowser(window_info, CEF_handler, AppCefClass::Url, browser_settings, NULL, NULL);
-
-
-	//CefMainArgs mainArgs(AfxGetInstanceHandle());
-	//CefRefPtr<CEF_Main_App> app(new CEF_Main_App);
-	//CefExecuteProcess(mainArgs, app.get(), NULL);
-
-	//CefSettings settings = AppCefClass().GetSetting();
-	//GetDlgItem(IDC_MAIN_STATIC_CEF)->GetClientRect(&CEF_Main_App::CEF_CRect);
-	//CEF_Main_App::CEF_HWND = GetSafeHwnd();
-	//CefInitialize(mainArgs, settings, app.get(), NULL);
+	CefBrowserHost::CreateBrowser(window_info, CEF_handler, url, browser_settings, NULL, NULL);
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
 //显示。
-HCURSOR Main_Dlg::OnQueryDragIcon()
-{
+HCURSOR Main_Dlg::OnQueryDragIcon() {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 

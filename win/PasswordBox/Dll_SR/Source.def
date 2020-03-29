@@ -3,4 +3,6 @@ EXPORTS
 	Web_Entrance
 	RSA_Encode
 	RSA_UnEncode
+	AES_Encode
+	AES_UnEncode
 	Set_Variable

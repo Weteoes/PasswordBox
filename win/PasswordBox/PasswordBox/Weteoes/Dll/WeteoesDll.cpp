@@ -1,8 +1,4 @@
 #include <pch.h>
-
-#ifndef WeteoesDll_Cpp
-#define WeteoesDll_Cpp
-
 #include "WeteoesDll.h"
 
 WeteoesDll::Basics_GetNowFilePath_ WeteoesDll::Basics_GetNowFilePath;
@@ -84,4 +80,3 @@ bool WeteoesDll::Loading()
 		(CMD_Run_)GetProcAddress(dll, "CMD_Run");
 	return TRUE;
 }
-#endif

@@ -8,30 +8,30 @@
 class WeteoesDll
 {
 private:
-	typedef char*(__stdcall *Basics_GetNowFilePath_)();
-	typedef char*(__stdcall *Basics_Replace_)(char* str, char* oldChar, char* newChar);
-	typedef bool(__stdcall *Basics_IsNum_)(char*);
-	typedef char*(__stdcall *Basics_CharToUL_)(char*, bool ToUpper);
-	typedef char*(__stdcall *MD5_MD5File_)(char*);
-	typedef char*(__stdcall *Http_HttpRequest_)(char* Url, short Port, char* lpUrl, char* Method, char* lpPostData, int nPostDataLen);
-	typedef LPCUWSTR(__stdcall *Convert_CharToLpcuwstr_)(char*);
-	typedef bool(__stdcall *Convert_CharToBool_)(char*);
-	typedef void(__stdcall *IO_WriteFile_)(char* file, char* data);
-	typedef char*(__stdcall *IO_ReadFile_)(char*);
-	typedef void(__stdcall *IO_CreatePath_)(char*);
-	typedef bool(__stdcall *IO_Exists_)(char*);
-	typedef void(__stdcall *IO_Remove_)(char*);
-	typedef HKEY(__stdcall *Regedit_CreateRegFile_)(HKEY Key, char* FileName);
-	typedef bool(__stdcall *Regedit_CreateRegValue_)(HKEY Key, char* KeyName, char* KeyValue, DWORD KeyType, bool WriteIsNum);
-	typedef char*(__stdcall *Regedit_QueryRegValue_)(HKEY Key, char* KeyName, DWORD KeyType, bool ReadIsNum);
-	typedef bool(__stdcall *Regedit_QueryAddValue_)(HKEY Key, char* KeyName, char* KeyValue, DWORD KeyType, bool ReadIsNum);
-	typedef HKEY(__stdcall *Regedit_OpenRegFile_)(HKEY MainPath, char* FileName);
-	typedef char*(__stdcall *Process_AsUser_)(char* file, char* SoftwareName);
-	typedef int*(__stdcall *Process_GetProcessidFromName_)(char* name,int *count);
-	typedef bool(__stdcall *Process_SoftwareExist_)(char* name, char* title);
-	typedef char*(__stdcall *Base64_Encode_)(char* data, int length);
-	typedef char*(__stdcall *Base64_UnEncode_)(char* data, int length);
-	typedef char*(__stdcall *CMD_Run_)(char* shell);
+	typedef char* (__stdcall* Basics_GetNowFilePath_)();
+	typedef char* (__stdcall* Basics_Replace_)(char* str, char* oldChar, char* newChar);
+	typedef bool(__stdcall* Basics_IsNum_)(char*);
+	typedef char* (__stdcall* Basics_CharToUL_)(char*, bool ToUpper);
+	typedef char* (__stdcall* MD5_MD5File_)(char*);
+	typedef char* (__stdcall* Http_HttpRequest_)(char* Url, short Port, char* lpUrl, char* Method, char* lpPostData, int nPostDataLen);
+	typedef LPCUWSTR(__stdcall* Convert_CharToLpcuwstr_)(char*);
+	typedef bool(__stdcall* Convert_CharToBool_)(char*);
+	typedef void(__stdcall* IO_WriteFile_)(char* file, char* data, int dataLen);
+	typedef int(__stdcall* IO_ReadFile_)(char* file, char*& result);
+	typedef void(__stdcall* IO_CreatePath_)(char*);
+	typedef bool(__stdcall* IO_Exists_)(char*);
+	typedef void(__stdcall* IO_Remove_)(char*);
+	typedef HKEY(__stdcall* Regedit_CreateRegFile_)(HKEY Key, char* FileName);
+	typedef bool(__stdcall* Regedit_CreateRegValue_)(HKEY Key, char* KeyName, char* KeyValue, DWORD KeyType, bool WriteIsNum);
+	typedef char* (__stdcall* Regedit_QueryRegValue_)(HKEY Key, char* KeyName, DWORD KeyType, bool ReadIsNum);
+	typedef bool(__stdcall* Regedit_QueryAddValue_)(HKEY Key, char* KeyName, char* KeyValue, DWORD KeyType, bool ReadIsNum);
+	typedef HKEY(__stdcall* Regedit_OpenRegFile_)(HKEY MainPath, char* FileName);
+	typedef char* (__stdcall* Process_AsUser_)(char* file, char* SoftwareName);
+	typedef int* (__stdcall* Process_GetProcessidFromName_)(char* name, int* count);
+	typedef bool(__stdcall* Process_SoftwareExist_)(char* name, char* title);
+	typedef char* (__stdcall* Base64_Encode_)(char* data, int length);
+	typedef int(__stdcall* Base64_UnEncode_)(char* data, int length, char*& result);
+	typedef char* (__stdcall* CMD_Run_)(char* shell);
 
 public:
 	bool Loading();

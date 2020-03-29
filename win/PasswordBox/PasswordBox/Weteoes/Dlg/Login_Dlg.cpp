@@ -16,6 +16,7 @@
 #include <Weteoes/More/CEF/Config.h>
 #include <Weteoes/More\CEF/Application/Dlg/Login/CEF_Login_App.h>
 #include <Weteoes/More\CEF/Application/Dlg/Login/CEF_Login_V8Handler.h>
+#include <Weteoes\More\CEF\Application\CEF_Handler.h>
 
 
 // Login_Dlg 对话框
@@ -93,6 +94,7 @@ void Login_Dlg::Ready() {
 	VariableClass::app_Dll_SWR.Start(0);
 	Ready_CEF();
 	SRWDll::Set_Variable("LoginIn", "1");
+	ConfigDll::Set_Variable("AES_Password", "123456");
 }
 
 // 初始化窗口
@@ -120,34 +122,29 @@ void Login_Dlg::Ready_Dlg() {
 }
 
 // 初始化CEF
-void Login_Dlg::Ready_CEF()
-{
-	AppCefClass::Url = AppCefClass().GetUrl("/operating/console/getAll");
-	CefMainArgs mainArgs(AfxGetInstanceHandle());
-	CefRefPtr<CEF_Login_App> app(new CEF_Login_App);
-	CefExecuteProcess(mainArgs, app.get(), NULL);
-
-	CefSettings settings = AppCefClass().GetSetting();
+void Login_Dlg::Ready_CEF() {
+	string url = VariableClass::appCefClass.GetUrl("/operating/console/getAll");
+	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
 	GetDlgItem(IDC_LOGIN_STATIC_CEF)->GetClientRect(&CEF_Login_App::CEF_CRect);
 	CEF_Login_App::CEF_HWND = GetSafeHwnd();
-	CefInitialize(mainArgs, settings, app.get(), NULL);
-	
+	CefBrowserSettings browser_settings;
+	CefWindowInfo window_info;
+	window_info.SetAsChild(CEF_Login_App::CEF_HWND, CEF_Login_App::CEF_CRect);
+	CefBrowserHost::CreateBrowser(window_info, CEF_handler, url, browser_settings, NULL, NULL);
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
 //显示。
-HCURSOR Login_Dlg::OnQueryDragIcon()
-{
+HCURSOR Login_Dlg::OnQueryDragIcon() {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
 
 #include <Weteoes/Dlg/Main_Dlg.h>
 
-void Login_Dlg::OnBnClickedOk()
-{
+void Login_Dlg::OnBnClickedOk() {
 	// TODO: 在此添加控件通知处理程序代码
-	exit(0);
+	//exit(0);
 	Main_Dlg a;
 	a.DoModal();
 }

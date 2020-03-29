@@ -3,7 +3,8 @@
 #define VariableClass_H
 
 #include <Weteoes/Application/Config.h>
-#include <Weteoes/Application/RSA.h>
+#include <Weteoes/Application/Security/RSA.h>
+#include <Weteoes/Application/Security/SecurityAES.h>
 #include <Weteoes/Application/Web/WebOperating.h>
 #include <Weteoes/Application/Web/WebBasic.h>
 
@@ -14,6 +15,7 @@ public:
 	static RSAClass rsaClass;
 	static ConfigDll configDll;
 	static WebBasicClass webBasicClass;
+	static SecurityAESClass securityAESClass;
 
 private:
 	static map<string, string> variable_map;

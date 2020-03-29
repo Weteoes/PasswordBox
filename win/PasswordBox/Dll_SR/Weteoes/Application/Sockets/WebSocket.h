@@ -81,8 +81,11 @@ void WebSocketClass::Socket_RunShell(SOCKET client, std::string data) { //Ö´ÐÐ¶¯
 				result = "";
 				send(client, buffer, length, 0);
 			}
-			else
-				result = GetHeader(pathFile) + WeteoesDll::IO_ReadFile((char*)pathFile.c_str());
+			else {
+				char* pathFile_c;
+				int pathFile_c_len = WeteoesDll::IO_ReadFile((char*)pathFile.c_str(), pathFile_c);
+				result = GetHeader(pathFile) + string(pathFile_c, pathFile_c_len);
+			}
 		}
 		else if (VariableClass::webOperatingClass.Entrance(file, result)) {
 			result = GetHeader("") + result;

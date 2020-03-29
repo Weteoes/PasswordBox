@@ -14,8 +14,7 @@
 class AppCefClass
 {
 public:
-	static std::string Url; //CEF≥ı ºªØURL
-public:
+	bool Init_CEF();
 	CefSettings GetSetting();
 	std::string GetUrl(std::string);
 private:

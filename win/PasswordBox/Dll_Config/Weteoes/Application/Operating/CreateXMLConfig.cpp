@@ -21,6 +21,5 @@ bool CreateXMLConfigClass::UserAndPassword(const char* host, const char* user, c
 	w_->SetAttribute("Pass", pass);
 	root->InsertEndChild(w_);
 	xml.InsertFirstChild(root);
-	VariableClass::xmlClass.SaveXML(xml, a);
-	return true;
+	return VariableClass::xmlClass.SaveXML(xml, a);
 }

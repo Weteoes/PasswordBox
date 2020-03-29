@@ -6,6 +6,7 @@ ConfigClass VariableClass::configClass;
 RSAClass VariableClass::rsaClass;
 ConfigDll VariableClass::configDll;
 WebBasicClass VariableClass::webBasicClass;
+SecurityAESClass VariableClass::securityAESClass;
 
 map<string, string> VariableClass::variable_map;
 // 变量			 内容		 备注

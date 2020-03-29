@@ -28,3 +28,9 @@ extern "C" _declspec(dllexport) bool Config_DelUserAndPassword(const char* host)
 	if (!Loading()) { return false; }
 	return VariableClass::setXMLConfigClass.DelUserAndPassword(host);
 }
+
+extern "C" _declspec(dllexport) bool Set_Variable(char* key, char* value) {
+	if (!Loading()) { return false; }
+	VariableClass::setVariable(key, value);
+	return true;
+}

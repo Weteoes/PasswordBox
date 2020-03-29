@@ -8,8 +8,8 @@ class RSAClass
 public:
 	std::string A_PublicEncode(std::string); // BEST64
 	std::string B_PrivateUnEncode(std::string); // BEST64
-	std::string UnEncode(std::string, std::string);
-	std::string Encode(std::string, std::string);
+	std::string UnEncode(std::string data, std::string key);
+	std::string Encode(std::string data, std::string key);
 	bool generateRSAKey(); // Éú³ÉRSAÃÜ³×
 
 private:

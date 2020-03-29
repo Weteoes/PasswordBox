@@ -1,4 +1,5 @@
 #include <string>
+#include <map>
 #include <vector>
 #include <Weteoes/Variable.h>
 #include <Weteoes/Dll/WeteoesDll.h>

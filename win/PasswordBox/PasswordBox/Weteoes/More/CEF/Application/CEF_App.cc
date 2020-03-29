@@ -53,10 +53,10 @@ void CEF_App::OnContextInitialized() {
   // that instead of the default URL.
   //url = command_line->GetSwitchValue("url");
 
-  url = AppCefClass::Url;
-  if (url.empty()){
-	  url = "http://127.0.0.1/";
-  }
+  //url = AppCefClass::Url;
+  //if (url.empty()){
+	 // url = "http://127.0.0.1/";
+  //}
 
   if (use_views) {
     // Create the BrowserView.
@@ -103,3 +103,5 @@ void CEF_App::OnContextCreated(
 	CefRefPtr<CefFrame> frame,
 	CefRefPtr<CefV8Context> context) {
 }
+
+void CEF_App::OnWebKitInitialized_() {}

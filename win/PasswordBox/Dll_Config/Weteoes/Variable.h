@@ -12,5 +12,11 @@ public:
 	static CreateXMLConfigClass createXMLConfigClass;
 	static ReadXMLConfigClass readXMLConfigClass;
 	static SetXMLConfigClass setXMLConfigClass;
+
+private:
+	static map<string, string> variable_map;
+public:
+	static string getVariable(string key);
+	static bool setVariable(string key, string value);
 };
 #endif

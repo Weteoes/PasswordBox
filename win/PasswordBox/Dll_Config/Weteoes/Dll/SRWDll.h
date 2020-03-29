@@ -1,20 +1,22 @@
-#ifdef SRWDll_H
-#else
+#ifndef SRWDll_H
 #define SRWDll_H
-#include <atlbase.h>
-class SRWDll
-{
+
+class SRWDll {
 private:
-	typedef int(__stdcall* Socket_Entrance_)();
 	typedef int(__stdcall* Web_Entrance_)(const char* webPath);
-	typedef char*(__stdcall *RSA_Encode_)(char* data, char* key);
-	typedef char*(__stdcall *RSA_UnEncode_)(char* data, char* key);
+	typedef int(__stdcall* RSA_Encode_)(char* data, int dataLen, char* key, char*& result);
+	typedef int(__stdcall* RSA_UnEncode_)(char* data, int dataLen, char* key, char*& result);
+	typedef int(__stdcall* AES_Encode_)(char* data, int dataLen, char* key, char*& result);
+	typedef int(__stdcall* AES_UnEncode_)(char* data, int dataLen, char* key, char*& result);
+	typedef bool(__stdcall* Set_Variable_)(char* key, char* value);
 
 public:
 	bool Loading();
-	static Web_Entrance_ Web_Entrance; //Web入口
-	static Socket_Entrance_ Socket_Entrance; //Socket入口
-	static RSA_Encode_ RSA_Encode; //加密
-	static RSA_UnEncode_ RSA_UnEncode; //解密
+	static Web_Entrance_ Web_Entrance;		// Web入口
+	static RSA_Encode_ RSA_Encode;			// RSA 加密
+	static RSA_UnEncode_ RSA_UnEncode;		// RSA 解密
+	static AES_Encode_ AES_Encode;			// AES 加密
+	static AES_UnEncode_ AES_UnEncode;		// AES 解密
+	static Set_Variable_ Set_Variable;		// Dll全局变量保存
 };
 #endif

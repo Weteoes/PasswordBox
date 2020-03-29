@@ -4,3 +4,4 @@ EXPORTS
 	Config_ReadUserAndPassword
 	Config_ReadAllUserAndPassword
 	Config_DelUserAndPassword
+	Set_Variable

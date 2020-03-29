@@ -5,15 +5,21 @@
 
 #include "AppCef.h"
 #include <Weteoes/More/CEF/Config.h> //CEF-Config
+#include <Weteoes/More/CEF/Application/CEF_App.h> //CEF-Config
 #include <Weteoes/Application/AppConfig.h>
 #include <Weteoes/Dll/WeteoesDll.h>
 #include <Weteoes/Dll/ManagementDll.h>
-#include <cstring>
 
-std::string AppCefClass::Url;
+bool AppCefClass::Init_CEF() {
+	CefMainArgs mainArgs(AfxGetInstanceHandle());
+	CefRefPtr<CEF_App> app(new CEF_App);
+	CefExecuteProcess(mainArgs, app.get(), NULL);
+	CefSettings settings = AppCefClass().GetSetting();
+	CefInitialize(mainArgs, settings, app.get(), NULL);
+	return true;
+}
 
-CefSettings AppCefClass::GetSetting()
-{
+CefSettings AppCefClass::GetSetting() {
 	std::string CEF_Path = WeteoesDll::Basics_GetNowFilePath();
 	CefSettings settings;
 	settings.no_sandbox = true;
