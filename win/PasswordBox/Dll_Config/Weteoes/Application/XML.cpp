@@ -2,18 +2,24 @@
 #include "XML.h"
 #include <Weteoes\Application\ConfigFile.h>
 
-bool XMLClass::GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file) {
+bool XMLClass::GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file, bool replace) {
 	if (!WeteoesDll::IO_Exists((char*)file.c_str())) {
 		// 配置文件不存在
 		WeteoesDll::IO_CreatePath((char*)file.c_str());
-		tinyxml2::XMLDocument xml = CreateXML(file);
-		return true;
+		return CreateXML(xml, file);
 	}
 	char* result;
 	int result_len = WeteoesDll::IO_ReadFile((char*)file.c_str(), result);
 	std::string XmlDataEncode = string(result, result_len);
 	std::string XmlData = VariableClass::xmlClass.ReadXmlParse(XmlDataEncode);
-	if (xml.Parse(XmlData.c_str(), XmlData.length()) != 0) { return false; } //读取文件失败
+	if (xml.Parse(XmlData.c_str(), XmlData.length()) != 0) { 
+		//读取文件失败
+		if (replace == true) {
+			// 如果需要替换
+			return CreateXML(xml, file);
+		}
+		return false; 
+	}
 	return true;
 }
 
@@ -55,15 +61,14 @@ std::string XMLClass::ReadXmlParse(std::string data) {
 	return data;
 }
 
-tinyxml2::XMLDocument* XMLClass::CreateXML(std::string XMLPath) {
-	static tinyxml2::XMLDocument xml;
+bool XMLClass::CreateXML(tinyxml2::XMLDocument& xml, std::string XMLPath) {
 	if (WeteoesDll::IO_Exists((char*)XMLPath.c_str())) { //存在
 		WeteoesDll::IO_Remove((char*)XMLPath.c_str()); //删除文件
 	}
 	//添加申明可以使用如下两行
 	tinyxml2::XMLDeclaration* declaration = xml.NewDeclaration();
 	xml.InsertFirstChild(declaration);
-	return &xml;
+	return true;
 }
 
 bool XMLClass::Ready_RSA() {

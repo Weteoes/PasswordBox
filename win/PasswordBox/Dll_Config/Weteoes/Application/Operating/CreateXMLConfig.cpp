@@ -7,7 +7,7 @@ bool CreateXMLConfigClass::UserAndPassword(const char* host, const char* user, c
 {
 	std::string a = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::UserAndPassword;
 	tinyxml2::XMLDocument xml;
-	if (!VariableClass::xmlClass.GetXmlDocument(xml, a)) {
+	if (!VariableClass::xmlClass.GetXmlDocument(xml, a, true)) {
 		return false;
 	}
 	tinyxml2::XMLElement* root = xml.RootElement();
@@ -20,6 +20,6 @@ bool CreateXMLConfigClass::UserAndPassword(const char* host, const char* user, c
 	w_->SetAttribute("User", user);
 	w_->SetAttribute("Pass", pass);
 	root->InsertEndChild(w_);
-	xml.InsertFirstChild(root);
+	xml.InsertEndChild(root);
 	return VariableClass::xmlClass.SaveXML(xml, a);
 }

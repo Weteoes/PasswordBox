@@ -5,14 +5,14 @@
 
 class XMLClass {
 public:
-	bool GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file); 
+	bool GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file, bool replace = false);
 	bool SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile); // 保存XML
 
 public:
 	string RootElementName = "Weteoes";
 
 private:
-	tinyxml2::XMLDocument* CreateXML(std::string); // 创建XML
+	bool CreateXML(tinyxml2::XMLDocument& xml, std::string XMLPath); // 创建XML
 	std::string ReadXmlParse(std::string); // 解密XML
 
 

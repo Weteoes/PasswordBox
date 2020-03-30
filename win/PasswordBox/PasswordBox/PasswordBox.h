@@ -29,6 +29,7 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
+	bool Ready();
 	bool Ready_Dll();
 
 };

@@ -36,6 +36,11 @@ CPasswordBoxApp::CPasswordBoxApp()
 CPasswordBoxApp theApp;
 
 
+bool CPasswordBoxApp::Ready() {
+	if (!Ready_Dll()) { exit(0x01); }
+	return true;
+}
+
 // 初始化 Dll
 bool CPasswordBoxApp::Ready_Dll() {
 	if (!WeteoesDll().Loading()) { return false; }
@@ -45,6 +50,7 @@ bool CPasswordBoxApp::Ready_Dll() {
 	VariableClass::appCefClass.Init_CEF();
 	return true;
 }
+
 
 // CPasswordBoxApp 初始化
 BOOL CPasswordBoxApp::InitInstance() {
@@ -57,12 +63,7 @@ BOOL CPasswordBoxApp::InitInstance() {
 	// 公共控件类。
 	InitCtrls.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&InitCtrls);
-
-	if (!Ready_Dll()) {
-		exit(0x01);
-	}
 	CWinApp::InitInstance();
-
 
 	AfxEnableControlContainer();
 
@@ -80,7 +81,10 @@ BOOL CPasswordBoxApp::InitInstance() {
 	// 更改用于存储设置的注册表项
 	// TODO: 应适当修改该字符串，
 	// 例如修改为公司或组织名
-	SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
+	SetRegistryKey(_T("Weteoes"));
+
+	Ready();
+
 
 	Login_Dlg dlg;
 	m_pMainWnd = &dlg;
