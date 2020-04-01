@@ -6,15 +6,15 @@
 
 
 // CPasswordBoxDlg 对话框
-class Login_Dlg : public CDialogEx
+class Init_Dlg : public CDialogEx
 {
 // 构造
 public:
-	Login_Dlg(CWnd* pParent = nullptr);	// 标准构造函数
+	Init_Dlg(CWnd* pParent = nullptr);	// 标准构造函数
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_DIALOG_Login };
+	enum { IDD = IDD_DIALOG_Init };
 #endif
 
 	protected:
@@ -45,4 +45,5 @@ private:
 public:
 	afx_msg void OnBnClickedOk();
 	virtual void OnCancel();
+	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 };

@@ -2,14 +2,13 @@
 // Microsoft Visual C++ 生成的包含文件。
 // 供 PasswordBox.rc 使用
 //
-#define IDD_PASSWORDBOX_DIALOG          102
-#define IDD_DIALOG_Login                102
+#define IDD_DIALOG_Init                 102
 #define IDD_DIALOG_Main                 130
 #define IDR_MAINFRAME                   137
 #define IDI_ICON1                       139
 #define IDR_MENU1                       140
-#define IDC_LOGIN_STATIC_CEF            1001
-#define IDC_MAIN_STATIC_CEF             1003
+#define IDC_Init_CEF                    1001
+#define IDC_MAIN_CEF                    1003
 #define ID_32771                        32771
 #define ID_MENU_Exit                    32773
 

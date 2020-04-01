@@ -7,6 +7,7 @@ public:
 	void Close(); // 关闭窗口
 	void Minimize(); // 最小化窗口
 	void Show(); // 显示窗口
+	void SetSize(int width, int height); // 设置窗口大小
 
 private:
 	HWND dlg_HWND;

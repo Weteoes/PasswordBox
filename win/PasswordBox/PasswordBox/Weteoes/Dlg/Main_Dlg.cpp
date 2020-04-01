@@ -14,8 +14,8 @@
 #include <Weteoes/Variable.h>
 #include <Weteoes/Application/CEF/AppCef.h>
 #include <Weteoes/More/CEF/Config.h>
-#include <Weteoes/More/CEF/Application/CEF_Handler.h>
 #include <Weteoes/More/CEF/Application/Dlg/Main/CEF_Main_App.h>
+#include <Weteoes\More\CEF\Application\CEF_Handler.h>
 
 
 // Main_Dlg 对话框
@@ -36,6 +36,7 @@ void Main_Dlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(Main_Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_WM_ACTIVATE()
 END_MESSAGE_MAP()
 
 
@@ -99,7 +100,7 @@ void Main_Dlg::Ready_Dlg() {
 	//设置窗口大小
 	int width = 600, height = 400;
 	SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE);
-	GetDlgItem(IDC_MAIN_STATIC_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
+	GetDlgItem(VariableClass::dlg_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
 
 	//阴影
 	SetClassLong(this->m_hWnd, GCL_STYLE, GetClassLong(this->m_hWnd, GCL_STYLE) | CS_DROPSHADOW);
@@ -118,8 +119,8 @@ void Main_Dlg::Ready_Dlg() {
 // 初始化CEF
 void Main_Dlg::Ready_CEF() {
 	string url = AppCefClass().GetUrl("");
-	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();;
-	GetDlgItem(IDC_MAIN_STATIC_CEF)->GetClientRect(&CEF_Main_App::CEF_CRect);
+	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
+	GetDlgItem(VariableClass::dlg_CEF)->GetClientRect(&CEF_Main_App::CEF_CRect);
 	CEF_Main_App::CEF_HWND = GetSafeHwnd();
 	CefBrowserSettings browser_settings;
 	CefWindowInfo window_info;
@@ -133,3 +134,8 @@ HCURSOR Main_Dlg::OnQueryDragIcon() {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+void Main_Dlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) {
+	VariableClass::dlg_CEF = IDC_MAIN_CEF;
+	VariableClass::dlg_HWND = this->m_hWnd;
+	CDialogEx::OnActivate(nState, pWndOther, bMinimized);
+}

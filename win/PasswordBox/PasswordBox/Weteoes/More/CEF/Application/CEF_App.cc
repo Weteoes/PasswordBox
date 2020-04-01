@@ -14,8 +14,8 @@
 #include <Weteoes/More/CEF/Application/CEF_WindowDelegate.h>
 
 CEF_App::CEF_App() {}
-CRect CEF_App::CEF_CRect; //ÊÓÍ¼×ø±ê
-HWND CEF_App::CEF_HWND; //´°¿Ú¾ä±ú
+CRect CEF_App::CEF_CRect; // ÊÓÍ¼×ø±ê
+HWND CEF_App::CEF_HWND; // ´°¿Ú¾ä±ú
 
 void CEF_App::OnBeforeCommandLineProcessing(const CefString & process_type, CefRefPtr<CefCommandLine> command_line)
 {
@@ -47,7 +47,6 @@ void CEF_App::OnContextInitialized() {
 
   // Specify CEF browser settings here.
   CefBrowserSettings browser_settings;
-  CefBrowserSettings browser_settings1;
   std::string url;
   // Check if a "--url=" value was provided via the command-line. If so, use
   // that instead of the default URL.
@@ -90,12 +89,14 @@ void CEF_App::OnWebKitInitialized() {
         "        Down: function(x, y) { native function Dlg_Mouse_Down(x, y); return Dlg_Mouse_Down(x, y); },"
         "        Move: function(x, y) { native function Dlg_Mouse_Move(x, y); return Dlg_Mouse_Move(x, y); },"
         "        Up: function() { native function Dlg_Mouse_Up(); return Dlg_Mouse_Up(); },"
-        "    }"
-        //"    native function Login();"
-        //"    return Login();"
+        "    },"
+        "    Size: function(width, height) { native function Dlg_Size(width, height); return Dlg_Size(width, height); }"
+        "};"
+        "WeteoesBrowser.App = function(app, fun, args) {"
+        "     native function App(app, fun, args);"
+        "     return App(app, fun, args);"
         "};";
 	CefRegisterExtension("V8/CEF", Code, new CEF_V8Handler());
-    OnWebKitInitialized_();
 }
 
 void CEF_App::OnContextCreated(
@@ -103,5 +104,3 @@ void CEF_App::OnContextCreated(
 	CefRefPtr<CefFrame> frame,
 	CefRefPtr<CefV8Context> context) {
 }
-
-void CEF_App::OnWebKitInitialized_() {}

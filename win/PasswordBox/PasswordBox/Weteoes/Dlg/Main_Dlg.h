@@ -36,4 +36,6 @@ private:
 	void Ready_Dlg();
 	void Ready_CEF();
 
+public:
+	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 };

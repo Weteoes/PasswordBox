@@ -5,7 +5,7 @@
 #include <pch.h>
 #include <framework.h>
 #include <PasswordBox.h>
-#include "Login_Dlg.h"
+#include "Init_Dlg.h"
 #include "afxdialogex.h"
 #include <resource.h>
 
@@ -15,44 +15,45 @@
 #include <Weteoes/Variable.h>
 #include <Weteoes/Application/CEF/AppCef.h>
 #include <Weteoes/More/CEF/Config.h>
-#include <Weteoes/More/CEF/Application/Dlg/Login/CEF_Login_App.h>
-#include <Weteoes/More/CEF/Application/Dlg/Login/CEF_Login_V8Handler.h>
+#include <Weteoes/More/CEF/Application/Dlg/Init/CEF_Init_App.h>
+#include <Weteoes/More/CEF/Application/Dlg/Init/CEF_Init_V8Handler.h>
 #include <Weteoes/More/CEF/Application/CEF_Handler.h>
 
 
-// Login_Dlg 对话框
+// Init_Dlg 对话框
 
 
 
-Login_Dlg::Login_Dlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_DIALOG_Login, pParent)
+Init_Dlg::Init_Dlg(CWnd* pParent /*=nullptr*/)
+	: CDialogEx(IDD_DIALOG_Init, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
 }
 
-void Login_Dlg::DoDataExchange(CDataExchange* pDX)
+void Init_Dlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
 // 托盘重启
 static UINT OnTaskBarRestart_ID = RegisterWindowMessage(TEXT("TaskbarCreated"));
-BEGIN_MESSAGE_MAP(Login_Dlg, CDialogEx)
+BEGIN_MESSAGE_MAP(Init_Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	// 托盘事件
-	ON_COMMAND(ID_MENU_Exit, &Login_Dlg::IconMenu_Exit)
-	ON_MESSAGE(WM_IconMsg, &Login_Dlg::OnNotifyMsg)
-	ON_REGISTERED_MESSAGE(OnTaskBarRestart_ID, &Login_Dlg::OnTaskBarRestart)
-	ON_BN_CLICKED(IDOK, &Login_Dlg::OnBnClickedOk)
+	ON_COMMAND(ID_MENU_Exit, &Init_Dlg::IconMenu_Exit)
+	ON_MESSAGE(WM_IconMsg, &Init_Dlg::OnNotifyMsg)
+	ON_REGISTERED_MESSAGE(OnTaskBarRestart_ID, &Init_Dlg::OnTaskBarRestart)
+	ON_BN_CLICKED(IDOK, &Init_Dlg::OnBnClickedOk)
 	ON_WM_NCHITTEST()
 //	ON_WM_ICONERASEBKGND()
+ON_WM_ACTIVATE()
 END_MESSAGE_MAP()
 
 
-// Login_Dlg 消息处理程序
+// Init_Dlg 消息处理程序
 
-BOOL Login_Dlg::OnInitDialog() {
+BOOL Init_Dlg::OnInitDialog() {
 	CDialogEx::OnInitDialog();
 
 	// 设置此对话框的图标。  当应用程序主窗口不是对话框时，框架将自动
@@ -70,7 +71,7 @@ BOOL Login_Dlg::OnInitDialog() {
 //  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，
 //  这将由框架自动完成。
 
-void Login_Dlg::OnPaint() {
+void Init_Dlg::OnPaint() {
 	if (IsIconic())
 	{
 		CPaintDC dc(this); // 用于绘制的设备上下文
@@ -95,24 +96,24 @@ void Login_Dlg::OnPaint() {
 }
 
 // 初始化
-void Login_Dlg::Ready() {
+void Init_Dlg::Ready() {
 	Ready_Dlg();
 	Ready_Icon();
 	VariableClass::app_Dll_SWR.Start(0);
 	Ready_CEF();
-	SRWDll::Set_Variable("LoginIn", "1");
+	SRWDll::Set_Variable("InitIn", "1");
 	ConfigDll::Set_Variable("AES_Password", "123456");
 }
 
 // 初始化窗口
-void Login_Dlg::Ready_Dlg() {
+void Init_Dlg::Ready_Dlg() {
 	/* 设置窗口标题(用于Dll获取主窗口句柄) Title */
 	//AfxGetMainWnd()->SetWindowText(AppConfigClass::SoftwareName.c_str());
 
 	//设置窗口大小
-	int width = 400, height = 300;
+	int width = 350, height = 250;
 	SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE);
-	GetDlgItem(IDC_LOGIN_STATIC_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
+	GetDlgItem(VariableClass::dlg_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
 
 	//阴影
 	SetClassLong(this->m_hWnd, GCL_STYLE, GetClassLong(this->m_hWnd, GCL_STYLE) | CS_DROPSHADOW);
@@ -127,26 +128,25 @@ void Login_Dlg::Ready_Dlg() {
 	// 保存窗口句柄
 	VariableClass::dlg_HWND = this->m_hWnd;
 }
-
 // 初始化CEF
-void Login_Dlg::Ready_CEF() {
-	string url = VariableClass::appCefClass.GetUrl("/operating/console/getAll");
+void Init_Dlg::Ready_CEF() {
+	string url = VariableClass::appCefClass.GetUrl("/passwordBox/ui/Init");
 	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
-	GetDlgItem(IDC_LOGIN_STATIC_CEF)->GetClientRect(&CEF_Login_App::CEF_CRect);
-	CEF_Login_App::CEF_HWND = GetSafeHwnd();
+	GetDlgItem(VariableClass::dlg_CEF)->GetClientRect(&CEF_Init_App::CEF_CRect);
+	CEF_Init_App::CEF_HWND = GetSafeHwnd();
 	CefBrowserSettings browser_settings;
 	CefWindowInfo window_info;
-	window_info.SetAsChild(CEF_Login_App::CEF_HWND, CEF_Login_App::CEF_CRect);
+	window_info.SetAsChild(CEF_Init_App::CEF_HWND, CEF_Init_App::CEF_CRect);
 	CefBrowserHost::CreateBrowser(window_info, CEF_handler, url, browser_settings, NULL, NULL);
 }
 
 // 初始化托盘图标
-void Login_Dlg::Ready_Icon() {
+void Init_Dlg::Ready_Icon() {
 	VariableClass::appIconClass.Icon_Add(this->m_hWnd, AfxGetInstanceHandle());
 }
 
 // 托盘图标事件
-LRESULT Login_Dlg::OnNotifyMsg(WPARAM wparam, LPARAM lparam) {
+LRESULT Init_Dlg::OnNotifyMsg(WPARAM wparam, LPARAM lparam) {
 	if (wparam != IDI_ICON1) { return -1; }
 	switch (lparam) {
 	case WM_LBUTTONDOWN:
@@ -169,26 +169,26 @@ LRESULT Login_Dlg::OnNotifyMsg(WPARAM wparam, LPARAM lparam) {
 }
 
 // 托盘图标重启事件
-LRESULT Login_Dlg::OnTaskBarRestart(WPARAM wParam, LPARAM lParam) {
+LRESULT Init_Dlg::OnTaskBarRestart(WPARAM wParam, LPARAM lParam) {
 	Ready_Icon();
 	return 0;
 }
 
 // 托盘事件-退出
-void Login_Dlg::IconMenu_Exit() {
+void Init_Dlg::IconMenu_Exit() {
 	VariableClass::appDlgClass.Close();
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
 //显示。
-HCURSOR Login_Dlg::OnQueryDragIcon() {
+HCURSOR Init_Dlg::OnQueryDragIcon() {
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
 
 #include <Weteoes/Dlg/Main_Dlg.h>
 
-void Login_Dlg::OnBnClickedOk() {
+void Init_Dlg::OnBnClickedOk() {
 	// TODO: 在此添加控件通知处理程序代码
 	//exit(0);
 	Main_Dlg a;
@@ -197,7 +197,14 @@ void Login_Dlg::OnBnClickedOk() {
 
 
 // Alt + F4
-void Login_Dlg::OnCancel() {
+void Init_Dlg::OnCancel() {
 	VariableClass::appDlgClass.Minimize();
 	//CDialogEx::OnCancel();
+}
+
+
+void Init_Dlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) {
+	VariableClass::dlg_CEF = IDC_Init_CEF;
+	VariableClass::dlg_HWND = this->m_hWnd;
+	CDialogEx::OnActivate(nState, pWndOther, bMinimized);
 }

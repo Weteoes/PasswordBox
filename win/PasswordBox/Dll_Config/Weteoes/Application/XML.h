@@ -19,6 +19,5 @@ private:
 private:
 	std::string RSA_PublicKey;
 	std::string RSA_PrivateKey;
-	bool Ready_RSA();
 };
 #endif

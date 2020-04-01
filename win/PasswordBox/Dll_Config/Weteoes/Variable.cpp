@@ -2,6 +2,7 @@
 #include "Variable.h"
 
 XMLClass VariableClass::xmlClass;
+AESClass VariableClass::aesClass;
 CreateXMLConfigClass VariableClass::createXMLConfigClass;
 ReadXMLConfigClass VariableClass::readXMLConfigClass;
 SetXMLConfigClass VariableClass::setXMLConfigClass;

@@ -23,6 +23,12 @@ private:
 	void Dlg_Mouse_Down(int x, int y);
 	void Dlg_Mouse_Move(int x, int y);
 	void Dlg_Mouse_Up();
-
+	void App(
+		const CefString& name,
+		CefRefPtr<CefV8Value> object,
+		const CefV8ValueList& arguments,
+		CefRefPtr<CefV8Value>& retval,
+		CefString& exception
+	);
 };
 #endif

@@ -20,7 +20,7 @@ CEF_Handler* g_instance = NULL;
 
 CEF_Handler::CEF_Handler(bool use_views)
     : use_views_(use_views), is_closing_(false) {
-  DCHECK(!g_instance);
+  //DCHECK(!g_instance);
   g_instance = this;
 }
 

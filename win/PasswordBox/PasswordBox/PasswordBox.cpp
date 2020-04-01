@@ -5,7 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "PasswordBox.h"
-#include <Weteoes/Dlg/Login_Dlg.h>
+#include <Weteoes/Dlg/Init_Dlg.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -86,7 +86,7 @@ BOOL CPasswordBoxApp::InitInstance() {
 	Ready();
 
 
-	Login_Dlg dlg;
+	Init_Dlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

@@ -24,9 +24,6 @@ bool XMLClass::GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file, bool
 }
 
 bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile) {
-	if (RSA_PublicKey.empty()) {
-		Ready_RSA();
-	}
 	tinyxml2::XMLPrinter s;
 	xml.Accept(&s); //获取内容到变量
 	std::string data = s.CStr();
@@ -48,9 +45,6 @@ bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile) {
 }
 
 std::string XMLClass::ReadXmlParse(std::string data) {
-	if (RSA_PrivateKey.empty()) {
-		Ready_RSA();
-	}
 	// 获取KEY
 	string aes = VariableClass::getVariable("AES_Password");
 	if (aes.empty()) { return ""; }
@@ -69,21 +63,4 @@ bool XMLClass::CreateXML(tinyxml2::XMLDocument& xml, std::string XMLPath) {
 	tinyxml2::XMLDeclaration* declaration = xml.NewDeclaration();
 	xml.InsertFirstChild(declaration);
 	return true;
-}
-
-bool XMLClass::Ready_RSA() {
-	string nowPath = WeteoesDll::Basics_GetNowFilePath();
-	string pub_Key = nowPath + ConfigFileClass::RSA_public_key;
-	string pri_Key = nowPath + ConfigFileClass::RSA_private_key;
-	if (WeteoesDll::IO_Exists((char*)pri_Key.c_str()) && WeteoesDll::IO_Exists((char*)pub_Key.c_str())) {
-		// RSA存在
-		char* RSA_PrivateKey_c;
-		int RSA_PrivateKey_len = WeteoesDll::IO_ReadFile((char*)pri_Key.c_str(), RSA_PrivateKey_c);
-		RSA_PrivateKey = string(RSA_PrivateKey_c, RSA_PrivateKey_len);
-
-		char* RSA_PublicKey_c;
-		int RSA_PublicKey_len = WeteoesDll::IO_ReadFile((char*)pub_Key.c_str(), RSA_PublicKey_c);
-		RSA_PublicKey = string(RSA_PublicKey_c, RSA_PublicKey_len);
-	}
-	return false;
 }

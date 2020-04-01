@@ -29,6 +29,21 @@ extern "C" _declspec(dllexport) bool Config_DelUserAndPassword(const char* host)
 	return VariableClass::setXMLConfigClass.DelUserAndPassword(host);
 }
 
+extern "C" _declspec(dllexport) bool Config_Exsits() {
+	if (!Loading()) { return false; }
+	return WeteoesDll::IO_Exists((char*)ConfigFileClass::UserAndPassword.c_str());
+}
+
+extern "C" _declspec(dllexport) bool Config_SetAESPassword(char* pass) {
+	if (!Loading()) { return false; }
+	return VariableClass::aesClass.setPassword(pass);
+}
+
+extern "C" _declspec(dllexport) bool Config_ResetAESPassword(char* oldPass, char* newPass) {
+	if (!Loading()) { return false; }
+	return VariableClass::aesClass.resetPassword(oldPass, newPass);
+}
+
 extern "C" _declspec(dllexport) bool Set_Variable(char* key, char* value) {
 	if (!Loading()) { return false; }
 	VariableClass::setVariable(key, value);

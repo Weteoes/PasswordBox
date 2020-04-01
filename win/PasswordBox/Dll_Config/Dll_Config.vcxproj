@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Weteoes\Application\AESClass.cpp" />
     <ClCompile Include="Weteoes\Application\ConfigFile.cpp" />
     <ClCompile Include="DllConfig.cpp" />
     <ClCompile Include="Weteoes\Application\Operating\ReadXMLConfig.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Weteoes\Application\AESClass.h" />
     <ClInclude Include="Weteoes\Application\ConfigFile.h" />
     <ClInclude Include="Weteoes\Application\Operating\ReadXMLConfig.h" />
     <ClInclude Include="Weteoes\Application\Operating\SetXMLConfig.h" />

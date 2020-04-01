@@ -5,15 +5,6 @@
 #include "CEF_Main_App.h"
 #include "CEF_Main_V8Handler.h"
 
-void CEF_Main_App::OnWebKitInitialized_() {
-    std::string Code =
-        "if (typeof WeteoesBrowser == 'undefined') var WeteoesBrowser = {};"
-        "if (typeof WeteoesBrowser.app == 'undefined') WeteoesBrowser.app = {};"
-        "WeteoesBrowser.app.Login = function() {"
-        "    native function Login();"
-        "    return Login();"
-        "};";
-    CefRegisterExtension("V8/CEF_Main", Code, new CEF_Main_V8Handler());
-}
+void CEF_Main_App::OnWebKitInitialized_() { }
 
 #endif

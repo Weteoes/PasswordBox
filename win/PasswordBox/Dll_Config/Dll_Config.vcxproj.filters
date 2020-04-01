@@ -48,6 +48,9 @@
     <ClCompile Include="Weteoes\Application\Operating\SetXMLConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Weteoes\Application\AESClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source.def">
@@ -89,6 +92,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\Application\Operating\SetXMLConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Application\AESClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
