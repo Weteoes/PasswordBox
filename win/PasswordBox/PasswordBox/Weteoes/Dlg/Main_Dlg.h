@@ -36,6 +36,10 @@ private:
 	void Ready_Dlg();
 	void Ready_CEF();
 
+private:
+	int browserListIndex;
+
 public:
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

@@ -83,16 +83,18 @@ void CEF_App::OnContextInitialized() {
 
 void CEF_App::OnWebKitInitialized() {
     std::string Code =
-        "if (typeof WeteoesBrowser == 'undefined') var WeteoesBrowser = {};"
-        "WeteoesBrowser.Dlg = {"
-        "    Mouse: {"
-        "        Down: function(x, y) { native function Dlg_Mouse_Down(x, y); return Dlg_Mouse_Down(x, y); },"
-        "        Move: function(x, y) { native function Dlg_Mouse_Move(x, y); return Dlg_Mouse_Move(x, y); },"
-        "        Up: function() { native function Dlg_Mouse_Up(); return Dlg_Mouse_Up(); },"
+        "if (typeof weteoesBrowser === 'undefined') var weteoesBrowser = {};"
+        "var weteoesBrowser_ = weteoesBrowser;"
+        "weteoesBrowser_.dlg = {"
+        "    mouse: {"
+        "        down: function(x, y) { native function Dlg_Mouse_Down(x, y); return Dlg_Mouse_Down(x, y); },"
+        "        move: function(x, y) { native function Dlg_Mouse_Move(x, y); return Dlg_Mouse_Move(x, y); },"
+        "        up: function() { native function Dlg_Mouse_Up(); return Dlg_Mouse_Up(); },"
         "    },"
-        "    Size: function(width, height) { native function Dlg_Size(width, height); return Dlg_Size(width, height); }"
+        "    size: function(width, height) { native function Dlg_Size(width, height); return Dlg_Size(width, height); }"
         "};"
-        "WeteoesBrowser.App = function(app, fun, args) {"
+        "weteoesBrowser_.app = function(app, fun, args) {"
+        "     args = JSON.stringify(args);"
         "     native function App(app, fun, args);"
         "     return App(app, fun, args);"
         "};";

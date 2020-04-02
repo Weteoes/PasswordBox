@@ -48,6 +48,7 @@ BEGIN_MESSAGE_MAP(Init_Dlg, CDialogEx)
 	ON_WM_NCHITTEST()
 //	ON_WM_ICONERASEBKGND()
 ON_WM_ACTIVATE()
+ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -118,20 +119,14 @@ void Init_Dlg::Ready_Dlg() {
 	//阴影
 	SetClassLong(this->m_hWnd, GCL_STYLE, GetClassLong(this->m_hWnd, GCL_STYLE) | CS_DROPSHADOW);
 
-	//圆角
-	CRgn m_rgn; RECT rc;
-	//GetWindowRect(&rc); //有边框对话框
-	GetClientRect(&rc);//无边框对话框 
-	m_rgn.CreateRoundRectRgn(rc.left, rc.top, rc.right, rc.bottom, 5, 5); //矩形圆角
-	SetWindowRgn(m_rgn, TRUE);
-
 	// 保存窗口句柄
 	VariableClass::dlg_HWND = this->m_hWnd;
 }
 // 初始化CEF
 void Init_Dlg::Ready_CEF() {
-	string url = VariableClass::appCefClass.GetUrl("/passwordBox/ui/Init");
+	string url = VariableClass::appCefClass.GetUrl("/passwordBox/ui/1/Init");
 	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
+	browserListIndex = CEF_handler->GetBrowserListIndex();
 	GetDlgItem(VariableClass::dlg_CEF)->GetClientRect(&CEF_Init_App::CEF_CRect);
 	CEF_Init_App::CEF_HWND = GetSafeHwnd();
 	CefBrowserSettings browser_settings;
@@ -204,7 +199,19 @@ void Init_Dlg::OnCancel() {
 
 
 void Init_Dlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) {
+	CDialogEx::OnActivate(nState, pWndOther, bMinimized);
 	VariableClass::dlg_CEF = IDC_Init_CEF;
 	VariableClass::dlg_HWND = this->m_hWnd;
-	CDialogEx::OnActivate(nState, pWndOther, bMinimized);
+}
+
+
+void Init_Dlg::OnSize(UINT nType, int cx, int cy) {
+	CDialogEx::OnSize(nType, cx, cy);
+	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
+	CefRefPtr<CefBrowser> browser = CEF_handler->GetBrowserbyIndex(browserListIndex);
+	if (browser) {
+		CefWindowHandle hwnd = browser->GetHost()->GetWindowHandle();
+		//因为浏览器对于对话框是子窗口，所以浏览器的左上角坐标是相于父窗口的客户区的左上角而言的
+		::MoveWindow(hwnd, 0, 0, cx, cy, TRUE);  
+	}
 }

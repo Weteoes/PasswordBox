@@ -6,7 +6,7 @@
 #define CEF_Handler_H
 
 #include <Weteoes/More/CEF/include/cef_client.h>
-
+#include <Weteoes/More/CEF/include/base/cef_lock.h>
 #include <list>
 
 class CEF_Handler : public CefClient,
@@ -20,6 +20,13 @@ class CEF_Handler : public CefClient,
 
   // Provide access to the single global instance of this object.
   static CEF_Handler* GetInstance();
+
+
+
+  //mutable base::Lock lock_;
+  //CefRefPtr<CefBrowser> browser_;
+  int GetBrowserListIndex();
+  CefRefPtr<CefBrowser> GetBrowserbyIndex(int index);
 
   // CefClient methods:
   virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE {

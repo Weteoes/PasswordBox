@@ -42,8 +42,12 @@ private:
 private:
 	void IconMenu_Exit();
 
+private:
+	int browserListIndex;
+
 public:
 	afx_msg void OnBnClickedOk();
 	virtual void OnCancel();
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

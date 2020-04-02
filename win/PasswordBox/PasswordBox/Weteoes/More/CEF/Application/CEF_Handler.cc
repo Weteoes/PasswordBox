@@ -33,6 +33,20 @@ CEF_Handler* CEF_Handler::GetInstance() {
   return g_instance;
 }
 
+int CEF_Handler::GetBrowserListIndex() {
+    return (int)browser_list_.size();
+}
+
+CefRefPtr<CefBrowser> CEF_Handler::GetBrowserbyIndex(int index) {
+    if (browser_list_.size() < index + 1) {
+        return NULL;
+    }
+    BrowserList::iterator iter = browser_list_.begin();
+    advance(iter, index);
+    CefRefPtr<CefBrowser> a = *iter;
+    return a;
+}
+
 void CEF_Handler::OnTitleChange(CefRefPtr<CefBrowser> browser,
                                   const CefString& title) {
   CEF_REQUIRE_UI_THREAD();
@@ -53,7 +67,10 @@ void CEF_Handler::OnTitleChange(CefRefPtr<CefBrowser> browser,
 }
 void CEF_Handler::OnAfterCreated(CefRefPtr<CefBrowser> browser) {
   CEF_REQUIRE_UI_THREAD();
-
+  //if (!GetBrowser()) {
+  //    base::AutoLock lock_scope(lock_);
+  //    browser_ = browser;
+  //}
   // Add to the list of existing browsers.
   browser_list_.push_back(browser);
 }

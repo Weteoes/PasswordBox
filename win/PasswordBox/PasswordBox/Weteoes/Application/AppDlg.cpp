@@ -29,8 +29,7 @@ void AppDlgClass::SetSize(int width, int height) {
 	// 设置窗口大小
 	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
 	Dlg_SetNowRect(); //保存现在的窗口信息
-	SetWindowPos(VariableClass::dlg_HWND, NULL, Dlg_.x, Dlg_.y, width, height, 0);
-	GetDlgItem(VariableClass::dlg_HWND, VariableClass::dlg_CEF);
+	SetWindowPos(dlg_HWND, NULL, Dlg_.x, Dlg_.y, width, height, 0);
 }
 
 void AppDlgClass::Dlg_SetNowRect(bool SetWH) {

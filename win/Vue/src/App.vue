@@ -14,19 +14,19 @@
 <script>
 export default {
   methods: {
-    ready_: function () {
+    ready: function () {
       let w = window
-      if (typeof w.Weteoes === 'undefined') {
-        w.Weteoes = {}
+      if (typeof w.weteoes === 'undefined') {
+        w.weteoes = {}
       }
       // 设置w为Weteoes变量
-      w = w.Weteoes
+      w = w.weteoes
       // 添加通用函数
-      w.Basic = {}
-      const Basic = w.Basic
+      w.basic = {}
+      const basic = w.basic
 
       // 获取URL Get参数
-      Basic.GetQueryString = name => {
+      basic.getQueryString = name => {
         var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
         var r = window.location.search.substr(1).match(reg)
         if (r != null) return unescape(decodeURI(r[2]))
@@ -34,7 +34,7 @@ export default {
       }
       // 获取URL Get参数  End
       // Ajax
-      Basic.Ajax = (url, data, success, error) => {
+      basic.ajax = (url, data, success, error) => {
         if (data === '' || data === undefined) {
           data = {}
         }
@@ -72,7 +72,7 @@ export default {
       }
       // Ajax End
       // Cookie
-      Basic.Cookie = {
+      basic.cookie = {
         get (name) {
           const arr = document.cookie.match(
             new RegExp('(^| )' + name + '=([^;]*)(;|$)')
@@ -83,7 +83,7 @@ export default {
         del (name) {
           var exp = new Date()
           exp.setTime(exp.getTime() - 1)
-          var cval = Basic.cookie.get(name)
+          var cval = basic.cookie.get(name)
           if (cval != null) {
             document.cookie =
               name + '=' + cval + ';expires=' + exp.toGMTString() + ';path=/'
@@ -149,7 +149,7 @@ export default {
     }
   },
   created () {
-    this.ready_()
+    this.ready()
   }
 }
 </script>
