@@ -83,20 +83,18 @@ void CEF_App::OnContextInitialized() {
 
 void CEF_App::OnWebKitInitialized() {
     std::string Code =
-        "if (typeof weteoesBrowser === 'undefined') var weteoesBrowser = {};"
-        "var weteoesBrowser_ = weteoesBrowser;"
-        "weteoesBrowser_.dlg = {"
-        "    mouse: {"
-        "        down: function(x, y) { native function Dlg_Mouse_Down(x, y); return Dlg_Mouse_Down(x, y); },"
-        "        move: function(x, y) { native function Dlg_Mouse_Move(x, y); return Dlg_Mouse_Move(x, y); },"
-        "        up: function() { native function Dlg_Mouse_Up(); return Dlg_Mouse_Up(); },"
+        "var weteoesBrowser = {"
+        "    dlg: {"
+        "        mouse: {"
+        "            down (x, y) { native function Dlg_Mouse_Down(x, y); return Dlg_Mouse_Down(x, y); },"
+        "            move (x, y) { native function Dlg_Mouse_Move(x, y); return Dlg_Mouse_Move(x, y); },"
+        "            up () { native function Dlg_Mouse_Up(); return Dlg_Mouse_Up(); },"
+        "        },"
+        "        size (width, height) { native function Dlg_Size(width, height); return Dlg_Size(width, height); },"
+        "        minimize () { native function Dlg_Minimize(); return Dlg_Minimize(); },"
+        "        close () { native function Dlg_Close(); return Dlg_Close(); }"
         "    },"
-        "    size: function(width, height) { native function Dlg_Size(width, height); return Dlg_Size(width, height); }"
-        "};"
-        "weteoesBrowser_.app = function(app, fun, args) {"
-        "     args = JSON.stringify(args);"
-        "     native function App(app, fun, args);"
-        "     return App(app, fun, args);"
+        "    app (app, fun, args) { args = JSON.stringify(args); native function App(app, fun, args); return App(app, fun, args); }"
         "};";
 	CefRegisterExtension("V8/CEF", Code, new CEF_V8Handler());
 }

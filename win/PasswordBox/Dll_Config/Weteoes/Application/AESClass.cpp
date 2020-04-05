@@ -6,13 +6,16 @@ bool AESClass::setPassword(string pass) {
 	std::string a = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::UserAndPassword;
 	if (!WeteoesDll::IO_Exists((char*)a.c_str())) {
 		// 配置不存在
-		return false;
+		return VariableClass::createXMLConfigClass.CreateXML(a);
 	}
-	tinyxml2::XMLDocument xml;
-	if (!VariableClass::xmlClass.GetXmlDocument(xml, a, true)) {
-		return false;
+	else {
+		// 配置文件存在
+		tinyxml2::XMLDocument xml;
+		if (!VariableClass::xmlClass.GetXmlDocument(xml, a)) {
+			return false;
+		}
+		return true;
 	}
-	return true;
 }
 
 bool AESClass::resetPassword(string oldPass, string newPass) {
@@ -25,5 +28,6 @@ bool AESClass::resetPassword(string oldPass, string newPass) {
 	if (!VariableClass::xmlClass.GetXmlDocument(xml, a)) {
 		return false;
 	}
+	VariableClass::setVariable("AES_Password", newPass);
 	return VariableClass::xmlClass.SaveXML(xml, a);
 }

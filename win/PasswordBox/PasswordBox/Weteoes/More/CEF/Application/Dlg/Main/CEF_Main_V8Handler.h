@@ -3,7 +3,7 @@
 #include <Weteoes\More\CEF\include\cef_v8.h>
 #include <Weteoes\More\CEF\include\internal\cef_string.h>
 
-class CEF_Main_V8Handler : public CefV8Handler {
+class CEF_Main_V8Handler {
 public:
 	bool Execute(
 		const CefString& name,
@@ -11,5 +11,9 @@ public:
 		CefRefPtr<CefV8Value>& retval,
 		CefString& exception
 		);
+
+private:
+	void ShowLoginDlg();
+	void ShowChangePasswordDlg();
 };
 #endif

@@ -6,6 +6,7 @@ std::string ManagementClass::Get(char* a) {
 	if (a_s == "Software_Name") { return Config_Software_Name; }  // 程序名称
 	else if (a_s == "Software_UI_Host") { return Config_Software_UI_Host; }  // 程序UI地址
 	else if (a_s == "Software_UI_Port") { return Config_Software_UI_Port; }  // 程序UI端口
+	else if (a_s == "Debug") { return Config_Debug; }  // 程序UI端口
 	//else if	(a_s == "URL_Client") { return Config_UI_Host; }  //客户端页面
 	//else if (a_s == "URL_Update") { return Config_URL; } // Update
 	//else if (a_s == "URL_Socket") { return Config_URL; }  // Socket

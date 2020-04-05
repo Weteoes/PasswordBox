@@ -35,9 +35,16 @@ bool CEF_V8Handler::Execute(
 		VariableClass::appDlgClass.SetSize(width, height);
 		return true;
 	}
-	else if (name == "App") {
-		App(name, object, arguments, retval, exception);
+	else if (name == "Dlg_Minimize") {
+		VariableClass::appDlgClass.Minimize();
 		return true;
+	}
+	else if (name == "Dlg_Close") {
+		VariableClass::appDlgClass.Close();
+		return true;
+	}
+	else if (name == "App") {
+		return App(name, object, arguments, retval, exception);
 	}
 	return false;
 }
@@ -53,7 +60,6 @@ void CEF_V8Handler::Dlg_Mouse_Move(int x, int y) {
 	int n_x = x - Dlg_Mouse_Down_X;
 	int n_y = y - Dlg_Mouse_Down_Y;
 	::SetWindowPos(VariableClass::dlg_HWND, NULL, n_x, n_y, 0, 0, SWP_NOSIZE);
-	//::MoveWindow(VariableClass::dlg_HWND, x, y,0,0,0);
 }
 
 void CEF_V8Handler::Dlg_Mouse_Up() {
@@ -61,7 +67,7 @@ void CEF_V8Handler::Dlg_Mouse_Up() {
 	Dlg_Mouse_Down_X = -1;
 	Dlg_Mouse_Down_Y = -1;
 }
-void CEF_V8Handler::App(
+bool CEF_V8Handler::App(
 	const CefString& name,
 	CefRefPtr<CefV8Value> object,
 	const CefV8ValueList& arguments, 
@@ -71,10 +77,17 @@ void CEF_V8Handler::App(
 	string app = arguments[0]->GetStringValue();
 	string fun = arguments[1]->GetStringValue();
 	string args = arguments[2]->GetStringValue();
-	if (args.empty()) { return; }
-	CefRefPtr<CefValue> jsonObject = CefParseJSON(args, JSON_PARSER_ALLOW_TRAILING_COMMAS);
-	CefRefPtr<CefDictionaryValue> dict = jsonObject->GetDictionary();
-	if (app.empty() || fun.empty()) { return; }
-	if (app == "Init") { VariableClass::cef_Init_V8Handler.Execute(app, dict, retval, exception); return; }
+	CefRefPtr<CefDictionaryValue> argsDict;
+	if (!args.empty()) { 
+		// ÓÐ²ÎÊý
+		CefRefPtr<CefValue> jsonObject = CefParseJSON(args, JSON_PARSER_ALLOW_TRAILING_COMMAS);
+		argsDict = jsonObject->GetDictionary();
+	}
+	if (app.empty() || fun.empty()) { return false; }
+	if (app == "Init") { return VariableClass::cef_Init_V8Handler.Execute(fun, argsDict, retval, exception); }
+	if (app == "Login") { return VariableClass::cef_Login_V8Handler.Execute(fun, argsDict, retval, exception); }
+	if (app == "Main") { return VariableClass::cef_Main_V8Handler.Execute(fun, argsDict, retval, exception); }
+	if (app == "ChangePassword") { return VariableClass::cef_ChangePassword_V8Handler.Execute(fun, argsDict, retval, exception); }
+	return false;
 }
 #endif

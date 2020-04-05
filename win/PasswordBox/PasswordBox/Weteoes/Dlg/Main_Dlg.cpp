@@ -20,7 +20,9 @@
 
 // Main_Dlg 对话框
 
-
+HWND Main_Dlg::dlg_HWND;			// 窗口句柄
+int Main_Dlg::dlg_CEF;				// CEF句柄ID
+int Main_Dlg::browserListIndex;		// 在CEF_Handler中的浏览器ID
 
 Main_Dlg::Main_Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_Main, pParent)
@@ -90,32 +92,39 @@ void Main_Dlg::OnPaint()
 // 初始化
 void Main_Dlg::Ready() {
 	Ready_Dlg();
+	Ready_Variable();
 	Ready_CEF();
+}
+
+void Main_Dlg::Ready_Variable() {
+	VariableClass::dlg_CEF = dlg_CEF;
+	VariableClass::dlg_HWND = dlg_HWND;
 }
 
 // 初始化窗口
 void Main_Dlg::Ready_Dlg() {
-	/* 设置窗口标题(用于Dll获取主窗口句柄) Title */
-	//AfxGetMainWnd()->SetWindowText(AppConfigClass::SoftwareName.c_str());
+	// 初始化变量
+	dlg_CEF = IDC_MAIN_CEF;
+	dlg_HWND = this->m_hWnd;
+
+	// 设置窗口标题(用于Dll获取主窗口句柄) Title
+	SetWindowText("Main");
 
 	//设置窗口大小
-	int width = 600, height = 400;
+	int width = 800, height = 500;
 	SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE);
-	GetDlgItem(VariableClass::dlg_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
+	GetDlgItem(dlg_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
 
 	//阴影
-	SetClassLong(this->m_hWnd, GCL_STYLE, GetClassLong(this->m_hWnd, GCL_STYLE) | CS_DROPSHADOW);
-
-	// 保存窗口句柄
-	VariableClass::dlg_HWND = this->m_hWnd;
+	SetClassLong(dlg_HWND, GCL_STYLE, GetClassLong(dlg_HWND, GCL_STYLE) | CS_DROPSHADOW);
 }
 
 // 初始化CEF
 void Main_Dlg::Ready_CEF() {
-	string url = AppCefClass().GetUrl("");
+	string url = AppCefClass().GetUrl("/passwordBox/ui/2/main");
 	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
 	browserListIndex = CEF_handler->GetBrowserListIndex();
-	GetDlgItem(VariableClass::dlg_CEF)->GetClientRect(&CEF_Main_App::CEF_CRect);
+	GetDlgItem(dlg_CEF)->GetClientRect(&CEF_Main_App::CEF_CRect);
 	CEF_Main_App::CEF_HWND = GetSafeHwnd();
 	CefBrowserSettings browser_settings;
 	CefWindowInfo window_info;
@@ -130,9 +139,8 @@ HCURSOR Main_Dlg::OnQueryDragIcon() {
 }
 
 void Main_Dlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) {
+	Ready_Variable();
 	CDialogEx::OnActivate(nState, pWndOther, bMinimized);
-	VariableClass::dlg_CEF = IDC_MAIN_CEF;
-	VariableClass::dlg_HWND = this->m_hWnd;
 }
 
 
@@ -145,4 +153,9 @@ void Main_Dlg::OnSize(UINT nType, int cx, int cy) {
 		//因为浏览器对于对话框是子窗口，所以浏览器的左上角坐标是相于父窗口的客户区的左上角而言的
 		::MoveWindow(hwnd, 0, 0, cx, cy, TRUE);
 	}
+}
+
+// Alt + F4
+void Main_Dlg::OnCancel() {
+	VariableClass::appDlgClass.Minimize();
 }

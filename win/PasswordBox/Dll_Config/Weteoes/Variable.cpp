@@ -19,8 +19,12 @@ string VariableClass::getVariable(string key) {
 	}
 	return i->second;
 }
-
 bool VariableClass::setVariable(string key, string value) {
+	map<string, string>::iterator i;
+	i = variable_map.find(key);
+	if (i != variable_map.end()) {
+		variable_map.erase(i);
+	}
 	variable_map.insert(pair<string, string>(key, value));
 	return true;
 }

@@ -1,6 +1,8 @@
 #include <pch.h>
 #include "Variable.h"
 
+bool VariableClass::DEBUG = FALSE;
+
 WebOperatingClass VariableClass::webOperatingClass; 
 ConfigClass VariableClass::configClass;
 RSAClass VariableClass::rsaClass;
@@ -21,6 +23,11 @@ string VariableClass::getVariable(string key) {
 }
 
 bool VariableClass::setVariable(string key, string value) {
+	map<string, string>::iterator i;
+	i = variable_map.find(key);
+	if (i != variable_map.end()) {
+		variable_map.erase(i);
+	}
 	variable_map.insert(pair<string, string>(key, value));
 	return true;
 }

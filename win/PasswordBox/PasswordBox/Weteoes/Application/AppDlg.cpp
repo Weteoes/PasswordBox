@@ -9,36 +9,48 @@ void AppDlgClass::Close() {
 
 void AppDlgClass::Minimize() {
 	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
-	Dlg_SetNowRect(); //保存现在的窗口信息
-	//移动窗口位置
-	int nFullWidth = GetSystemMetrics(SM_CXSCREEN), //获取屏幕大小
+	Dlg_SetNowRect(); // 保存现在的窗口信息
+	// 移动窗口位置
+	int nFullWidth = GetSystemMetrics(SM_CXSCREEN), // 获取屏幕大小
 		nFullHeight = GetSystemMetrics(SM_CYSCREEN);
-	SetWindowPos(dlg_HWND, NULL, nFullWidth, nFullHeight, 0, 0, SWP_NOSIZE);  //设置0像素,移到最角落,不然会存在阴影
+	SetWindowPos(dlg_HWND, NULL, nFullWidth, nFullHeight, 0, 0, SWP_NOSIZE);  // 设置0像素,移到最角落,不然会存在阴影
 
 	ShowWindow(dlg_HWND, SW_HIDE);
 }
 
-void AppDlgClass::Show() {
+void AppDlgClass::Show(bool MoveCenter) {
 	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
-	Dlg a = Dlg_GetRect(); //获取保存的窗口信息
-	SetWindowPos(dlg_HWND, NULL, a.x, a.y, 0, 0, SWP_NOSIZE);  //设置0像素,移到最角落
+	if (MoveCenter) {
+		// 窗口移动到中间
+		int nFullWidth = GetSystemMetrics(SM_CXSCREEN), // 获取屏幕大小
+			nFullHeight = GetSystemMetrics(SM_CYSCREEN);
+		CRect rect;
+		GetWindowRect(dlg_HWND, &rect);
+		int x = (nFullWidth - (rect.right - rect.left)) / 2,
+			y = (nFullHeight - (rect.bottom - rect.top)) / 2;
+		SetWindowPos(dlg_HWND, NULL, x, y, 0, 0, SWP_NOSIZE); 
+	}
+	else {
+		Dlg a = Dlg_GetRect(); // 获取保存的窗口信息
+		SetWindowPos(dlg_HWND, NULL, a.x, a.y, 0, 0, SWP_NOSIZE);  // 还原上次位置
+	}
 	ShowWindow(dlg_HWND, SW_SHOW);
 }
 
 void AppDlgClass::SetSize(int width, int height) {
 	// 设置窗口大小
 	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
-	Dlg_SetNowRect(); //保存现在的窗口信息
+	Dlg_SetNowRect(); // 保存现在的窗口信息
 	SetWindowPos(dlg_HWND, NULL, Dlg_.x, Dlg_.y, width, height, 0);
 }
 
 void AppDlgClass::Dlg_SetNowRect(bool SetWH) {
 	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
 	CRect DlgCRect;
-	GetWindowRect(dlg_HWND, &DlgCRect); //获取在屏幕中的坐标
+	GetWindowRect(dlg_HWND, &DlgCRect); // 获取在屏幕中的坐标
 	Dlg_.x = DlgCRect.left;
 	Dlg_.y = DlgCRect.top;
-	if (SetWH) { //设置宽高
+	if (SetWH) { // 设置宽高
 		Dlg_.width = DlgCRect.right - DlgCRect.left;
 		Dlg_.height = DlgCRect.bottom - DlgCRect.top;
 	}
@@ -46,9 +58,9 @@ void AppDlgClass::Dlg_SetNowRect(bool SetWH) {
 
 AppDlgClass::Dlg AppDlgClass::Dlg_GetRect() {
 	Dlg a;
-	if (Dlg_.x == 0 || Dlg_.y == 0) { //不存在值
+	if (Dlg_.x == 0 || Dlg_.y == 0) { // 不存在值
 		int width = GetSystemMetrics(SM_CXSCREEN),
-			height = GetSystemMetrics(SM_CYSCREEN); //获取屏幕分辨率
+			height = GetSystemMetrics(SM_CYSCREEN); // 获取屏幕分辨率
 		a.x = (width - Dlg_.width) / 2;
 		a.y = (height - Dlg_.height) / 2 - 20;
 	}

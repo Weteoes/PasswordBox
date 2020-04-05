@@ -11,5 +11,8 @@ public:
 		CefRefPtr<CefV8Value>& retval,
 		CefString& exception
 	);
+
+private:
+	void ShowMainDlg();
 };
 #endif

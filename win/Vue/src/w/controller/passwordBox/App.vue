@@ -16,38 +16,57 @@ export default {
     ready () {
       this.readySoftwareApi()
       this.readySoftwareFun()
+      this.readyUrl()
     },
-    dlgReady () {
-      const body = document.querySelector('html')
-      const w = body.offsetWidth
-      const h = body.offsetHeight
-      this.w.softwareApi.dlg.size(w, h)
+    readyUrl () {
+      const host = 'http://127.0.0.1:23340'
+      this.w.url = {
+        get: host + '/operating/browser/get?',
+        create: host + '/operating/browser/create?',
+        del: host + '/operating/browser/del?',
+        getAll: host + '/operating/console/getAll?'
+      }
     },
     readySoftwareApi () {
       this.w.softwareApi = {
         dlg: {
           mouse: {
-            down (x, y) {
+            down: (x, y) => {
               try {
                 this.weteoesBrowser.dlg.mouse.down(x, y)
-              } catch (e) {}
+              } catch (e) { this.log(e) }
             },
-            move (x, y) {
+            move: (x, y) => {
               try {
                 this.weteoesBrowser.dlg.mouse.move(x, y)
-              } catch (e) {}
+              } catch (e) { this.log(e) }
             },
-            up () {
+            up: () => {
               try {
                 this.weteoesBrowser.dlg.mouse.up()
-              } catch (e) {}
+              } catch (e) { this.log(e) }
             }
           },
-          size (width, height) {
+          size: (width, height) => {
             try {
-              this.weteoesBrowser.size(width, height)
-            } catch (e) {}
+              this.weteoesBrowser.dlg.size(width, height)
+            } catch (e) { this.log(e) }
+          },
+          minimize: () => {
+            try {
+              this.weteoesBrowser.dlg.minimize()
+            } catch (e) { this.log(e) }
+          },
+          close: () => {
+            try {
+              this.weteoesBrowser.dlg.close()
+            } catch (e) { this.log(e) }
           }
+        },
+        app: (app, fun, args) => {
+          try {
+            return this.weteoesBrowser.app(app, fun, args)
+          } catch (e) { this.log(e) }
         }
       }
     },
@@ -81,13 +100,14 @@ export default {
           })
         }
       }
+    },
+    log (...msg) {
+      window.console.log(...msg)
     }
   },
   created () {
     this.ready()
   },
-  mounted () {
-    this.dlgReady()
-  }
+  mounted () { }
 }
 </script>

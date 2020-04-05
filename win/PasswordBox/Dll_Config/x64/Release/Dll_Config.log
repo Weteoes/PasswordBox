@@ -1,18 +1,7 @@
-﻿  DllConfig.cpp
-  ConfigFile.cpp
-  CreateXMLConfig.cpp
-  ReadXMLConfig.cpp
-  ReturnXMLStruct.cpp
-  SetXMLConfig.cpp
-  XML.cpp
-  SRWDll.cpp
-  WeteoesDll.cpp
-  tinyxml2.cpp
-  Variable.cpp
-    正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.exp
+﻿    正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.exp
   正在生成代码
-  213 of 566 functions (37.6%) were compiled, the rest were copied from previous compilation.
-    124 functions were new in current compilation
-    24 functions had inline decision re-evaluated but remain unchanged
+  0 of 580 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   Dll_Config.vcxproj -> E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.dll

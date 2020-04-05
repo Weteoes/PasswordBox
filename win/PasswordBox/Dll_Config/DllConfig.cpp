@@ -31,7 +31,8 @@ extern "C" _declspec(dllexport) bool Config_DelUserAndPassword(const char* host)
 
 extern "C" _declspec(dllexport) bool Config_Exsits() {
 	if (!Loading()) { return false; }
-	return WeteoesDll::IO_Exists((char*)ConfigFileClass::UserAndPassword.c_str());
+	std::string a = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::UserAndPassword;
+	return WeteoesDll::IO_Exists((char*)a.c_str());
 }
 
 extern "C" _declspec(dllexport) bool Config_SetAESPassword(char* pass) {

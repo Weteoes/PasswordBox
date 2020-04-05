@@ -5,7 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "PasswordBox.h"
-#include <Weteoes/Dlg/Init_Dlg.h>
+#include <Weteoes/Dlg/W_ICON_Dlg.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -51,7 +51,6 @@ bool CPasswordBoxApp::Ready_Dll() {
 	return true;
 }
 
-
 // CPasswordBoxApp 初始化
 BOOL CPasswordBoxApp::InitInstance() {
 	// 如果一个运行在 Windows XP 上的应用程序清单指定要
@@ -85,8 +84,7 @@ BOOL CPasswordBoxApp::InitInstance() {
 
 	Ready();
 
-
-	Init_Dlg dlg;
+	W_ICON_Dlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

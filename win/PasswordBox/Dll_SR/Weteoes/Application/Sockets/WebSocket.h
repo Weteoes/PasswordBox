@@ -64,7 +64,12 @@ void WebSocketClass::Socket_RunShell(SOCKET client, std::string data) { //执行动
 		std::string file = data.substr(4);
 		file = file.substr(0, file.find(" "));
 		if (file == "/") { file = "/index.html"; }
-		//if (file.find(".") == -1) { file = "/index.html"; }
+		// operating
+		if (VariableClass::webOperatingClass.Entrance(file, result)) {
+			result = GetHeader("") + result;
+			goto f_result;
+		}
+		if (file.find(".") == -1) { file = "/index.html"; } // VUE 转发
 		std::string pathFile = this->webPath + file;
 		if(WeteoesDll::IO_Exists((char*)pathFile.c_str())) {
 			//fileByte.
@@ -87,10 +92,6 @@ void WebSocketClass::Socket_RunShell(SOCKET client, std::string data) { //执行动
 				result = GetHeader(pathFile) + string(pathFile_c, pathFile_c_len);
 			}
 		}
-		else if (VariableClass::webOperatingClass.Entrance(file, result)) {
-			result = GetHeader("") + result;
-			goto f_result;
-		}
 		else { result = OtherSend(); }
 	}
 f_result:
@@ -107,10 +108,14 @@ std::string WebSocketClass::OtherSend() {
 }
 inline std::string WebSocketClass::GetHeader(std::string file) {
 	std::string result = "HTTP/1.1 200 OK\r\ncharset=UTF-8\r\nServer: Weteoes\r\n";
-	std::string type = "text/html";
+	if (VariableClass::DEBUG) {
+		result += "Access-Control-Allow-Origin:*\r\n";
+	}
 	if (!file.empty()) { 
 		std::string urlType = file.substr(file.find_last_of(".") + 1);
-		if (fileByte(urlType)) { result += "Accept-Ranges: bytes\r\nDate: Weteoes\r\n\r\n"; }
+		if (urlType == "woff") { result += "Content-Type: application/font-woff\r\n"; }
+		else if (urlType == "ttf") { result += "Content-Type: font/ttf\r\n"; }
+		else if (fileByte(urlType)) { result += "Accept-Ranges: bytes\r\nDate: Weteoes\r\n\r\n"; }
 	}
 	result += "\r\n";
 	return result;

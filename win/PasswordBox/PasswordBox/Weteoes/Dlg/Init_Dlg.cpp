@@ -22,7 +22,9 @@
 
 // Init_Dlg 对话框
 
-
+HWND Init_Dlg::dlg_HWND;			// 窗口句柄
+int Init_Dlg::dlg_CEF;				// CEF句柄ID
+int Init_Dlg::browserListIndex;		// 在CEF_Handler中的浏览器ID
 
 Init_Dlg::Init_Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_Init, pParent)
@@ -36,17 +38,10 @@ void Init_Dlg::DoDataExchange(CDataExchange* pDX)
 }
 
 // 托盘重启
-static UINT OnTaskBarRestart_ID = RegisterWindowMessage(TEXT("TaskbarCreated"));
 BEGIN_MESSAGE_MAP(Init_Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	// 托盘事件
-	ON_COMMAND(ID_MENU_Exit, &Init_Dlg::IconMenu_Exit)
-	ON_MESSAGE(WM_IconMsg, &Init_Dlg::OnNotifyMsg)
-	ON_REGISTERED_MESSAGE(OnTaskBarRestart_ID, &Init_Dlg::OnTaskBarRestart)
-	ON_BN_CLICKED(IDOK, &Init_Dlg::OnBnClickedOk)
 	ON_WM_NCHITTEST()
-//	ON_WM_ICONERASEBKGND()
 ON_WM_ACTIVATE()
 ON_WM_SIZE()
 END_MESSAGE_MAP()
@@ -99,35 +94,38 @@ void Init_Dlg::OnPaint() {
 // 初始化
 void Init_Dlg::Ready() {
 	Ready_Dlg();
-	Ready_Icon();
+	Ready_Variable();
 	VariableClass::app_Dll_SWR.Start(0);
 	Ready_CEF();
-	SRWDll::Set_Variable("InitIn", "1");
-	ConfigDll::Set_Variable("AES_Password", "123456");
+}
+void Init_Dlg::Ready_Variable() {
+	VariableClass::dlg_CEF = dlg_CEF;
+	VariableClass::dlg_HWND = dlg_HWND;
 }
 
 // 初始化窗口
 void Init_Dlg::Ready_Dlg() {
-	/* 设置窗口标题(用于Dll获取主窗口句柄) Title */
-	//AfxGetMainWnd()->SetWindowText(AppConfigClass::SoftwareName.c_str());
+	// 初始化变量
+	dlg_CEF = IDC_Init_CEF;
+	dlg_HWND = this->m_hWnd;
+
+	// 设置窗口标题(用于Dll获取主窗口句柄) Title
+	SetWindowText("Init");
 
 	//设置窗口大小
 	int width = 350, height = 250;
 	SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE);
-	GetDlgItem(VariableClass::dlg_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
+	GetDlgItem(dlg_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
 
 	//阴影
-	SetClassLong(this->m_hWnd, GCL_STYLE, GetClassLong(this->m_hWnd, GCL_STYLE) | CS_DROPSHADOW);
-
-	// 保存窗口句柄
-	VariableClass::dlg_HWND = this->m_hWnd;
+	SetClassLong(dlg_HWND, GCL_STYLE, GetClassLong(dlg_HWND, GCL_STYLE) | CS_DROPSHADOW);
 }
 // 初始化CEF
 void Init_Dlg::Ready_CEF() {
-	string url = VariableClass::appCefClass.GetUrl("/passwordBox/ui/1/Init");
+	string url = VariableClass::appCefClass.GetUrl("/passwordBox/ui/1/init");
 	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
 	browserListIndex = CEF_handler->GetBrowserListIndex();
-	GetDlgItem(VariableClass::dlg_CEF)->GetClientRect(&CEF_Init_App::CEF_CRect);
+	GetDlgItem(dlg_CEF)->GetClientRect(&CEF_Init_App::CEF_CRect);
 	CEF_Init_App::CEF_HWND = GetSafeHwnd();
 	CefBrowserSettings browser_settings;
 	CefWindowInfo window_info;
@@ -135,75 +133,16 @@ void Init_Dlg::Ready_CEF() {
 	CefBrowserHost::CreateBrowser(window_info, CEF_handler, url, browser_settings, NULL, NULL);
 }
 
-// 初始化托盘图标
-void Init_Dlg::Ready_Icon() {
-	VariableClass::appIconClass.Icon_Add(this->m_hWnd, AfxGetInstanceHandle());
-}
-
-// 托盘图标事件
-LRESULT Init_Dlg::OnNotifyMsg(WPARAM wparam, LPARAM lparam) {
-	if (wparam != IDI_ICON1) { return -1; }
-	switch (lparam) {
-	case WM_LBUTTONDOWN:
-		VariableClass::appDlgClass.Show();
-		break;
-	case WM_RBUTTONDOWN: 
-		// 注意：菜单是弹出式菜单，菜单索引项是弹出式菜单，子菜单不是
-		CMenu menu;
-		menu.LoadMenu(IDR_MENU1);
-		CMenu* pPopup = menu.GetSubMenu(0);  // 获取菜单句柄，参数表示菜单位置，索引值
-		if (!pPopup) { MessageBox(_T("Icon 获取句柄失败"), _T(""), MB_OK); return 0; }
-		SetForegroundWindow();
-		POINT pt;
-		GetCursorPos(&pt);
-		pPopup->TrackPopupMenu(TPM_LEFTALIGN, pt.x, pt.y, this); // 其中可添加TPM_RETURNCMD  | TPM_RIGHTBUTTON 选项，返回值表示选中的菜单ID项
-		pPopup->DestroyMenu(); //销毁菜单
-		break;
-	}
-	return 0;
-}
-
-// 托盘图标重启事件
-LRESULT Init_Dlg::OnTaskBarRestart(WPARAM wParam, LPARAM lParam) {
-	Ready_Icon();
-	return 0;
-}
-
-// 托盘事件-退出
-void Init_Dlg::IconMenu_Exit() {
-	VariableClass::appDlgClass.Close();
-}
-
-//当用户拖动最小化窗口时系统调用此函数取得光标
-//显示。
-HCURSOR Init_Dlg::OnQueryDragIcon() {
-	return static_cast<HCURSOR>(m_hIcon);
-}
-
-
-#include <Weteoes/Dlg/Main_Dlg.h>
-
-void Init_Dlg::OnBnClickedOk() {
-	// TODO: 在此添加控件通知处理程序代码
-	//exit(0);
-	Main_Dlg a;
-	a.DoModal();
-}
-
-
 // Alt + F4
 void Init_Dlg::OnCancel() {
 	VariableClass::appDlgClass.Minimize();
 	//CDialogEx::OnCancel();
 }
 
-
 void Init_Dlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) {
+	Ready_Variable();
 	CDialogEx::OnActivate(nState, pWndOther, bMinimized);
-	VariableClass::dlg_CEF = IDC_Init_CEF;
-	VariableClass::dlg_HWND = this->m_hWnd;
 }
-
 
 void Init_Dlg::OnSize(UINT nType, int cx, int cy) {
 	CDialogEx::OnSize(nType, cx, cy);

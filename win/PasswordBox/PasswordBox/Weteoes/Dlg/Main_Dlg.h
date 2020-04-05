@@ -33,13 +33,17 @@ protected:
 
 private:
 	void Ready();
+	void Ready_Variable();
 	void Ready_Dlg();
 	void Ready_CEF();
 
-private:
-	int browserListIndex;
+public:
+	static HWND dlg_HWND;			// 窗口句柄
+	static int dlg_CEF;				// CEF句柄ID
+	static int browserListIndex;	// 在CEF_Handler中的浏览器ID
 
 public:
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	virtual void OnCancel(); // Alt + F4
 };
