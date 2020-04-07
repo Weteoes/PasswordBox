@@ -12,11 +12,12 @@
 #include <string>
 #include <thread>
 #include <vector>
+using namespace std;
+
 #include <Weteoes/Dll/WeteoesDll.h>
 #include <Weteoes/Dll/ManagementDll.h>
 #include <Weteoes/Dll/SRWDll.h>
 #include <Weteoes/Dll/ConfigDll.h>
 #include <Weteoes/Variable.h>
-using namespace std;
 
 #endif //PCH_H

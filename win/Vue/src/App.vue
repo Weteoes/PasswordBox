@@ -76,14 +76,10 @@ export default {
               }
             ]
           }).then((r) => {
-            if (this.$store.state.debug) {
-              this.log(r)
-            }
+            this.debugLog(r)
             success(r)
           }).catch((e) => {
-            if (this.$store.state.debug) {
-              this.log(e)
-            }
+            this.debugLog(e)
             error(e)
           })
         },
@@ -164,6 +160,11 @@ export default {
         return fmt
       }
       // Date.format End
+    },
+    debugLog (...msg) {
+      if (this.$store.state.debug) {
+        window.console.log(...msg)
+      }
     },
     log (...msg) {
       window.console.log(...msg)

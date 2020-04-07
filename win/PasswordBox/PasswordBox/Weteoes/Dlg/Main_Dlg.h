@@ -1,5 +1,4 @@
-﻿
-// PasswordBoxDlg.h: 头文件
+﻿// PasswordBoxDlg.h: 头文件
 //
 
 #pragma once
@@ -33,14 +32,16 @@ protected:
 
 private:
 	void Ready();
-	void Ready_Variable();
-	void Ready_Dlg();
-	void Ready_CEF();
+	void ReadyVariable();
+	void ReadyDlg();
+	void ReadyCEF();
+	void ReadyCEFVariable();
 
 public:
-	static HWND dlg_HWND;			// 窗口句柄
-	static int dlg_CEF;				// CEF句柄ID
-	static int browserListIndex;	// 在CEF_Handler中的浏览器ID
+	static HWND dlg_HWND;					// 窗口句柄
+	static int dlg_CEF;						// CEF句柄ID
+	static int browserListIndex;			// 在CEF_Handler中的浏览器ID
+	static CefRefPtr<CefBrowser> browser;   // 浏览器句柄
 
 public:
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);

@@ -15,6 +15,7 @@ export default {
   methods: {
     ready () {
       this.readySoftwareApi()
+      this.readySoftwareDlgApi()
       this.readySoftwareFun()
       this.readyUrl()
     },
@@ -70,6 +71,17 @@ export default {
         }
       }
     },
+    readySoftwareDlgApi () {
+      const this_ = this
+      this.w.softwareDlgApi = {
+        // 窗口焦点
+        activate_ (nState) {
+          this_.debugLog('SoftwareDlgApi activate:{0}'.format(nState))
+          this.activate(nState)
+        },
+        activate: (nState) => { }
+      }
+    },
     readySoftwareFun () {
       this.w.softwareFun = {
         // 拖动条
@@ -99,6 +111,11 @@ export default {
             this.w.softwareApi.dlg.mouse.up()
           })
         }
+      }
+    },
+    debugLog (...msg) {
+      if (this.$store.state.debug) {
+        window.console.log(...msg)
       }
     },
     log (...msg) {

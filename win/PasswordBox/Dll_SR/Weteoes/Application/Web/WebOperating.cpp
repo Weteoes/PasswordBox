@@ -127,7 +127,7 @@ string WebOperatingClass::operating_operating_console_getAll(string data) {
 		char* onlyData_c = new char[1000];
 		sprintf_s(onlyData_c, 1000, "{\"Host\":\"%s\",\"User\":\"%s\",\"Pass\":\"%s\"}", Host.c_str(), User.c_str(), Pass.c_str());
 		result_list += onlyData_c;
-		if (i + 1 < a.size()) {
+		if (i + 1 < (int)a.size()) {
 			result_list += ",";
 		}
 	}

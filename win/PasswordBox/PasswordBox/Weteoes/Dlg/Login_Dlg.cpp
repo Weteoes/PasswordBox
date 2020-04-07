@@ -22,9 +22,10 @@
 
 // Login_Dlg 对话框
 
-HWND Login_Dlg::dlg_HWND;			// 窗口句柄
-int Login_Dlg::dlg_CEF;				// CEF句柄ID
-int Login_Dlg::browserListIndex;	// 在CEF_Handler中的浏览器ID
+HWND Login_Dlg::dlg_HWND;						// 窗口句柄
+int Login_Dlg::dlg_CEF;							// CEF句柄ID
+int Login_Dlg::browserListIndex;					// 在CEF_Handler中的浏览器ID
+CefRefPtr<CefBrowser> Login_Dlg::browser;		// 浏览器句柄
 
 Login_Dlg::Login_Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_Login, pParent)
@@ -131,6 +132,19 @@ void Login_Dlg::Ready_CEF() {
 	CefWindowInfo window_info;
 	window_info.SetAsChild(CEF_Login_App::CEF_HWND, CEF_Login_App::CEF_CRect);
 	CefBrowserHost::CreateBrowser(window_info, CEF_handler, url, browser_settings, NULL, NULL);
+	thread a(&Login_Dlg::ReadyCEFVariable, this); a.detach();
+}
+
+void Login_Dlg::ReadyCEFVariable() {
+	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
+	CefRefPtr<CefBrowser> browser = CEF_handler->GetBrowserbyIndex(browserListIndex);
+	if (browser) {
+		this->browser = browser;
+	}
+	else {
+		Sleep(100);
+		ReadyCEFVariable();
+	}
 }
 
 // Alt + F4
@@ -146,8 +160,6 @@ void Login_Dlg::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized) {
 
 void Login_Dlg::OnSize(UINT nType, int cx, int cy) {
 	CDialogEx::OnSize(nType, cx, cy);
-	CefRefPtr<CEF_Handler> CEF_handler = CEF_Handler::GetInstance();
-	CefRefPtr<CefBrowser> browser = CEF_handler->GetBrowserbyIndex(browserListIndex);
 	if (browser) {
 		CefWindowHandle hwnd = browser->GetHost()->GetWindowHandle();
 		//因为浏览器对于对话框是子窗口，所以浏览器的左上角坐标是相于父窗口的客户区的左上角而言的

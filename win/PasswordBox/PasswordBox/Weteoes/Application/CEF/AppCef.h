@@ -17,6 +17,7 @@ public:
 	bool Init_CEF();
 	CefSettings GetSetting();
 	std::string GetUrl(std::string);
+
 private:
 	wchar_t* ToUnicode(char*);
 };

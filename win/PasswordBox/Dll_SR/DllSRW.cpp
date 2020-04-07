@@ -54,9 +54,12 @@ extern "C" _declspec(dllexport) int RSA_UnEncode(char* data, int dataLen, char* 
 	return l;
 }
 
-extern "C" _declspec(dllexport) int AES_Encode(char* data, int dataLen, char* key, char*& result) {
+extern "C++" _declspec(dllexport) int AES_Encode(char* data, int dataLen, char* key, char*& result) {
 	if (!Loading()) { return NULL; }
-	string a = VariableClass::securityAESClass.Encryption(string(data, dataLen), key);
+	string data_s = string(data, dataLen);
+	VariableClass::securityAESClass.key = key;
+	string a = VariableClass::securityAESClass.Encryption(data_s);
+	string b = VariableClass::securityAESClass.Decryption(a);
 	int l = (int)a.length();
 	result = GetChars(a);
 	return l;
@@ -64,7 +67,9 @@ extern "C" _declspec(dllexport) int AES_Encode(char* data, int dataLen, char* ke
 
 extern "C" _declspec(dllexport) int AES_UnEncode(char* data, int dataLen, char* key, char*& result) {
 	if (!Loading()) { return NULL; }
-	string a = VariableClass::securityAESClass.Decryption(string(data, dataLen), key);
+	string data_s = string(data, dataLen);
+	VariableClass::securityAESClass.key = key;
+	string a = VariableClass::securityAESClass.Decryption(data_s);
 	int l = (int)a.length();
 	result = GetChars(a);
 	return l;

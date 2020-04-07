@@ -37,17 +37,27 @@ CPasswordBoxApp theApp;
 
 
 bool CPasswordBoxApp::Ready() {
-	if (!Ready_Dll()) { exit(0x01); }
+	if (!ReadyDll()) { exit(0x01); }
+	if (!ReadyProcess()) { exit(0x02); }
+	VariableClass::appCefClass.Init_CEF();
 	return true;
 }
 
 // 初始化 Dll
-bool CPasswordBoxApp::Ready_Dll() {
+bool CPasswordBoxApp::ReadyDll() {
 	if (!WeteoesDll().Loading()) { return false; }
 	if (!ManagementDll().Loading()) { return false; }
 	if (!SRWDll().Loading()) { return false; }
 	if (!ConfigDll().Loading()) { return false; }
-	VariableClass::appCefClass.Init_CEF();
+	return true;
+}
+
+bool CPasswordBoxApp::ReadyProcess() {
+	int i = 0;
+	WeteoesDll::Process_GetProcessidFromName("passwordbox.exe", &i);
+	if (i > 1) {
+		return false;
+	}
 	return true;
 }
 

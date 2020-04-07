@@ -1,1 +1,14 @@
-﻿  Dll_Config.vcxproj -> E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Debug\Config.dll
+﻿  AESClass.cpp
+  ConfigFile.cpp
+  DllConfig.cpp
+  ReadXMLConfig.cpp
+  ReturnXMLStruct.cpp
+  SetXMLConfig.cpp
+  SRWDll.cpp
+  WeteoesDll.cpp
+  tinyxml2.cpp
+  XML.cpp
+  CreateXMLConfig.cpp
+  Variable.cpp
+    正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Debug\Config.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Debug\Config.exp
+  Dll_Config.vcxproj -> E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Debug\Config.dll

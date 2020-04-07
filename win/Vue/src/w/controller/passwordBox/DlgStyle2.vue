@@ -66,12 +66,12 @@ $topHeight: 34px;
 }
 
 .dlg2_button > .dlg2_onlyButton {
-  width: 35px;
-  height: 35px;
-  padding: 2px 5px;
+  width: 24px;
+  height: 24px;
+  padding: 5px 5px;
   cursor: pointer;
   color: #fff;
-  font-size: 30px;
+  font-size: 24px;
   margin: 0 auto;
   display: block;
 }

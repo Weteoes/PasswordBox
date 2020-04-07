@@ -1,7 +1,20 @@
-﻿    正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.exp
+﻿  DllSRW.cpp
+  Config.cpp
+  AES.cpp
+  SecurityAES.cpp
+E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\Dll_SR\Weteoes\Application\Security\SecurityAES.cpp(56,42): warning C4804: “<=”: 在操作中使用类型“bool”不安全
+  WebBasic.cpp
+  Variable.cpp
+  WebOperating.cpp
+  ConfigDll.cpp
+  ManagementDll.cpp
+  WeteoesDll.cpp
+  RSA.cpp
+  CSocket.cpp
+  SSocket.cpp
+    正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.exp
   正在生成代码
-  0 of 658 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  Previous IPDB not found, fall back to full compilation.
+  All 660 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
   Dll_SR.vcxproj -> E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.dll

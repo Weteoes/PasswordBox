@@ -22,6 +22,8 @@
                     if (data.Code == 0) {
                         client.postMessage( { api:"getUserPassbyUrl", "user": data.Data.User, "pass": data.Data.Pass }, ()=> {})
                         log("get ok");
+                    } else {
+                        log("get error")
                     }
                 },(e)=>{
                     log(e);
@@ -36,6 +38,8 @@
                     let data = r.data;
                     if (data.Code == 0) {
                         log("create ok");
+                    } else {
+                        log("create error")
                     }
                 },(e)=>{
                     log(e);
@@ -50,6 +54,8 @@
                     let data = r.data;
                     if (data.Code == 0) {
                         log("del ok");
+                    } else {
+                        log("del error");
                     }
                 },(e)=>{
                     log(e);
@@ -104,12 +110,15 @@ chrome.runtime.onConnect.addListener(function (client) {
     getUserPassbyUrl();
 
     client.onDisconnect.addListener(function() {
+        log(variable.Host, "disconnect");
         if (pd_data()) {
             if (Weteoes.config.userSoftware) {
                 Weteoes.software.operating.create(variable.Host, variable.User, variable.Pass);
             } else {
                 Weteoes.localStorage.operating.create(variable.Host);
             }
+        } else {
+            log(variable, "数据不合格")
         }
     });
 

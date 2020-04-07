@@ -1,4 +1,4 @@
-#include <pch.h>
+ï»¿#include <pch.h>
 #include "WebBasic.h"
 #include <assert.h>
 
@@ -9,7 +9,7 @@ string WebBasicClass::get_HtmlConfig(string data, string configName) {
 		string onlyData = a[i];
 		size_t b = onlyData.find("=");
 		if (b == -1) {
-			// Èç¹ûÕÒ²»µ½¾ÍÍË³ö±¾´Î
+			// å¦‚æœæ‰¾ä¸åˆ°å°±é€€å‡ºæœ¬æ¬¡
 			continue;
 		}
 		string onlyData_name = onlyData.substr(0, b);

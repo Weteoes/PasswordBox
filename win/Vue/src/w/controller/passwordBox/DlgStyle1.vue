@@ -1,5 +1,5 @@
 <template>
-  <div class="dlg1_a" :style="dlgStyle">
+  <div class="dlg1_a" v-if="showDlg" :style="dlgStyle">
     <div class="dlg1_aa">
       <div class="title" v-text="dlgTitle"></div>
       <div class="dlg1_aa_menu" v-if="dlg_aa_menu_if">
@@ -83,6 +83,7 @@ export default {
     return {
       w: window.weteoes,
       weteoesBrowser: window.weteoesBrowser,
+      showDlg: true, // 显示窗口，用于关闭刷新页面
       dlgTitle: 'Title', // 标题
       dlgStyle: '', // 样式
       dlg_aa_menu_if: true // 刷新按钮显示
@@ -99,10 +100,15 @@ export default {
     },
     menuMin () {
       this.dlg_aa_menu_if = false
+      this.showDlg = false
       this.w.softwareApi.dlg.minimize()
-      setTimeout(() => { this.dlg_aa_menu_if = true }, 100)
+      setTimeout(() => {
+        this.dlg_aa_menu_if = true
+        this.showDlg = true
+      }, 100)
     },
     menuExit () {
+      // 没使用到
       this.w.softwareApi.dlg.close()
     },
     log (...msg) {

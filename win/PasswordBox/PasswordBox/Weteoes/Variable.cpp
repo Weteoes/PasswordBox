@@ -6,6 +6,7 @@ AppIconClass VariableClass::appIconClass;
 AppDlgClass VariableClass::appDlgClass;
 CreateDlgClass VariableClass::createDlgClass;
 AppCefClass VariableClass::appCefClass;
+AppCefBasicClass VariableClass::appCefBasicClass;
 APP_Dll_SWR VariableClass::app_Dll_SWR;
 
 CEF_Init_V8Handler VariableClass::cef_Init_V8Handler;

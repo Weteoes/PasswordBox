@@ -30,7 +30,8 @@ public:
 
 private:
 	bool Ready();
-	bool Ready_Dll();
+	bool ReadyDll();
+	bool ReadyProcess();
 
 };
 

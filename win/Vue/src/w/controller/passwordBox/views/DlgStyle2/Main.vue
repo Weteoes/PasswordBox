@@ -55,7 +55,18 @@ export default {
       this.$parent.dlgTitle = this.dlgTitle // 标题
       this.tableLoad() // 加载数据
       this.tableScroll() // Scroll事件
+      this.readyDlgApi() // 设置窗口API回调
       this.w.softwareFun.addDlgMouseEvent(document.querySelector('.dlg2_aaa')) // 拖动条
+    },
+    // 设置窗口API回调
+    readyDlgApi () {
+      // 窗口句柄回调
+      this.w.softwareDlgApi.activate = (a) => {
+        if (a !== 0) {
+          // 重新加载表格
+          this.tableLoad()
+        }
+      }
     },
     tableLoad () {
       this.w.basic.ajax(this.w.url.getAll, 'get', {},

@@ -40,6 +40,8 @@ bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile) {
 		WeteoesDll::IO_Remove(XmlFile_C);
 	}
 
+	std::string XmlData11111111 = VariableClass::xmlClass.ReadXmlParse(data);
+
 	WeteoesDll::IO_WriteFile((char*)XmlFile.c_str(), (char*)data.c_str(), (int)data.length());
 	return true;
 }

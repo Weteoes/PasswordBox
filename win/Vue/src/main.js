@@ -11,6 +11,13 @@ Vue.prototype.$axios = axios
 
 Vue.use(ElementUI)
 
+// 自动获取焦点input
+Vue.directive('w-focus', {
+  inserted: function (el, binding) {
+    el.focus()
+  }
+})
+
 new Vue({
   router,
   store,

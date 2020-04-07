@@ -1,10 +1,10 @@
 <template>
-  <div class="dlg_form">
+  <div class="dlg_form" @keydown="dlgKeyDown">
     <div class="title">第一次使用请设置一个安全密码</div>
     <div class="title1">此密码请自行记录,丢失后数据将无法恢复</div>
     <div class="userInputAll">
       <div class="userInputOnly">
-        <input class="userInput" v-model="userInput.pass0" placeholder="请输入安全密码" type="password" />
+        <input class="userInput" v-model="userInput.pass0" placeholder="请输入安全密码" type="password" v-w-focus />
       </div>
       <div class="userInputOnly">
         <input class="userInput" v-model="userInput.pass1" placeholder="请再次输入安全密码" type="password" />
@@ -13,7 +13,7 @@
     <div class="errorMsg" style="height: 16px" v-text="errorMsg"></div>
     <div class="userButton">
       <div class="userButtonOnly">
-        <div class="only" @click="buttonNext">确定</div>
+        <div class="only" @click="buttonNextClick">确定</div>
       </div>
     </div>
   </div>
@@ -91,7 +91,12 @@ export default {
       this.$parent.dlgTitle = this.dlgTitle // 标题
       this.w.softwareFun.addDlgMouseEvent(document.querySelector('.dlg1_aa')) // 拖动条
     },
-    buttonNext () {
+    dlgKeyDown: function (a) {
+      if (a.keyCode === 13) {
+        this.buttonNextClick()
+      }
+    },
+    buttonNextClick () {
       const showMsg = msg => {
         this.errorMsg = msg
         setTimeout(() => {

@@ -35,11 +35,13 @@ private:
 	void Ready_Variable();
 	void Ready_Dlg();
 	void Ready_CEF();
+	void ReadyCEFVariable();
 
 public:
-	static HWND dlg_HWND;			// 窗口句柄
-	static int dlg_CEF;				// CEF句柄ID
-	static int browserListIndex;	// 在CEF_Handler中的浏览器ID
+	static HWND dlg_HWND;					// 窗口句柄
+	static int dlg_CEF;						// CEF句柄ID
+	static int browserListIndex;			// 在CEF_Handler中的浏览器ID
+	static CefRefPtr<CefBrowser> browser;   // 浏览器句柄
 
 public:
 	virtual void OnCancel(); // Alt + F4
