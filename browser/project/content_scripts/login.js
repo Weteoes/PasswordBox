@@ -42,7 +42,7 @@ function socketConnect() {
 }
 
 function addDocumentEvent() {
-    document.onclick = main;
+    document.body.onclick = main;
 }
 
 function addInputEvent(userInput, passInput) {
@@ -89,7 +89,7 @@ function findPassInput() {
 function findUserInput(PassInput) {
     let userInputType = "input[type=text]";
     let a = document.querySelectorAll(userInputType);
-    if (a.length > 1) {
+    if (a.length >= 1) {
         // 如果有2个input以上，包括2个
         let passInputParent = null;
         while(1) {
