@@ -152,13 +152,8 @@ chrome.runtime.onConnect.addListener(function (client) {
         } else {
             // 个别浏览器没有origin需要自己处理
             let a = client.sender.url;
-            let b = a.indexOf("?");
-            if (b != -1) {
-                a = a.substr(0, b);
-            } else {
-                a = a.substr(0);
-            }
-            url = a;
+            let b = a.substr(0, a.indexOf("/", 8));
+            url = b;
         }
         variable.Host = url;
     }
