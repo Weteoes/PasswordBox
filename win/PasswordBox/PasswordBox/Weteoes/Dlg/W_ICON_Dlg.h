@@ -29,8 +29,9 @@ protected:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg LRESULT OnNotifyMsg(WPARAM, LPARAM); // 托盘图标事件
-	afx_msg LRESULT OnTaskBarRestart(WPARAM, LPARAM); // 托盘图标重启
+	afx_msg LRESULT OnNotifyMsg(WPARAM, LPARAM);			 // 托盘图标事件
+	afx_msg LRESULT OnTaskBarRestart(WPARAM, LPARAM);		 // 托盘图标重启
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);			 // F1帮助菜单
 	DECLARE_MESSAGE_MAP()
 
 private:

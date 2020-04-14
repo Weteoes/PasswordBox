@@ -43,8 +43,10 @@ BEGIN_MESSAGE_MAP(Login_Dlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_NCHITTEST()
-ON_WM_ACTIVATE()
-ON_WM_SIZE()
+	ON_WM_ACTIVATE()
+	ON_WM_SIZE()
+	ON_WM_HELPINFO() // HELP
+	ON_WM_HELPINFO()
 END_MESSAGE_MAP()
 
 
@@ -52,7 +54,6 @@ END_MESSAGE_MAP()
 
 BOOL Login_Dlg::OnInitDialog() {
 	CDialogEx::OnInitDialog();
-
 	// 设置此对话框的图标。  当应用程序主窗口不是对话框时，框架将自动
 	//  执行此操作
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
@@ -165,4 +166,8 @@ void Login_Dlg::OnSize(UINT nType, int cx, int cy) {
 		//因为浏览器对于对话框是子窗口，所以浏览器的左上角坐标是相于父窗口的客户区的左上角而言的
 		::MoveWindow(hwnd, 0, 0, cx, cy, TRUE);  
 	}
+}
+
+BOOL Login_Dlg::OnHelpInfo(HELPINFO* pHelpInfo) {
+	return 0;
 }

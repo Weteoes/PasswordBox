@@ -41,6 +41,7 @@ BEGIN_MESSAGE_MAP(Main_Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_WM_ACTIVATE()
 	ON_WM_SIZE()
+	ON_WM_HELPINFO()
 END_MESSAGE_MAP()
 
 
@@ -178,4 +179,9 @@ void Main_Dlg::OnSize(UINT nType, int cx, int cy) {
 // Alt + F4
 void Main_Dlg::OnCancel() {
 	VariableClass::appDlgClass.Minimize();
+}
+
+
+BOOL Main_Dlg::OnHelpInfo(HELPINFO* pHelpInfo) {
+	return 0;
 }

@@ -46,7 +46,11 @@ SOCKADDR_IN WebSocketClass::Socket_Initialization() {
 	SOCKADDR_IN server;
 	memset(&server, 0, sizeof(SOCKADDR_IN)); //初始化(先将保存地址的server置为全0)
 	int Socket_Port = 23340; // 默认监听端口
+#ifndef _DEBUG
 	string Software_UI_Port = ManagementDll::Get((char*)"Software_UI_Port");
+#else
+	string Software_UI_Port = "8080";
+#endif
 	if (!Software_UI_Port.empty()) { 
 		// 不为空,替换
 		Socket_Port = atoi(Software_UI_Port.c_str());
@@ -108,9 +112,9 @@ std::string WebSocketClass::OtherSend() {
 }
 inline std::string WebSocketClass::GetHeader(std::string file) {
 	std::string result = "HTTP/1.1 200 OK\r\ncharset=UTF-8\r\nServer: Weteoes\r\n";
-	if (VariableClass::DEBUG) {
-		result += "Access-Control-Allow-Origin:*\r\n";
-	}
+#ifdef _DEBUG
+	result += "Access-Control-Allow-Origin:*\r\n";
+#endif
 	if (!file.empty()) { 
 		std::string urlType = file.substr(file.find_last_of(".") + 1);
 		if (urlType == "woff") { result += "Content-Type: application/font-woff\r\n"; }

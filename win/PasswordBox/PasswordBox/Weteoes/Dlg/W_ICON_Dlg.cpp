@@ -39,6 +39,8 @@ BEGIN_MESSAGE_MAP(W_ICON_Dlg, CDialogEx)
 	ON_MESSAGE(WM_IconMsg, &W_ICON_Dlg::OnNotifyMsg)
 	ON_REGISTERED_MESSAGE(OnTaskBarRestart_ID, &W_ICON_Dlg::OnTaskBarRestart)
 	ON_WM_NCHITTEST()
+	// HELP
+	ON_WM_HELPINFO()
 END_MESSAGE_MAP()
 
 
@@ -158,4 +160,10 @@ HCURSOR W_ICON_Dlg::OnQueryDragIcon() {
 void W_ICON_Dlg::OnCancel() {
 	VariableClass::appDlgClass.Minimize();
 	//CDialogEx::OnCancel();
+}
+
+// 屏蔽F1帮助
+BOOL W_ICON_Dlg::OnHelpInfo(HELPINFO* pHelpInfo) {
+	return false;
+	// return CDialogEx::OnHelpInfo(pHelpInfo);
 }

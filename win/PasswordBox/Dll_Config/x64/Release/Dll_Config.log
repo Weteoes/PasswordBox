@@ -10,6 +10,8 @@
   XML.cpp
   CreateXMLConfig.cpp
   Variable.cpp
+LINK : warning C4727: 具有相同时间戳的名为 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\config.pch 的 PCH 已存在于 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\dllconfig.obj 和 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\configfile.obj 中。 使用第一个 PCH。
+LINK : warning C4727: 具有相同时间戳的名为 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\config.pch 的 PCH 已存在于 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\weteoesdll.obj 和 e:\it\project\github\passwordbox\win\passwordbox\dll_config\x64\release\srwdll.obj 中。 使用第一个 PCH。
     正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\Config.exp
   正在生成代码
   Previous IPDB not found, fall back to full compilation.

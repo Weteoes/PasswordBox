@@ -3,22 +3,10 @@
 #include <Weteoes/Application/Security/RSA.h>
 #include <Weteoes/Application/Sockets/WebSocket.h>
 
-bool Loading_Management() {
-	bool debug;
-	string debug_s = ManagementDll::Get((char*)"Debug");
-	if (debug_s.empty()) {
-		return false;
-	}
-	istringstream(debug_s) >> debug;
-	VariableClass::DEBUG = debug;
-	return true;
-}
-
 bool Loading() {
 	if (!WeteoesDll().Loading()) { return false; }
 	if (!ConfigDll().Loading()) { return false; }
 	if (!ManagementDll().Loading()) { return false; }
-	if (!Loading_Management()) { return false; }
 	return true;
 }
 

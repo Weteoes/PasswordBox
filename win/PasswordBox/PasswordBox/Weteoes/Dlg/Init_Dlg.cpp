@@ -45,6 +45,7 @@ BEGIN_MESSAGE_MAP(Init_Dlg, CDialogEx)
 	ON_WM_NCHITTEST()
 ON_WM_ACTIVATE()
 ON_WM_SIZE()
+ON_WM_HELPINFO()
 END_MESSAGE_MAP()
 
 
@@ -165,4 +166,9 @@ void Init_Dlg::OnSize(UINT nType, int cx, int cy) {
 		//因为浏览器对于对话框是子窗口，所以浏览器的左上角坐标是相于父窗口的客户区的左上角而言的
 		::MoveWindow(hwnd, 0, 0, cx, cy, TRUE);  
 	}
+}
+
+
+BOOL Init_Dlg::OnHelpInfo(HELPINFO* pHelpInfo) {
+	return 0;
 }

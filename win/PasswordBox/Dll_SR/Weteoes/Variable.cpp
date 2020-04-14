@@ -1,8 +1,6 @@
 #include <pch.h>
 #include "Variable.h"
 
-bool VariableClass::DEBUG = FALSE;
-
 WebOperatingClass VariableClass::webOperatingClass; 
 ConfigClass VariableClass::configClass;
 RSAClass VariableClass::rsaClass;

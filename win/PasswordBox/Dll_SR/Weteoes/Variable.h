@@ -10,9 +10,6 @@
 
 class VariableClass {
 public:
-	static bool DEBUG;
-
-public:
 	static ConfigClass configClass;
 	static WebOperatingClass webOperatingClass;
 	static RSAClass rsaClass;

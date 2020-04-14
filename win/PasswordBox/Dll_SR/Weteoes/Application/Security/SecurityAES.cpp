@@ -53,7 +53,7 @@ string SecurityAESClass::Decryption(string strSrc) {
 	aes.Decrypt(szDataIn, szDataOut, length, AES::CBC);
 
 	//È¥PKCS7PaddingÌî³ä
-	if (0x00 < szDataOut[length - 1] <= 0x16) {
+	if (0x00 < szDataOut[length - 1] && szDataOut[length - 1] <= 0x16) {
 		int tmp = szDataOut[length - 1];
 		for (int i = (int)length - 1; i >= length - tmp; i--) {
 			if (szDataOut[i] != tmp) {

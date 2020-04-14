@@ -47,4 +47,5 @@ public:
 	virtual void OnCancel(); // Alt + F4
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 };

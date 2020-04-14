@@ -2,7 +2,6 @@
   Config.cpp
   AES.cpp
   SecurityAES.cpp
-E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\Dll_SR\Weteoes\Application\Security\SecurityAES.cpp(56,42): warning C4804: “<=”: 在操作中使用类型“bool”不安全
   WebBasic.cpp
   Variable.cpp
   WebOperating.cpp
@@ -12,9 +11,10 @@ E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\Dll_SR\Weteoes\Application\Secu
   RSA.cpp
   CSocket.cpp
   SSocket.cpp
+LINK : warning C4727: 具有相同时间戳的名为 e:\it\project\github\passwordbox\win\passwordbox\dll_sr\x64\release\srw.pch 的 PCH 已存在于 e:\it\project\github\passwordbox\win\passwordbox\dll_sr\x64\release\weboperating.obj 和 e:\it\project\github\passwordbox\win\passwordbox\dll_sr\x64\release\variable.obj 中。 使用第一个 PCH。
     正在创建库 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.lib 和对象 E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.exp
   正在生成代码
   Previous IPDB not found, fall back to full compilation.
-  All 660 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 656 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   已完成代码的生成
   Dll_SR.vcxproj -> E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\x64\Release\SRW.dll

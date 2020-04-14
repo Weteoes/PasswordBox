@@ -6,5 +6,4 @@
 #include <Weteoes/Dll/ManagementDll.h>
 #include <Weteoes/Dll/ConfigDll.h>
 #include <Weteoes/Variable.h>
-
 using namespace std;

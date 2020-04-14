@@ -2,7 +2,6 @@
   Config.cpp
   AES.cpp
   SecurityAES.cpp
-E:\IT\Project\GitHub\PasswordBox\win\PasswordBox\Dll_SR\Weteoes\Application\Security\SecurityAES.cpp(56,42): warning C4804: “<=”: 在操作中使用类型“bool”不安全
   WebBasic.cpp
   Variable.cpp
   WebOperating.cpp

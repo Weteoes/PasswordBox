@@ -17,16 +17,17 @@ CEF_App::CEF_App() {}
 CRect CEF_App::CEF_CRect; // ÊÓÍ¼×ø±ê
 HWND CEF_App::CEF_HWND; // ´°¿Ú¾ä±ú
 
-void CEF_App::OnBeforeCommandLineProcessing(const CefString & process_type, CefRefPtr<CefCommandLine> command_line)
-{
-#ifdef single_process
+void CEF_App::OnBeforeCommandLineProcessing(const CefString & process_type, CefRefPtr<CefCommandLine> command_line) {
+#ifdef cef_single_process
 	command_line->AppendSwitch("single-process");
 #endif
-#ifdef disable_gpu
+#ifdef cef_disable_gpu
 	command_line->AppendSwitch("disable-gpu");
 	command_line->AppendSwitch("disable-gpu-compositing");
 #endif
-	command_line->AppendSwitch("no-proxy-server");
+#ifdef cef_no_proxy
+    command_line->AppendSwitch("no-proxy-server");
+#endif
 }
 
 void CEF_App::OnContextInitialized() {
@@ -51,11 +52,6 @@ void CEF_App::OnContextInitialized() {
   // Check if a "--url=" value was provided via the command-line. If so, use
   // that instead of the default URL.
   //url = command_line->GetSwitchValue("url");
-
-  //url = AppCefClass::Url;
-  //if (url.empty()){
-	 // url = "http://127.0.0.1/";
-  //}
 
   if (use_views) {
     // Create the BrowserView.

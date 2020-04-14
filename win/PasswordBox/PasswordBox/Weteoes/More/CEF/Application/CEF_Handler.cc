@@ -151,9 +151,11 @@ void CEF_Handler::OnBeforeContextMenu(
 	CefRefPtr<CefContextMenuParams> params,
 	CefRefPtr<CefMenuModel> model)
 {
-	model->AddItem(Menu_Ready, "Ready");
-	model->AddItem(Menu_F12, "DevTools");
-	//model->Clear();
+    model->Clear();
+#ifdef _DEBUG
+    model->AddItem(Menu_Ready, "Ready");
+    model->AddItem(Menu_F12, "DevTools");
+#endif
 }
 
 bool CEF_Handler::OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
