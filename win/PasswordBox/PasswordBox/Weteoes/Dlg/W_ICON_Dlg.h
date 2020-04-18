@@ -37,16 +37,15 @@ protected:
 private:
 	void Ready();
 	bool CreateDlg();
-	void Ready_Variable();
-	void Ready_Icon();
+	void ReadyVariable();
+	void ReadyIcon();
 
 private:
 	void IconMenu_Exit();
 
 private:
-	HWND dlg_HWND; // 窗口句柄
-	int dlg_CEF;   // CEF句柄ID
-	int browserListIndex;
+	static HWND dlg_HWND;					// 窗口句柄
+	static int dlg_CEF;						// CEF句柄ID
 
 public:
 	virtual void OnCancel(); // Alt + F4

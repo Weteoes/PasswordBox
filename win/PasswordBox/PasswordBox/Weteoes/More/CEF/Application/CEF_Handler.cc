@@ -62,7 +62,7 @@ void CEF_Handler::OnTitleChange(CefRefPtr<CefBrowser> browser,
     }
   } else {
     // Set the title of the window using platform APIs.
-    PlatformTitleChange(browser, VariableClass::appConfig.Get_SoftwareName());
+    PlatformTitleChange(browser, VariableClass::appConfigClass.Get_SoftwareName());
   }
 }
 void CEF_Handler::OnAfterCreated(CefRefPtr<CefBrowser> browser) {

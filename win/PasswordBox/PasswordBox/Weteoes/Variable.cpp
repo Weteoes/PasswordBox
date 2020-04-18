@@ -1,7 +1,7 @@
 #include <pch.h>
 #include "Variable.h"
 
-AppConfigClass VariableClass::appConfig;
+AppConfigClass VariableClass::appConfigClass;
 AppIconClass VariableClass::appIconClass;
 AppDlgClass VariableClass::appDlgClass;
 CreateDlgClass VariableClass::createDlgClass;

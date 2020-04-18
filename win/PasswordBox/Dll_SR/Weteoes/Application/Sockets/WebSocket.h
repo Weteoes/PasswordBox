@@ -86,9 +86,11 @@ void WebSocketClass::Socket_RunShell(SOCKET client, std::string data) { //Ö´ÐÐ¶¯
 				char* buffer = (char*)calloc(length, sizeof(char));           //´æ´¢¶ÁÈ¡×Ö·û´®
 				filea.read(buffer, length);
 				result = GetHeader(pathFile);
-				Send_Socket(client, result);
+				if (Send_Socket(client, result)) {
+					send(client, buffer, length, 0);
+				}
 				result = "";
-				send(client, buffer, length, 0);
+				free(buffer); //ÊÍ·ÅÄÚ´æ
 			}
 			else {
 				char* pathFile_c;
@@ -119,7 +121,7 @@ inline std::string WebSocketClass::GetHeader(std::string file) {
 		std::string urlType = file.substr(file.find_last_of(".") + 1);
 		if (urlType == "woff") { result += "Content-Type: application/font-woff\r\n"; }
 		else if (urlType == "ttf") { result += "Content-Type: font/ttf\r\n"; }
-		else if (fileByte(urlType)) { result += "Accept-Ranges: bytes\r\nDate: Weteoes\r\n\r\n"; }
+		else if (fileByte(urlType)) { result += "Accept-Ranges: bytes\r\nDate: Weteoes\r\n"; }
 	}
 	result += "\r\n";
 	return result;

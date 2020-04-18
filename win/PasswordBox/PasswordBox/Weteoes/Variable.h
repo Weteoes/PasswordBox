@@ -17,7 +17,7 @@
 
 class VariableClass {
 public:
-	static AppConfigClass appConfig;
+	static AppConfigClass appConfigClass;
 	static AppIconClass appIconClass;
 	static AppDlgClass appDlgClass;
 	static CreateDlgClass createDlgClass;

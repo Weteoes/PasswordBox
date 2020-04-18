@@ -17,7 +17,8 @@
 
 // W_ICON_Dlg 对话框
 
-
+HWND W_ICON_Dlg::dlg_HWND;						// 窗口句柄
+int W_ICON_Dlg::dlg_CEF;						// CEF句柄ID
 
 W_ICON_Dlg::W_ICON_Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_W_ICON, pParent)
@@ -90,8 +91,8 @@ void W_ICON_Dlg::OnPaint() {
 
 // 初始化
 void W_ICON_Dlg::Ready() {
-	Ready_Variable();
-	Ready_Icon();
+	ReadyVariable();
+	ReadyIcon();
 	CreateDlg();
 }
 
@@ -106,14 +107,13 @@ bool W_ICON_Dlg::CreateDlg() {
 	return true;
 }
 
-void W_ICON_Dlg::Ready_Variable() {
-	dlg_CEF = IDC_Init_CEF;
+void W_ICON_Dlg::ReadyVariable() {
 	dlg_HWND = this->m_hWnd;
 }
 
 // 初始化托盘图标
-void W_ICON_Dlg::Ready_Icon() {
-	VariableClass::appIconClass.Icon_Add(this->m_hWnd, AfxGetInstanceHandle());
+void W_ICON_Dlg::ReadyIcon() {
+	VariableClass::appIconClass.Icon_Add(dlg_HWND, AfxGetInstanceHandle());
 }
 
 // 托盘图标事件
@@ -141,7 +141,7 @@ LRESULT W_ICON_Dlg::OnNotifyMsg(WPARAM wparam, LPARAM lparam) {
 
 // 托盘图标重启事件
 LRESULT W_ICON_Dlg::OnTaskBarRestart(WPARAM wParam, LPARAM lParam) {
-	Ready_Icon();
+	ReadyIcon();
 	return 0;
 }
 
@@ -165,5 +165,4 @@ void W_ICON_Dlg::OnCancel() {
 // 屏蔽F1帮助
 BOOL W_ICON_Dlg::OnHelpInfo(HELPINFO* pHelpInfo) {
 	return false;
-	// return CDialogEx::OnHelpInfo(pHelpInfo);
 }

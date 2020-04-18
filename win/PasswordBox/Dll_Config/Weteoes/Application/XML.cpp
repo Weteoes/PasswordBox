@@ -35,13 +35,9 @@ bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile) {
 	int result_l = SRWDll::AES_Encode((char*)data.c_str(), (int)data.length(), (char*)aes.c_str(), result);
 	data = string(result, (size_t)result_l);
 	if (data.empty()) { return false; }
-
 	if (WeteoesDll::IO_Exists(XmlFile_C)) {
 		WeteoesDll::IO_Remove(XmlFile_C);
 	}
-
-	std::string XmlData11111111 = VariableClass::xmlClass.ReadXmlParse(data);
-
 	WeteoesDll::IO_WriteFile((char*)XmlFile.c_str(), (char*)data.c_str(), (int)data.length());
 	return true;
 }
