@@ -14,7 +14,6 @@
 #include <Weteoes/Variable.h>
 #include <Weteoes/Application/CEF/AppCef.h>
 #include <Weteoes/More/CEF/Config.h>
-#include <Weteoes/More/CEF/Application/Dlg/Browser/CEF_Browser_App.h>
 #include <Weteoes/More\CEF/Application/CEF_Handler.h>
 
 

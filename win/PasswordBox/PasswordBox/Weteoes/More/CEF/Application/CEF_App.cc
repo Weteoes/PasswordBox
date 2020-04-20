@@ -14,8 +14,6 @@
 #include <Weteoes/More/CEF/Application/CEF_WindowDelegate.h>
 
 CEF_App::CEF_App() {}
-CRect CEF_App::CEF_CRect; // ÊÓÍ¼×ø±ê
-HWND CEF_App::CEF_HWND; // ´°¿Ú¾ä±ú
 
 void CEF_App::OnBeforeCommandLineProcessing(const CefString & process_type, CefRefPtr<CefCommandLine> command_line) {
 #ifdef cef_single_process
@@ -44,7 +42,7 @@ void CEF_App::OnContextInitialized() {
 //
 //  // Specify CEF browser settings here.
 //  CefBrowserSettings browser_settings;
-//  std::string url = "http://www.weteoes.cn";
+//  std::string url = "";
 //  // Check if a "--url=" value was provided via the command-line. If so, use
 //  // that instead of the default URL.
 //  //url = command_line->GetSwitchValue("url");

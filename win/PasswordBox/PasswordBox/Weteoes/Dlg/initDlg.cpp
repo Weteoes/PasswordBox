@@ -1,4 +1,4 @@
-﻿
+﻿ 
 // PasswordBoxDlg.cpp: 实现文件
 //
 
@@ -94,6 +94,7 @@ void initDlg::Ready() {
 	VariableClass::appCefClass.Init_CEF(); // 初始化CEF
 	VariableClass::app_Dll_SWR.Start(0);  // 启动UI
 	CreateDlg();
+	VariableClass::appDlgClass.Exit();
 }
 
 bool initDlg::CreateDlg() {
@@ -147,7 +148,7 @@ LRESULT initDlg::OnTaskBarRestart(WPARAM wParam, LPARAM lParam) {
 
 // 托盘事件-退出
 void initDlg::IconMenu_Exit() {
-	VariableClass::appDlgClass.Close();
+	VariableClass::appDlgClass.Exit();
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标

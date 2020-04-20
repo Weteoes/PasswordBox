@@ -23,6 +23,21 @@ bool XMLClass::GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file, bool
 	return true;
 }
 
+void XMLClass::SetElementValue(tinyxml2::XMLDocument& xml, tinyxml2::XMLElement* rootElement, string key, string value) {
+	tinyxml2::XMLElement* element = rootElement->FirstChildElement(key.c_str());
+	if (!element) {
+		// 找不到该行
+		element = xml.NewElement(key.c_str());
+		element->SetText(value.c_str());
+		rootElement->InsertEndChild(element);
+		xml.InsertEndChild(rootElement);
+	}
+	else {
+		// 找到该行
+		element->SetText(value.c_str());
+	}
+}
+
 bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile) {
 	tinyxml2::XMLPrinter s;
 	xml.Accept(&s); //获取内容到变量

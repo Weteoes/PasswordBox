@@ -4,8 +4,8 @@
 #define AppCefClass_Cpp
 
 #include "AppCef.h"
-#include <Weteoes/More/CEF/Config.h> //CEF-Config
-#include <Weteoes/More/CEF/Application/Ready/CEF_App_Ready.h> //CEF-Config
+#include <Weteoes/More/CEF/Config.h> // CEF-Config
+#include <Weteoes/More/CEF/Application/Ready/CEF_App_Ready.h> // CEF-Config
 #include <Weteoes/Application/AppConfig.h>
 #include <Weteoes/Dll/WeteoesDll.h>
 #include <Weteoes/Dll/ManagementDll.h>
