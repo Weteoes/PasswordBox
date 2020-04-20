@@ -84,7 +84,7 @@ export default {
         newPass1: ''
       },
       dlgTitle: '修改密码',
-      dlgStyle: 'width: 350px',
+      dlgStyle: 'width: 350px', // 需要和readyCEFSize一起修改
       errorMsg: ''
     }
   },
@@ -92,6 +92,7 @@ export default {
     ready () {
       this.$parent.dlgStyle = this.dlgStyle // 样式
       this.$parent.dlgTitle = this.dlgTitle // 标题
+      this.$parent.$parent.readyCEFSize({ w: 350, div: '.dlg1_a' }) // 设置窗口大小
       this.w.softwareFun.addDlgMouseEvent(document.querySelector('.dlg1_aa')) // 拖动条
     },
     dlgKeyDown: function (a) {
@@ -170,7 +171,7 @@ export default {
         return
       }
       // 修改成功
-      this.w.softwareApi.app('ChangePassword', 'ShowMainDlg')
+      this.w.softwareApi.dlg.close()
       clearOldInput(true)
       clearNewInput()
     },

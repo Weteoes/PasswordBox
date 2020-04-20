@@ -23,8 +23,6 @@ $padding_left: 15px;
   border: 1px solid #c5b9b9;
   min-width: 100px;
   min-height: 100px;
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
 }
 .dlg1_aa {
@@ -90,14 +88,8 @@ export default {
     }
   },
   methods: {
-    ready () {},
-    dlgReady () {
-      const body = document.querySelector('.dlg1_a')
-      const w = body.offsetWidth
-      const h = body.offsetHeight
-      this.w.softwareApi.dlg.size(w, h)
-      this.log('width:{0} height:{1}'.format(w, h))
-    },
+    ready () { },
+    dlgReady () { },
     menuMin () {
       this.dlg_aa_menu_if = false
       this.showDlg = false
@@ -115,7 +107,11 @@ export default {
       window.console.log(...msg)
     }
   },
-  created () { this.ready() },
-  mounted () { this.dlgReady() }
+  created () { },
+  mounted () {
+    const a = document.querySelector('.dlg1_a')
+    console.log(a.offsetHeight)
+    this.$parent.readyCEFSize({ w: 350, div: '.dlg1_a' }) // 设置窗口大小
+  }
 }
 </script>

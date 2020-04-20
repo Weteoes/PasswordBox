@@ -1,6 +1,5 @@
 #include <pch.h>
 #include "CEF_Main_V8Handler.h"
-#include <Weteoes/Dlg/Login_Dlg.h>
 
 bool CEF_Main_V8Handler::Execute(
 	const CefString& name, 

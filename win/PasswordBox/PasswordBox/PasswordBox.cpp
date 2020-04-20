@@ -5,7 +5,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "PasswordBox.h"
-#include <Weteoes/Dlg/W_ICON_Dlg.h>
+#include <Weteoes/Dlg/initDlg.h>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -39,7 +39,6 @@ CPasswordBoxApp theApp;
 bool CPasswordBoxApp::Ready() {
 	if (!ReadyDll()) { exit(0x01); }
 	if (!ReadyProcess()) { exit(0x02); }
-	VariableClass::appCefClass.Init_CEF();
 	return true;
 }
 
@@ -94,7 +93,7 @@ BOOL CPasswordBoxApp::InitInstance() {
 
 	Ready();
 
-	W_ICON_Dlg dlg;
+	initDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

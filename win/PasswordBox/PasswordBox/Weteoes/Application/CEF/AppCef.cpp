@@ -30,7 +30,7 @@ CefSettings AppCefClass::GetSetting() {
 #endif // _DEBUG
 	CefString(&settings.cache_path) = AppConfigClass::Get_TempPath() + "CEF\\";
 	CefString(&settings.resources_dir_path) = ToUnicode((char*)(CEF_Path + "CEF\\Resources").c_str());
-	//CefString(&settings.locales_dir_path) = ToUnicode((char*)(CEF_Path + "CEF\\Resources\\locales\\").c_str());
+	CefString(&settings.locales_dir_path) = ToUnicode((char*)(CEF_Path + "CEF\\Resources\\locales\\").c_str());
 	return settings;
 }
 

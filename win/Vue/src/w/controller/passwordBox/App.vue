@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script>
@@ -112,6 +110,37 @@ export default {
           })
         }
       }
+    },
+    // 设置窗口大小
+    readyCEFSize: function (args) {
+      const getByDiv = (div) => {
+        const a = document.querySelector(div)
+        return {
+          w: a.offsetWidth,
+          h: a.offsetHeight
+        }
+      }
+      let w, h, by
+      if (args.div !== undefined && args.w === undefined && args.h === undefined) {
+        // 自动获取
+        const a = getByDiv(args.div)
+        w = a.w
+        h = a.h
+        by = 'div'
+      } else if (args.w !== undefined && args.h !== undefined) {
+        // 手动
+        w = args.w
+        h = args.h
+        by = 'int width height'
+      } else if (args.w !== undefined && args.h === undefined && args.div !== undefined) {
+        // 固定宽度，高度自动获取
+        const a = getByDiv(args.div)
+        w = args.w
+        h = a.h
+        by = 'int width'
+      }
+      this.log('readyCEFSize', 'width:', w, 'height:', h, by)
+      this.w.softwareApi.dlg.size(w, h)
     },
     debugLog (...msg) {
       if (this.$store.state.debug) {

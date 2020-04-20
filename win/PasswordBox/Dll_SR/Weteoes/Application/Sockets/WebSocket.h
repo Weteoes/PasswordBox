@@ -46,11 +46,7 @@ SOCKADDR_IN WebSocketClass::Socket_Initialization() {
 	SOCKADDR_IN server;
 	memset(&server, 0, sizeof(SOCKADDR_IN)); //初始化(先将保存地址的server置为全0)
 	int Socket_Port = 23340; // 默认监听端口
-#ifndef _DEBUG
 	string Software_UI_Port = ManagementDll::Get((char*)"Software_UI_Port");
-#else
-	string Software_UI_Port = "8080";
-#endif
 	if (!Software_UI_Port.empty()) { 
 		// 不为空,替换
 		Socket_Port = atoi(Software_UI_Port.c_str());

@@ -17,8 +17,5 @@ bool CEF_ChangePassword_V8Handler::Execute(
 		retval = CefV8Value::CreateBool(result);
 		return true;
 	}
-	else if (name == "ShowMainDlg") {
-		return VariableClass::cef_Init_V8Handler.Execute("ShowMainDlg", arguments, retval, exception);
-	}
 	return false;
 }

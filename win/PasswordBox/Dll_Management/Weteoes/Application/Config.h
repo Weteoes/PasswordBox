@@ -1,5 +1,5 @@
-//#define w_Debug
-#ifdef w_Debug
+//#define W_DEBUG
+#ifdef W_DEBUG
 #define Config_Software_UI_Port "8080"
 #else
 #define Config_Software_UI_Port "23340"

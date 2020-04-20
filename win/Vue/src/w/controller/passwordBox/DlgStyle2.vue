@@ -1,5 +1,5 @@
 <template>
-  <div class="dlg2_a">
+  <div class="dlg2_a" :style="dlgStyle">
     <div class="dlg2_aa">
       <div class="dlg2_aaa">
         <div class="dlg2_aaaa">
@@ -88,18 +88,13 @@ export default {
       w: window.weteoes,
       weteoesBrowser: window.weteoesBrowser,
       dlgTitle: 'Title', // 标题
+      dlgStyle: '', // 样式
       dlg_aa_menu_if: true // 刷新按钮显示
     }
   },
   methods: {
-    ready () {},
-    dlgReady () {
-      const body = document.querySelector('.dlg2_a')
-      const w = body.offsetWidth
-      const h = body.offsetHeight
-      this.w.softwareApi.dlg.size(w, h)
-      this.log('width:{0} height:{1}'.format(w, h))
-    },
+    ready () { },
+    dlgReady () { },
     menuMin () {
       this.dlg_aa_menu_if = false
       this.w.softwareApi.dlg.minimize()
@@ -116,6 +111,6 @@ export default {
     }
   },
   created () { this.ready() },
-  mounted () { this.dlgReady() }
+  mounted () { }
 }
 </script>

@@ -2,7 +2,7 @@
   <div class="dlg_form">
     <div class="table">
       <el-table :data="tableData" :default-sort="{prop: 'host', order: 'ascending'}" height="400">
-        <el-table-column prop="host" label="域" sortable>
+        <el-table-column prop="host" label="域" width="400" sortable>
           <template slot-scope="scope">
             <span>{{ scope.row.host }}</span>
           </template>
@@ -47,16 +47,19 @@ export default {
     return {
       w: window.weteoes,
       dlgTitle: 'Password Box',
+      dlgStyle: 'width: 900px', // 需要和readyCEFSize一起修改
       tableData: [] // 数据
     }
   },
   methods: {
     ready () {
       this.$parent.dlgTitle = this.dlgTitle // 标题
+      this.$parent.dlgStyle = this.dlgStyle // 样式
+      this.$parent.$parent.readyCEFSize({ w: 900, div: '.dlg2_a' }) // 设置窗口大小
+      this.w.softwareFun.addDlgMouseEvent(document.querySelector('.dlg2_aaa')) // 拖动条
       this.tableLoad() // 加载数据
       this.tableScroll() // Scroll事件
       this.readyDlgApi() // 设置窗口API回调
-      this.w.softwareFun.addDlgMouseEvent(document.querySelector('.dlg2_aaa')) // 拖动条
     },
     // 设置窗口API回调
     readyDlgApi () {

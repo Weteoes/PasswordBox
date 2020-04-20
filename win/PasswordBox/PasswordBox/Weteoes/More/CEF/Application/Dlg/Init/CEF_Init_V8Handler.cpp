@@ -1,6 +1,5 @@
 #include <pch.h>
 #include "CEF_Init_V8Handler.h"
-#include <Weteoes\Dlg\Main_Dlg.h>
 
 bool CEF_Init_V8Handler::Execute(
 	const CefString& name,                        //JavaScript调用的C++方法名字
