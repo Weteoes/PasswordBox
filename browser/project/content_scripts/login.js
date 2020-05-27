@@ -46,8 +46,10 @@ function socketConnect() {
             case "getUserPassbyUrl":
                 variable.input.userInput.focus()
                 variable.input.userInput.value = msg.user;
+                variable.input.userInput.dispatchEvent(new Event('input'));
                 variable.input.passInput.focus()
                 variable.input.passInput.value = msg.pass;
+                variable.input.passInput.dispatchEvent(new Event('input'));
                 break;
         }
         });
