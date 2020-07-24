@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a id="login" href="/sso/redirect?">登录</a>
+<a href="/sso/login">查看登录信息</a>
+<a id="logout" href="/sso/logout?">退出登录</a>
+<script>
+    document.querySelector("#login").href += "url=" + this.location.href;
+    document.querySelector("#logout").href += "url=" + this.location.href;
+</script>
+</body>
+</html>
