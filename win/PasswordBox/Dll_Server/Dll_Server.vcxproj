@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7520775A-B4E9-4B01-B5AE-4196310B5D3E}</ProjectGuid>
-    <RootNamespace>DllManagement</RootNamespace>
+    <ProjectGuid>{13A57574-3501-4CAA-9A11-8FA179950C3E}</ProjectGuid>
+    <RootNamespace>DllServer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,20 +70,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dll_Management\Weteoes\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dll_Server\Weteoes\;$(IncludePath)</IncludePath>
     <TargetName>Management</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Dll_Management\Weteoes\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dll_Server\Weteoes\;$(IncludePath)</IncludePath>
     <TargetName>Management</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
-    <TargetName>Management</TargetName>
+    <TargetName>Server</TargetName>
+    <LibraryPath>$(ProjectDir)Weteoes\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
-    <TargetName>Management</TargetName>
+    <TargetName>Server</TargetName>
+    <LibraryPath>$(ProjectDir)Weteoes\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -91,6 +93,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <ModuleDefinitionFile>Source.def</ModuleDefinitionFile>
@@ -130,6 +134,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -138,22 +144,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dll_Management.cpp" />
-    <ClCompile Include="Weteoes\Application\Convert.cpp" />
-    <ClCompile Include="Weteoes\Application\Management.cpp" />
+    <ClCompile Include="Dll_Server.cpp" />
+    <ClCompile Include="Weteoes\Application\HttpOperating.cpp" />
+    <ClCompile Include="Weteoes\Application\Operating.cpp" />
+    <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp" />
+    <ClCompile Include="Weteoes\More\Json\include\WJson.cpp" />
+    <ClCompile Include="Weteoes\Variable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Weteoes\Application\Config.h" />
-    <ClInclude Include="Weteoes\Application\Convert.h" />
-    <ClInclude Include="Weteoes\Application\Management.h" />
-    <ClInclude Include="Weteoes\Loading.h" />
+    <ClInclude Include="Weteoes\Application\HttpOperating.h" />
+    <ClInclude Include="Weteoes\Application\Operating.h" />
+    <ClInclude Include="Weteoes\Dll\WeteoesDll.h" />
+    <ClInclude Include="Weteoes\More\Json\include\allocator.h" />
+    <ClInclude Include="Weteoes\More\Json\include\assertions.h" />
+    <ClInclude Include="Weteoes\More\Json\include\config.h" />
+    <ClInclude Include="Weteoes\More\Json\include\forwards.h" />
+    <ClInclude Include="Weteoes\More\Json\include\json.h" />
+    <ClInclude Include="Weteoes\More\Json\include\json_features.h" />
+    <ClInclude Include="Weteoes\More\Json\include\reader.h" />
+    <ClInclude Include="Weteoes\More\Json\include\value.h" />
+    <ClInclude Include="Weteoes\More\Json\include\version.h" />
+    <ClInclude Include="Weteoes\More\Json\include\WJson.h" />
+    <ClInclude Include="Weteoes\More\Json\include\writer.h" />
+    <ClInclude Include="Weteoes\Variable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source.def" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Dll_Management.rc" />
+    <ResourceCompile Include="Dll_Server.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

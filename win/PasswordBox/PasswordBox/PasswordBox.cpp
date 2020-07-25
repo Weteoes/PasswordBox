@@ -38,6 +38,9 @@ CPasswordBoxApp theApp;
 
 bool CPasswordBoxApp::Ready() {
 	if (!ReadyDll()) { exit(0x01); }
+	ServerDll::Set_Variable("w", "5572DAC90785523EF3C24A3259A8981F");
+	ServerDll::SumbitConfig();
+	ServerDll::GetConfig();
 	if (!ReadyProcess()) { exit(0x02); }
 	return true;
 }
@@ -48,6 +51,7 @@ bool CPasswordBoxApp::ReadyDll() {
 	if (!ManagementDll().Loading()) { return false; }
 	if (!SRWDll().Loading()) { return false; }
 	if (!ConfigDll().Loading()) { return false; }
+	if (!ServerDll().Loading()) { return false; }
 	return true;
 }
 

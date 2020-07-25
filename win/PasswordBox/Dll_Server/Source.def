@@ -1,0 +1,5 @@
+LIBRARY "Server"
+EXPORTS
+	SumbitConfig
+	GetConfig
+	Set_Variable

@@ -4,6 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import java.net.HttpCookie;
 
 @Controller
 @RequestMapping("cs")
@@ -12,15 +17,26 @@ public class CsController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private HttpServletRequest request;
+
     @RequestMapping("a")
     String a() {
         return "cs/a";
     }
 
-//    @RequestMapping("b")
-//    String b(HttpSession session) {
-//        return session.toString();
-//    }
+    @ResponseBody
+    @RequestMapping("b")
+    String b() {
+        String result = "";
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            for(Cookie cookie : cookies){
+                result += cookie.getName() + ":" + cookie.getValue() + "<br/>";
+            }
+        }
+        return result;
+    }
 //
 //    @RequestMapping("byid")
 //    public List<Login> byid (@RequestParam int id) {
