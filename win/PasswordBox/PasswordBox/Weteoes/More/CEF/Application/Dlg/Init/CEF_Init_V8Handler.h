@@ -14,5 +14,6 @@ public:
 
 private:
 	void ShowMainDlg();
+	void ShowLogin_SSODlg();
 };
 #endif

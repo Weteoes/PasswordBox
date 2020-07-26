@@ -14,7 +14,7 @@
 #include <Weteoes/Variable.h>
 #include <Weteoes/Application/CEF/AppCef.h>
 #include <Weteoes/More/CEF/Config.h>
-#include <Weteoes/More\CEF/Application/CEF_Handler.h>
+#include <Weteoes/More/CEF/Application/CEF_Handler.h>
 
 
 // BrowserDlg 对话框
@@ -104,17 +104,17 @@ void BrowserDlg::ReadyDlg() {
 	dlg_HWND = this->m_hWnd;
 
 	// 设置窗口标题(用于Dll获取主窗口句柄) Title
-	SetWindowText("Browser");
+	SetWindowText(dlgTitle.c_str());
 
 	//设置窗口大小
-	int width = 600, height = 400;
-	SetWindowPos(NULL, 0, 0, width, height, SWP_NOMOVE);
-	GetDlgItem(dlg_CEF)->SetWindowPos(0, 0, 0, width, height, NULL);
+	//int width = 600, height = 400;
+	SetWindowPos(NULL, 0, 0, dlgWidth, dlgHeight, SWP_NOMOVE);
+	GetDlgItem(dlg_CEF)->SetWindowPos(0, 0, 0, dlgWidth, dlgHeight, NULL);
 
-	//阴影
-	SetClassLong(dlg_HWND, GCL_STYLE, GetClassLong(dlg_HWND, GCL_STYLE) | CS_DROPSHADOW);
-
-	VariableClass::appDlgClass.Minimize(); // 一开始隐藏窗口
+	if (dlgBorderStyle != BorderStyle_None) SetBorder(dlgBorderStyle);
+	// 阴影
+	//SetClassLong(dlg_HWND, GCL_STYLE, GetClassLong(dlg_HWND, GCL_STYLE) | CS_DROPSHADOW);
+	
 }
 
 // 初始化CEF
@@ -138,10 +138,38 @@ void BrowserDlg::ReadyCEFVariable() {
 	CefRefPtr<CefBrowser> browser = CEF_handler->GetBrowserbyIndex(browserListIndex);
 	if (browser) {
 		this->browser = browser;
+		VariableClass::setCefBrowserMap(browserKey, this->dlg_HWND, this->browser);
 	}
 	else {
 		Sleep(100);
 		ReadyCEFVariable();
+	}
+}
+
+void BrowserDlg::SetBorder(UINT nBorder) {
+	if (BorderStyle_Dialog_Frame == nBorder)
+	{
+		ModifyStyle(WS_CAPTION | WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS | DS_MODALFRAME,
+			WS_CAPTION | WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS | DS_MODALFRAME, NULL);
+		ModifyStyleEx(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE, WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE, NULL);
+	}
+	else if (BorderStyle_Thin == nBorder)
+	{
+		ModifyStyle(WS_CAPTION | WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS | DS_MODALFRAME,
+			WS_CAPTION | WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS | DS_MODALFRAME, NULL);
+		ModifyStyleEx(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE, WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE, NULL);
+	}
+	else if (BorderStyle_None == nBorder)
+	{
+		ModifyStyle(WS_CAPTION | WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS | DS_MODALFRAME,
+			WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS, NULL);
+		ModifyStyleEx(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE, NULL, NULL);
+	}
+	else if (BorderStyle_Resizing == nBorder)
+	{
+		ModifyStyle(WS_CAPTION | WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS | DS_MODALFRAME,
+			WS_CAPTION | WS_POPUP | WS_SYSMENU | WS_CLIPSIBLINGS | DS_MODALFRAME | WS_THICKFRAME, NULL);
+		ModifyStyleEx(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE, WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE, NULL);
 	}
 }
 
@@ -188,7 +216,6 @@ void BrowserDlg::OnCancel() {
 		VariableClass::appDlgClass.Minimize();
 	}
 }
-
 
 BOOL BrowserDlg::OnHelpInfo(HELPINFO* pHelpInfo) {
 	return 0;

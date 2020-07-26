@@ -8,6 +8,8 @@
 #include <vector>
 using namespace std;
 
+#include <Weteoes/Application/CEF/AppCef.h>
+
 #include <Weteoes/Dll/WeteoesDll.h>
 #include <Weteoes/Dll/ManagementDll.h>
 #include <Weteoes/Dll/SRWDll.h>

@@ -2,7 +2,7 @@
 //
 
 #pragma once
-
+#include <pch.h>
 
 // CPasswordBoxDlg 对话框
 class BrowserDlg : public CDialogEx
@@ -30,6 +30,7 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 
+
 private:
 	void Ready();
 	void ReadyVariable();
@@ -37,14 +38,27 @@ private:
 	void ReadyCEF();
 	void ReadyCEFVariable();
 
-public:
-	string configCEFUrl = "http://www.weteoes.cn";
+
+private:
+	void SetBorder(UINT nBorder);
+	enum {
+		BorderStyle_None = 0,
+		BorderStyle_Dialog_Frame = 1,
+		BorderStyle_Thin = 2,
+		BorderStyle_Resizing = 3,
+	};
 
 public:
-	HWND dlg_HWND;					// 窗口句柄
-	int dlg_CEF;					// CEF句柄ID
-	int browserListIndex;			// 在CEF_Handler中的浏览器ID
-	CefRefPtr<CefBrowser> browser;  // 浏览器句柄
+	std::string configCEFUrl = "http://www.weteoes.cn";		// URL
+	std::string dlgTitle = "Browser";						// 窗口标题
+	std::string browserKey = "";							// Browser Key
+	HWND dlg_HWND;											// 窗口句柄
+	int dlg_CEF;											// CEF句柄ID
+	int browserListIndex;									// 在CEF_Handler中的浏览器ID
+	CefRefPtr<CefBrowser> browser;							// 浏览器句柄
+	int dlgWidth = 0;										// 默认窗口宽度
+	int dlgHeight = 0;										// 默认窗口高度
+	int dlgBorderStyle = BorderStyle_None;					// 默认窗口样式
 
 public:
 	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);

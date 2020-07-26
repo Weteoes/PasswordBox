@@ -36,10 +36,16 @@ void AppDlgClass::Show(bool moveCenter) {
 	ShowWindow(dlg_HWND, SW_SHOW);
 }
 
+void AppDlgClass::Show(HWND dlg_HWND) {
+	MoveCenter(dlg_HWND); // 窗口移动到中间
+	ShowWindow(dlg_HWND, SW_SHOW);
+}
+
 void AppDlgClass::SetSize(int width, int height) {
 	// 设置窗口大小
 	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
 	if (dlg_HWND == NULL) {
+		Sleep(50);
 		SetSize(width, height);
 	}
 	Dlg_SetNowRect(); // 保存现在的窗口信息
@@ -47,8 +53,7 @@ void AppDlgClass::SetSize(int width, int height) {
 	MoveCenter(); // 窗口移动到中间
 }
 
-void AppDlgClass::MoveCenter() {
-	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
+void AppDlgClass::MoveCenter(HWND dlg_HWND) {
 	int nFullWidth = GetSystemMetrics(SM_CXSCREEN), // 获取屏幕大小
 		nFullHeight = GetSystemMetrics(SM_CYSCREEN);
 	CRect rect;
@@ -56,6 +61,11 @@ void AppDlgClass::MoveCenter() {
 	int x = (nFullWidth - (rect.right - rect.left)) / 2,
 		y = (nFullHeight - (rect.bottom - rect.top)) / 2;
 	SetWindowPos(dlg_HWND, NULL, x, y, 0, 0, SWP_NOSIZE);
+}
+
+void AppDlgClass::MoveCenter() {
+	dlg_HWND = VariableClass::dlg_HWND; // 获取当前活动句柄
+	MoveCenter(dlg_HWND);
 }
 
 void AppDlgClass::Dlg_SetNowRect(bool SetWH) {

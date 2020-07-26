@@ -34,7 +34,7 @@ bool OperatingClass::getConfig() {
         VariableClass::serverDomain, 
         VariableClass::serverPort, 
         VariableClass::serverDomainConfigGetUrl, 
-        VariableClass::configFile, 
+        "", 
         "POST", 
         VariableClass::serverIsSSL, 
         cookies
@@ -47,6 +47,18 @@ bool OperatingClass::getConfig() {
         if (code == 0) { 
             std::string configData = json["config"].asString();
             if (configData.empty()) { return true; }
+            char* configFileChar = (char*)VariableClass::configFile.c_str();
+            // 判断文件是否存在
+            if (WeteoesDll::IO_Exists(configFileChar)) {
+                // 存在就备份
+                CopyFile(configFileChar, (VariableClass::configFile + ".bak").c_str(), false);
+                WeteoesDll::IO_Remove(configFileChar);
+            }
+            WeteoesDll::IO_WriteFile(
+                configFileChar,
+                (char*)configData.c_str(),
+                (int)configData.length()
+            );
             return true; 
         }
     }

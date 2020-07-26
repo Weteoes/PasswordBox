@@ -10,7 +10,7 @@ bool CEF_Login_V8Handler::Execute(
 	if (name == "LoginPass") {
 		return VariableClass::cef_Init_V8Handler.Execute("AesInit", arguments, retval, exception);
 	}
-	if (name == "ShowMainDlg") {
+	else if (name == "ShowMainDlg") {
 		return VariableClass::cef_Init_V8Handler.Execute("ShowMainDlg", arguments, retval, exception);
 	}
 	return false;

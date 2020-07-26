@@ -25,7 +25,7 @@ private:
 	void Dlg_Mouse_Up();
 
 private:
-	void Dlg_CreateThread(string url);
+	void Dlg_CreateThread(string key, string url);
 	bool App(
 		const CefString& name,
 		CefRefPtr<CefV8Value> object,

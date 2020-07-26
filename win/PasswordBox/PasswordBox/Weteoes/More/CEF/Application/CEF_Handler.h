@@ -28,6 +28,8 @@ class CEF_Handler : public CefClient,
   int GetBrowserListIndex();
   CefRefPtr<CefBrowser> GetBrowserbyIndex(int index);
 
+  void OnAddressChange(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, const CefString& url);
+
   // CefClient methods:
   virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE {
 	  return this;

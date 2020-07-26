@@ -47,6 +47,20 @@ CefRefPtr<CefBrowser> CEF_Handler::GetBrowserbyIndex(int index) {
     return a;
 }
 
+// URL变化
+void CEF_Handler::OnAddressChange(
+    CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame,
+    const CefString& url
+) {
+    // 判断
+    if (url == VariableClass::appConfigClass.ServerLoginSSOSuccessURL) {
+        // 如果是URL等于SSO登录成功URL，认为已经登录完毕
+        browser->GetHost()->CloseBrowser(true);
+        VariableClass::loginSSOClass.Loginin(browser);
+    }
+}
+
 void CEF_Handler::OnTitleChange(CefRefPtr<CefBrowser> browser,
                                   const CefString& title) {
   CEF_REQUIRE_UI_THREAD();

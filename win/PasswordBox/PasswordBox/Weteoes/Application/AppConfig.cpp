@@ -4,7 +4,6 @@
 #define AppConfigClass_Cpp
 
 #include "AppConfig.h"
-#include <Weteoes/Dll/ManagementDll.h>
 
 std::string AppConfigClass::SoftwareName;
 std::string AppConfigClass::Version;

@@ -1,19 +1,30 @@
 <template>
-  <div class="dlg_form" @keydown="dlgKeyDown">
+  <div class="dlg_form"
+       @keydown="dlgKeyDown">
     <div class="title">第一次使用请设置一个安全密码</div>
     <div class="title1">此密码请自行记录,丢失后数据将无法恢复</div>
     <div class="userInputAll">
       <div class="userInputOnly">
-        <input class="userInput" v-model="userInput.pass0" placeholder="请输入安全密码" type="password" v-w-focus />
+        <input class="userInput"
+               v-model="userInput.pass0"
+               placeholder="请输入安全密码"
+               type="password"
+               v-w-focus />
       </div>
       <div class="userInputOnly">
-        <input class="userInput" v-model="userInput.pass1" placeholder="请再次输入安全密码" type="password" />
+        <input class="userInput"
+               v-model="userInput.pass1"
+               placeholder="请再次输入安全密码"
+               type="password" />
       </div>
     </div>
-    <div class="errorMsg" style="height: 16px" v-text="errorMsg"></div>
+    <div class="errorMsg"
+         style="height: 16px"
+         v-text="errorMsg"></div>
     <div class="userButton">
       <div class="userButtonOnly">
-        <div class="only" @click="buttonNextClick">确定</div>
+        <div class="only"
+             @click="buttonNextClick">确定</div>
       </div>
     </div>
   </div>
@@ -21,6 +32,7 @@
 
 <style lang="scss" scoped>
 .dlg_form > .title {
+  height: 20px;
   font-size: 14px;
   margin-bottom: 3px;
 }

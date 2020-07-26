@@ -22,9 +22,17 @@ bool CEF_Init_V8Handler::Execute(
 		std::thread a(&CEF_Init_V8Handler::ShowMainDlg, this); a.detach(); //Create Thread
 		return true;
 	}
+	else if (name == "ShowLogin_SSODlg") {
+		std::thread a(&CEF_Init_V8Handler::ShowLogin_SSODlg, this); a.detach(); //Create Thread
+		return true;
+	}
 	return false;
 }
 
 void CEF_Init_V8Handler::ShowMainDlg() {
 	VariableClass::createDlgClass.main();
+}
+
+void CEF_Init_V8Handler::ShowLogin_SSODlg() {
+	VariableClass::createDlgClass.login_sso();
 }

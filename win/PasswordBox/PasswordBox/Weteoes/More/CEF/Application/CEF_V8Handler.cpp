@@ -48,9 +48,10 @@ bool CEF_V8Handler::Execute(
 		return true;
 	}
 	else if (name == "Dlg_Create") {
-		string url = arguments[0]->GetStringValue();
+		string key = arguments[0]->GetStringValue();
+		string url = arguments[1]->GetStringValue();
 		if (!url.empty()) {
-			thread a(&CEF_V8Handler::Dlg_CreateThread, this, url);
+			thread a(&CEF_V8Handler::Dlg_CreateThread, this, key, url);
 			a.detach();
 		}
 		return true;
@@ -61,8 +62,8 @@ bool CEF_V8Handler::Execute(
 	return false;
 }
 
-void CEF_V8Handler::Dlg_CreateThread(string url) {
-	VariableClass::createDlgClass.browser(url);
+void CEF_V8Handler::Dlg_CreateThread(string key, string url) {
+	VariableClass::createDlgClass.browser(key, url);
 }
 
 void CEF_V8Handler::Dlg_Mouse_Down(int x, int y) {
@@ -92,7 +93,7 @@ bool CEF_V8Handler::App(
 ) {
 	string app = arguments[0]->GetStringValue();
 	string fun = arguments[1]->GetStringValue();
-	string args = arguments[2]->GetStringValue();
+	wstring args = arguments[2]->GetStringValue();
 	CefRefPtr<CefDictionaryValue> argsDict;
 	if (!args.empty()) { 
 		// ÓÐ²ÎÊý
