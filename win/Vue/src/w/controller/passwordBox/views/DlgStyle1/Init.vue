@@ -37,11 +37,13 @@
   margin-bottom: 3px;
 }
 .dlg_form > .title1 {
+  height: 20px;
   color: rgb(252, 63, 79);
   font-size: 12px;
   margin-bottom: 10px;
 }
 .dlg_form > .errorMsg {
+  height: 18px;
   color: rgb(252, 63, 79);
   font-size: 12px;
 }

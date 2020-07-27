@@ -91,8 +91,9 @@ void initDlg::OnPaint() {
 void initDlg::Ready() {
 	ReadyVariable();
 	ReadyIcon();
-	VariableClass::appCefClass.Init_CEF(); // 初始化CEF
-	VariableClass::app_Dll_SWR.Start(0);  // 启动UI
+	VariableClass::appCefClass.Init_CEF();	// 初始化CEF
+	VariableClass::app_Dll_SWR.Start(0);	// 启动UI
+	VariableClass::loginSSOClass.PdLogin(); // 判断是否登录
 	CreateDlg();
 	VariableClass::appDlgClass.Exit();
 }

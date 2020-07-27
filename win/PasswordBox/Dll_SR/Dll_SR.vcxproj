@@ -149,8 +149,8 @@
     <ClCompile Include="DllSRW.cpp" />
     <ClCompile Include="Weteoes\Application\Config.cpp" />
     <ClCompile Include="Weteoes\Application\Security\AES.cpp" />
-    <ClCompile Include="Weteoes\Application\Security\SecurityAES.cpp" />
     <ClCompile Include="Weteoes\Application\Web\WebBasic.cpp" />
+    <ClCompile Include="Weteoes\Dll\ServerDll.cpp" />
     <ClCompile Include="Weteoes\Variable.cpp" />
     <ClCompile Include="Weteoes\Application\Web\WebOperating.cpp" />
     <ClCompile Include="Weteoes\Dll\ConfigDll.cpp" />
@@ -162,12 +162,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Weteoes\Application\Actions\Software.h" />
     <ClInclude Include="Weteoes\Application\Config.h" />
     <ClInclude Include="Weteoes\Application\Security\AES.h" />
-    <ClInclude Include="Weteoes\Application\Security\SecurityAES.h" />
     <ClInclude Include="Weteoes\Application\Sockets\WebSocket.h" />
     <ClInclude Include="Weteoes\Application\Web\WebBasic.h" />
+    <ClInclude Include="Weteoes\Dll\ServerDll.h" />
     <ClInclude Include="Weteoes\Variable.h" />
     <ClInclude Include="Weteoes\Application\Web\WebOperating.h" />
     <ClInclude Include="Weteoes\Dll\ConfigDll.h" />

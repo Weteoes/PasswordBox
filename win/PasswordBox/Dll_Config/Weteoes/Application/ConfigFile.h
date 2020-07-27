@@ -3,5 +3,6 @@
 class ConfigFileClass {
 public:
 	static std::string UserAndPassword;
+	static std::string Server;
 };
 #endif

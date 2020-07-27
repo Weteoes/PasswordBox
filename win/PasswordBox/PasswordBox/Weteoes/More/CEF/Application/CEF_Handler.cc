@@ -56,7 +56,6 @@ void CEF_Handler::OnAddressChange(
     // 判断
     if (url == VariableClass::appConfigClass.ServerLoginSSOSuccessURL) {
         // 如果是URL等于SSO登录成功URL，认为已经登录完毕
-        browser->GetHost()->CloseBrowser(true);
         VariableClass::loginSSOClass.Loginin(browser);
     }
 }

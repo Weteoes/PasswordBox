@@ -4,6 +4,12 @@
 char* ConfigClass::Socket_Header = (char*)"Weteoes";
 ConfigClass ConfigClass::use;
 
+bool ConfigClass::GetIsSSOLogin() {
+	std::string value = VariableClass::getVariable("isSSOLogin");
+	if (value == "1") return true;
+	return false;
+}
+
 std::string ConfigClass::GetConfig(std::string &data, std::string flag) {
 	int a = (int)data.find(flag);
 	if (a != -1) {

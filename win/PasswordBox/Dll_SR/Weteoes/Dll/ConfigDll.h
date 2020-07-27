@@ -13,14 +13,18 @@ public:
 	};
 
 private:
-	typedef bool(__stdcall* Config_CreateUserAndPassword_)		(const char* host, const char* user, const char* pass);
-	typedef Struct_UserAndPassword(__stdcall* Config_ReadUserAndPassword_)		(const char* host);
-	typedef std::vector<Struct_UserAndPassword>(__stdcall* Config_ReadAllUserAndPassword_)	();
-	typedef bool(__stdcall* Config_DelUserAndPassword_)		(const char* host);
-	typedef bool(__stdcall* Config_Exsits_)						();
-	typedef bool(__stdcall* Config_SetAESPassword_)				(char* pass);
-	typedef bool(__stdcall* Config_ResetAESPassword_)			(char* oldPass, char* newPass);
-	typedef bool(__stdcall* Set_Variable_)						(char* key, char* value);
+	typedef bool								(__stdcall * Config_CreateUserAndPassword_)		(const char* host, const char* user, const char* pass);
+	typedef Struct_UserAndPassword		        (__stdcall* Config_ReadUserAndPassword_)		(const char* host);
+	typedef std::vector<Struct_UserAndPassword> (__stdcall * Config_ReadAllUserAndPassword_)	();
+	typedef bool								(__stdcall * Config_DelUserAndPassword_)		(const char* host);
+	typedef bool								(__stdcall* Config_Exsits_)						();
+	typedef bool								(__stdcall* Config_SetAESPassword_)				(char* pass);
+	typedef bool								(__stdcall* Config_ResetAESPassword_)			(char* oldPass, char* newPass);
+
+	typedef bool								(__stdcall* Config_ServerSetw_)					(const char* w);
+	typedef int									(__stdcall* Config_ServerGetw_)					(char*& w);
+
+	typedef bool								(__stdcall* Set_Variable_)						(char* key, char* value);
 
 public:
 	bool Loading();
@@ -31,6 +35,10 @@ public:
 	static Config_Exsits_					 Config_Exsits;
 	static Config_SetAESPassword_			 Config_SetAESPassword;
 	static Config_ResetAESPassword_			 Config_ResetAESPassword;
+
+	static Config_ServerSetw_				 Config_ServerSetw;
+	static Config_ServerGetw_				 Config_ServerGetw;
+
 	static Set_Variable_					 Set_Variable;		// Dll全局变量保存
 
 };

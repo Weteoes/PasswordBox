@@ -49,3 +49,26 @@ vector<ReturnXMLStruct::Struct_UserAndPassword> ReadXMLConfigClass::ReadAllUserA
 	}
 	return result;
 }
+
+
+
+
+
+
+
+
+std::string ReadXMLConfigClass::ServerGet(const char* key) {
+	std::string file = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::Server;
+	tinyxml2::XMLDocument xml;
+	if (!VariableClass::xmlClass.GetXmlDocument(xml, file)) { return ""; }
+	tinyxml2::XMLElement* root = xml.RootElement();
+	if (root == NULL) { return ""; }
+	tinyxml2::XMLElement* element = root->FirstChildElement(key);
+	if (element) {
+		// ÕÒµ½
+		const char* elementValue = element->GetText();
+		if (elementValue == NULL) { return ""; }
+		return elementValue;
+	}
+	return "";
+}

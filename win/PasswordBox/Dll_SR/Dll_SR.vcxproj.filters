@@ -48,10 +48,10 @@
     <ClCompile Include="Weteoes\Application\Security\RSA.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weteoes\Application\Security\AES.cpp">
+    <ClCompile Include="Weteoes\Dll\ServerDll.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weteoes\Application\Security\SecurityAES.cpp">
+    <ClCompile Include="Weteoes\Application\Security\AES.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -380,9 +380,6 @@
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Weteoes\Application\Actions\Software.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Weteoes\Dll\ManagementDll.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -416,10 +413,10 @@
     <ClInclude Include="Weteoes\Application\Security\RSA.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Weteoes\Application\Security\AES.h">
+    <ClInclude Include="Weteoes\Dll\ServerDll.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Weteoes\Application\Security\SecurityAES.h">
+    <ClInclude Include="Weteoes\Application\Security\AES.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

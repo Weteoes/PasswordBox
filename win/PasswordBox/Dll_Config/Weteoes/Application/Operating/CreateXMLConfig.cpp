@@ -11,28 +11,22 @@ bool CreateXMLConfigClass::CreateXML(string xmlFile) {
 	tinyxml2::XMLElement* root = xml.RootElement();
 	if (root == NULL) {
 		// 找不到root节点
-		root = xml.NewElement(VariableClass::xmlClass.RootElementName.c_str());
+		root = CreateXMLRoot(xml);
 	}
 	xml.InsertEndChild(root);
 	return VariableClass::xmlClass.SaveXML(xml, xmlFile);
 }
 
-bool CreateXMLConfigClass::UserAndPassword(const char* host, const char* user, const char* pass) {
+bool CreateXMLConfigClass::UserAndPassword() {
 	std::string a = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::UserAndPassword;
-	tinyxml2::XMLDocument xml;
-	if (!VariableClass::xmlClass.GetXmlDocument(xml, a, true)) {
-		return false;
-	}
-	tinyxml2::XMLElement* root = xml.RootElement();
-	if (root == NULL) {
-		// 找不到root节点
-		root = xml.NewElement(VariableClass::xmlClass.RootElementName.c_str());
-	}
-	tinyxml2::XMLElement* w_ = xml.NewElement("UserAndPassword");
-	w_->SetAttribute("Host", host);
-	w_->SetAttribute("User", user);
-	w_->SetAttribute("Pass", pass);
-	root->InsertEndChild(w_);
-	xml.InsertEndChild(root);
-	return VariableClass::xmlClass.SaveXML(xml, a);
+	return CreateXML(a);
+}
+
+bool CreateXMLConfigClass::Server() {
+	std::string a = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::Server;
+	return CreateXML(a);
+}
+
+tinyxml2::XMLElement* CreateXMLConfigClass::CreateXMLRoot(tinyxml2::XMLDocument& xml) {
+	return xml.NewElement(VariableClass::xmlClass.RootElementName.c_str());
 }

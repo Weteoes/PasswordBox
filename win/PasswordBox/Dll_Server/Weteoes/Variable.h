@@ -9,6 +9,7 @@ public:
 
 public:
 	static std::string serverDomain;
+	static std::string serverDomainPdLoginUrl;
 	static std::string serverDomainConfigSumbitUrl;
 	static std::string serverDomainConfigGetUrl;
 	static int serverPort;

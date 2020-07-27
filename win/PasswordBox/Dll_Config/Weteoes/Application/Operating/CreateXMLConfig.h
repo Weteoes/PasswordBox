@@ -7,7 +7,13 @@
 
 class CreateXMLConfigClass {
 public:
-	bool CreateXML(string xmlFile); // 创建配置文件
-	bool UserAndPassword(const char* host, const char* user, const char* pass); // 用户账户配置文件
+	bool CreateXML(string xmlFile);												// 创建XML模板文件
+
+public:
+	bool UserAndPassword();														// 用户账户配置文件(仅仅创建)
+	bool Server();																// Server Session配置文件(仅仅创建)
+
+private:
+	tinyxml2::XMLElement* CreateXMLRoot(tinyxml2::XMLDocument& xml);			// 创建XML根节点
 };
 #endif 

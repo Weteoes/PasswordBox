@@ -37,6 +37,8 @@ public:
 	static int dlg_CEF;								// 当前活动窗口CEF控件句柄
 	static HWND dlg_HWND;							// 当前活动窗口句柄
 
+public:
+	static bool isSSOLogin;							// 是否统一身份认证登录
 
 
 public:

@@ -7,4 +7,8 @@ EXPORTS
 	Config_Exsits
 	Config_SetAESPassword
 	Config_ResetAESPassword
+
+	Config_ServerSetw
+	Config_ServerGetw
+
 	Set_Variable

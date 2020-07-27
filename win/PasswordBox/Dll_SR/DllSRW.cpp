@@ -3,12 +3,27 @@
 #include <Weteoes/Application/Security/RSA.h>
 #include <Weteoes/Application/Sockets/WebSocket.h>
 
-bool Loading() {
+
+bool ReadyVariableMap() {
+	static bool first = true;
+	if (!first) {
+		return true;
+	}
+	first = false;
+	VariableClass::setVariable("LoginIn", "0");				// 是否已经登录（全局登录判断）
+	VariableClass::setVariable("isSSOLogin", "0");			// 是否统一身份认证登录
+	return true;
+}
+
+bool Ready() {
 	if (!WeteoesDll().Loading()) { return false; }
 	if (!ConfigDll().Loading()) { return false; }
 	if (!ManagementDll().Loading()) { return false; }
+	if (!ServerDll().Loading()) { return false; }
+	if (!ReadyVariableMap()) { return false; }
 	return true;
 }
+
 
 char* GetChars(std::string data_s) {
 	int len = (int)data_s.length();
@@ -22,12 +37,12 @@ char* GetChars(std::string data_s) {
 
 
 extern "C" _declspec(dllexport) int Web_Entrance(const char* webPath) {
-	if (!Loading()) { return NULL; }
+	if (!Ready()) { return NULL; }
 	return WebSocketClass(webPath).Entrance();
 }
 
 extern "C" _declspec(dllexport) int RSA_Encode(char* data, int dataLen, char* key, char*& result) {
-	if (!Loading()) { return NULL; }
+	if (!Ready()) { return NULL; }
 	string a = VariableClass::rsaClass.Encode(string(data, dataLen), key);
 	int l = (int)a.length();
 	result = GetChars(a);
@@ -35,7 +50,7 @@ extern "C" _declspec(dllexport) int RSA_Encode(char* data, int dataLen, char* ke
 }
 
 extern "C" _declspec(dllexport) int RSA_UnEncode(char* data, int dataLen, char* key, char*& result) {
-	if (!Loading()) { return NULL; }
+	if (!Ready()) { return NULL; }
 	string a = VariableClass::rsaClass.UnEncode(string(data, dataLen), key);
 	int l = (int)a.length();
 	result = GetChars(a);
@@ -43,28 +58,25 @@ extern "C" _declspec(dllexport) int RSA_UnEncode(char* data, int dataLen, char* 
 }
 
 extern "C++" _declspec(dllexport) int AES_Encode(char* data, int dataLen, char* key, char*& result) {
-	if (!Loading()) { return NULL; }
+	if (!Ready()) { return NULL; }
 	string data_s = string(data, dataLen);
-	VariableClass::securityAESClass.key = key;
-	string a = VariableClass::securityAESClass.Encryption(data_s);
-	string b = VariableClass::securityAESClass.Decryption(a);
+	string a = VariableClass::aesClass.aes_256_cbc_encode(std::string(key), data_s);
 	int l = (int)a.length();
 	result = GetChars(a);
 	return l;
 }
 
-extern "C" _declspec(dllexport) int AES_UnEncode(char* data, int dataLen, char* key, char*& result) {
-	if (!Loading()) { return NULL; }
+extern "C++" _declspec(dllexport) int AES_UnEncode(char* data, int dataLen, char* key, char*& result) {
+	if (!Ready()) { return NULL; }
 	string data_s = string(data, dataLen);
-	VariableClass::securityAESClass.key = key;
-	string a = VariableClass::securityAESClass.Decryption(data_s);
+	string a = VariableClass::aesClass.aes_256_cbc_decode(std::string(key), data_s);
 	int l = (int)a.length();
 	result = GetChars(a);
 	return l;
 }
 
 extern "C" _declspec(dllexport) bool Set_Variable(char* key, char* value) {
-	if (!Loading()) { return false; }
+	if (!Ready()) { return false; }
 	VariableClass::setVariable(key, value);
 	return true;
 }

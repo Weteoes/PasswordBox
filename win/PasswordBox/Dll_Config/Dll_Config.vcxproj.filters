@@ -18,9 +18,6 @@
     <ClCompile Include="DllConfig.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Weteoes\More\tinyxml2\tinyxml2.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -51,6 +48,9 @@
     <ClCompile Include="Weteoes\Application\AESClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Weteoes\More\tinyxml2\tinyxml2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source.def">
@@ -58,9 +58,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Weteoes\More\tinyxml2\tinyxml2.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Weteoes\Dll\WeteoesDll.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -95,6 +92,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\Application\AESClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\More\tinyxml2\tinyxml2.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,11 @@ class ConfigClass
 {
 public:
 	static ConfigClass use;
-	static char* Socket_Header; //Socket Header String
+	static char* Socket_Header; // Socket Header String
+
+public:
+	bool GetIsSSOLogin();		// 获取是否是统一身份认证登录
+
 public:
 	std::string GetConfig(std::string& data, std::string flag = "_"); //获取配置(返回配置，减去源内容)
 	std::string StrToLower(std::string); //String到小写

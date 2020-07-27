@@ -8,19 +8,28 @@ ConfigDll::Config_DelUserAndPassword_		ConfigDll::Config_DelUserAndPassword;
 ConfigDll::Config_Exsits_					ConfigDll::Config_Exsits;
 ConfigDll::Config_SetAESPassword_			ConfigDll::Config_SetAESPassword;
 ConfigDll::Config_ResetAESPassword_			ConfigDll::Config_ResetAESPassword;
+
+ConfigDll::Config_ServerSetw_				ConfigDll::Config_ServerSetw;
+ConfigDll::Config_ServerGetw_				ConfigDll::Config_ServerGetw;
+
 ConfigDll::Set_Variable_					ConfigDll::Set_Variable;
 
 bool ConfigDll::Loading()
 {
 	HMODULE dll = LoadLibrary(TEXT("Config.dll"));//º”‘ÿdll
 	if (!dll) { MessageBox(NULL, TEXT("º”‘ÿConfig-DLL ß∞‹ code:-1"), TEXT(""), MB_OK); return false; }
-	Config_CreateUserAndPassword = (Config_CreateUserAndPassword_)GetProcAddress(dll, "Config_CreateUserAndPassword");
-	Config_ReadUserAndPassword = (Config_ReadUserAndPassword_)GetProcAddress(dll, "Config_ReadUserAndPassword");
-	Config_ReadAllUserAndPassword = (Config_ReadAllUserAndPassword_)GetProcAddress(dll, "Config_ReadAllUserAndPassword");
-	Config_DelUserAndPassword = (Config_DelUserAndPassword_)GetProcAddress(dll, "Config_DelUserAndPassword");
-	Config_Exsits = (Config_Exsits_)GetProcAddress(dll, "Config_Exsits");
-	Config_SetAESPassword = (Config_SetAESPassword_)GetProcAddress(dll, "Config_SetAESPassword");
-	Config_ResetAESPassword = (Config_ResetAESPassword_)GetProcAddress(dll, "Config_ResetAESPassword");
-	Set_Variable = (Set_Variable_)GetProcAddress(dll, "Set_Variable");
+	Config_CreateUserAndPassword =  (Config_CreateUserAndPassword_)		GetProcAddress(dll, "Config_CreateUserAndPassword");
+	Config_ReadUserAndPassword =    (Config_ReadUserAndPassword_)		GetProcAddress(dll, "Config_ReadUserAndPassword");
+	Config_ReadAllUserAndPassword = (Config_ReadAllUserAndPassword_)	GetProcAddress(dll, "Config_ReadAllUserAndPassword");
+	Config_DelUserAndPassword =     (Config_DelUserAndPassword_)		GetProcAddress(dll, "Config_DelUserAndPassword");
+	Config_Exsits =					(Config_Exsits_)					GetProcAddress(dll, "Config_Exsits");
+	Config_SetAESPassword =			(Config_SetAESPassword_)			GetProcAddress(dll, "Config_SetAESPassword");
+	Config_ResetAESPassword =		(Config_ResetAESPassword_)			GetProcAddress(dll, "Config_ResetAESPassword");
+
+
+	Config_ServerSetw =				(Config_ServerSetw_)				GetProcAddress(dll, "Config_ServerSetw");
+	Config_ServerGetw =				(Config_ServerGetw_)				GetProcAddress(dll, "Config_ServerGetw");
+
+	Set_Variable =					(Set_Variable_)						GetProcAddress(dll, "Set_Variable");
 	return true;
 }

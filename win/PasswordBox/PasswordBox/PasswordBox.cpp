@@ -38,8 +38,6 @@ CPasswordBoxApp theApp;
 
 bool CPasswordBoxApp::Ready() {
 	if (!ReadyDll()) { exit(0x01); }
-	//ServerDll::SumbitConfig();
-	//ServerDll::GetConfig();
 	if (!ReadyProcess()) { exit(0x02); }
 	return true;
 }

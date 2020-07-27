@@ -154,9 +154,9 @@
     <ClCompile Include="Weteoes\Application\Operating\SetXMLConfig.cpp" />
     <ClCompile Include="Weteoes\Dll\SRWDll.cpp" />
     <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp" />
-    <ClCompile Include="Weteoes\More\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="Weteoes\Application\XML.cpp" />
     <ClCompile Include="Weteoes\Application\Operating\CreateXMLConfig.cpp" />
+    <ClCompile Include="Weteoes\More\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="Weteoes\Variable.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,10 +171,10 @@
     <ClInclude Include="Weteoes\Application\Operating\SetXMLConfig.h" />
     <ClInclude Include="Weteoes\Dll\SRWDll.h" />
     <ClInclude Include="Weteoes\Dll\WeteoesDll.h" />
-    <ClInclude Include="Weteoes\More\tinyxml2\tinyxml2.h" />
     <ClInclude Include="Weteoes\Application\XML.h" />
     <ClInclude Include="Weteoes\Application\Operating\CreateXMLConfig.h" />
     <ClInclude Include="Weteoes\Application\Operating\ReturnXMLStruct.h" />
+    <ClInclude Include="Weteoes\More\tinyxml2\tinyxml2.h" />
     <ClInclude Include="Weteoes\Variable.h" />
   </ItemGroup>
   <ItemGroup>

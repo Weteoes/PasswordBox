@@ -6,6 +6,11 @@
 
 class SetXMLConfigClass {
 public:
-	bool DelUserAndPassword(const char* host);
+	bool UserAndPasswordAdd(const char* host, const char* user, const char* pass);
+	bool UserAndPasswordDel(const char* host);
+
+public:
+	bool ServerSet(const char* key, const char* value);
+
 };
 #endif 

@@ -6,11 +6,12 @@ ConfigClass VariableClass::configClass;
 RSAClass VariableClass::rsaClass;
 ConfigDll VariableClass::configDll;
 WebBasicClass VariableClass::webBasicClass;
-SecurityAESClass VariableClass::securityAESClass;
+AESClass VariableClass::aesClass;
 
 map<string, string> VariableClass::variable_map;
 // 变量			 内容		 备注
-// LoginIn		 0/1		 是否已经登录
+// LoginIn		 0/1		 是否已经登录（全局登录判断）
+// isSSOLogin	 0/1		 是否通过统一身份认证登录
 
 string VariableClass::getVariable(string key) {
 	map<string, string>::iterator i = variable_map.find(key);

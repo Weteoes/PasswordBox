@@ -20,6 +20,8 @@ CEF_ChangePassword_V8Handler VariableClass::cef_ChangePassword_V8Handler;
 int VariableClass::dlg_CEF;
 HWND VariableClass::dlg_HWND;
 
+bool VariableClass::isSSOLogin = false;
+
 
 map<string, VariableClass::CefBrowserMapClass> VariableClass::cefBrowserMap;
 //  Ãû³ÆID		 ä¯ÀÀÆ÷Ö¸Õë		

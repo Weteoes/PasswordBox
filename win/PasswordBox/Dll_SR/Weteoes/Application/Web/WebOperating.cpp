@@ -55,6 +55,11 @@ string WebOperatingClass::operating_operating_browser_del(string data) {
 		// 解码
 		Host = VariableClass::webBasicClass.UrlDecode(Host);
 		code = VariableClass::configDll.Config_DelUserAndPassword(Host.c_str()) ? 0 : 1;
+
+		// 如果是统一身份认证登录上传服务器
+		if (VariableClass::configClass.GetIsSSOLogin()) {
+			ServerDll::SumbitConfig();
+		}
 	}
 result:
 	sprintf_s(result_c, 100, result_format_s.c_str(), code);
@@ -75,6 +80,11 @@ string WebOperatingClass::operating_operating_browser_create(string data) {
 		// 解码
 		Host = VariableClass::webBasicClass.UrlDecode(Host);
 		code = VariableClass::configDll.Config_CreateUserAndPassword(Host.c_str(), User.c_str(), Pass.c_str()) ? 0 : 1;
+
+		// 如果是统一身份认证登录上传服务器
+		if (VariableClass::configClass.GetIsSSOLogin()) {
+			ServerDll::SumbitConfig();
+		}
 	}
 result:
 	sprintf_s(result_c, 100, result_format_s.c_str(), code);

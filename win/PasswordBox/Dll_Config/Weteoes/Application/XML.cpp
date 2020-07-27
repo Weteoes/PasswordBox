@@ -2,7 +2,7 @@
 #include "XML.h"
 #include <Weteoes\Application\ConfigFile.h>
 
-bool XMLClass::GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file, bool replace) {
+bool XMLClass::GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file, bool isAes, bool replace) {
 	if (!WeteoesDll::IO_Exists((char*)file.c_str())) {
 		// 配置文件不存在
 		WeteoesDll::IO_CreatePath((char*)file.c_str());
@@ -10,8 +10,14 @@ bool XMLClass::GetXmlDocument(tinyxml2::XMLDocument& xml, std::string file, bool
 	}
 	char* result;
 	int result_len = WeteoesDll::IO_ReadFile((char*)file.c_str(), result);
-	std::string XmlDataEncode = string(result, result_len);
-	std::string XmlData = VariableClass::xmlClass.ReadXmlParse(XmlDataEncode);
+	std::string XmlData = string(result, result_len);
+	// 是否需要加密
+	if (isAes) {
+		// 获取AES Key
+		string aes = VariableClass::aesClass.getAESPassByFile(file);
+		if (aes.empty()) { return false; }
+		XmlData = VariableClass::xmlClass.ReadXmlParse(XmlData, aes);
+	}
 	if (xml.Parse(XmlData.c_str(), XmlData.length()) != 0) { 
 		//读取文件失败
 		if (replace == true) {
@@ -38,17 +44,20 @@ void XMLClass::SetElementValue(tinyxml2::XMLDocument& xml, tinyxml2::XMLElement*
 	}
 }
 
-bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile) {
+bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile, bool isAes) {
 	tinyxml2::XMLPrinter s;
 	xml.Accept(&s); //获取内容到变量
 	std::string data = s.CStr();
 	char* XmlFile_C = (char*)XmlFile.c_str();
-	// 获取KEY
-	string aes = VariableClass::getVariable("AES_Password");
-	if (aes.empty()) { return false; }
-	char* result;
-	int result_l = SRWDll::AES_Encode((char*)data.c_str(), (int)data.length(), (char*)aes.c_str(), result);
-	data = string(result, (size_t)result_l);
+	// 是否需要加密
+	if (isAes) {
+		// 获取AES Key
+		string aes = VariableClass::aesClass.getAESPassByFile(XmlFile);
+		if (aes.empty()) { return false; }
+		char* result;
+		int result_l = SRWDll::AES_Encode((char*)data.c_str(), (int)data.length(), (char*)aes.c_str(), result);
+		data = string(result, (size_t)result_l);
+	}
 	if (data.empty()) { return false; }
 	if (WeteoesDll::IO_Exists(XmlFile_C)) {
 		WeteoesDll::IO_Remove(XmlFile_C);
@@ -57,12 +66,11 @@ bool XMLClass::SaveXML(tinyxml2::XMLDocument& xml, std::string XmlFile) {
 	return true;
 }
 
-std::string XMLClass::ReadXmlParse(std::string data) {
-	// 获取KEY
-	string aes = VariableClass::getVariable("AES_Password");
-	if (aes.empty()) { return ""; }
+std::string XMLClass::ReadXmlParse(std::string data, std::string aesPass) {
+	// 解密
+	if (aesPass.empty()) { return ""; }
 	char* result;
-	int result_l = SRWDll::AES_UnEncode((char*)data.c_str(), (int)data.length(), (char*)aes.c_str(), result);
+	int result_l = SRWDll::AES_UnEncode((char*)data.c_str(), (int)data.length(), (char*)aesPass.c_str(), result);
 	data = string(result, (size_t)result_l);
 	if (data.empty()) { return ""; }
 	return data;

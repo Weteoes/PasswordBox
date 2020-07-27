@@ -65,5 +65,5 @@ void CreateDlgClass::changePassword() {
 void CreateDlgClass::main(bool minimize) {
 	VariableClass::appDlgClass.Minimize();
 	string url = VariableClass::appCefClass.GetUrl(VariableClass::appConfigClass.DlgMainURL);
-	browser(url, "main", "Main", minimize);
+	browser(url, "main", "Main", 900, 500, minimize);
 }
