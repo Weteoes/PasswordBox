@@ -5,6 +5,7 @@
 #include <Weteoes/Application/AppConfig.h>
 #include <Weteoes/Application/AppIcon.h>
 #include <Weteoes/Application/AppDlg.h>
+#include <Weteoes/Application/AppDlgCallBack.h>
 #include <Weteoes/Application/CreateDlg.h>
 #include <Weteoes/Application/Login/LoginSSO.h>
 #include <Weteoes/Application/CEF/AppCef.h>
@@ -22,7 +23,9 @@ public:
 	static AppConfigClass appConfigClass;
 	static AppIconClass appIconClass;
 	static AppDlgClass appDlgClass;
+	static AppDlgCallBackClass appDlgCallBackClass;
 	static CreateDlgClass createDlgClass;
+
 	static AppCefClass appCefClass;
 	static AppCefBasicClass appCefBasicClass;
 	static APP_Dll_SWR app_Dll_SWR;

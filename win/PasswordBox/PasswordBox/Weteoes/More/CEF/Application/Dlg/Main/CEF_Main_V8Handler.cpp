@@ -10,7 +10,7 @@ bool CEF_Main_V8Handler::Execute(
 	if (name == "Signout") { 
 		// ÍË³öµÇÂ¼
 		SRWDll::Set_Variable("LoginIn", "");
-		std::thread a(&CEF_Main_V8Handler::ShowLoginDlg, this); a.detach(); //Create Thread
+		return VariableClass::cef_Init_V8Handler.Execute("ShowLoginDlg", arguments, retval, exception);
 		return true;
 	}
 	else if (name == "ShowChangePasswordDlg") {
@@ -18,10 +18,6 @@ bool CEF_Main_V8Handler::Execute(
 		return true;
 	}
 	return false;
-}
-
-void CEF_Main_V8Handler::ShowLoginDlg() {
-	VariableClass::createDlgClass.login();
 }
 
 void CEF_Main_V8Handler::ShowChangePasswordDlg() {

@@ -11,6 +11,5 @@ public:
 
 private:
 	bool SetLoginSession(std::string w);
-	void ShowLoginDlg();
 };
 #endif

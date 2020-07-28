@@ -29,10 +29,14 @@ bool WebOperatingClass::Entrance(string operatingUrl, string &result) {
 	else if (operatingName == "/operating/browser/create") {
 		operating_operating_browser_del(operatingData); // 删除原本的
 		result = operating_operating_browser_create(operatingData); // 创建
+		// 如果是统一身份认证登录上传服务器
+		SSOLoginUpdate();
 		return true;
 	}
 	else if (operatingName == "/operating/browser/del") {
 		result = operating_operating_browser_del(operatingData);
+		// 如果是统一身份认证登录上传服务器
+		SSOLoginUpdate();
 		return true;
 	}
 	else if (operatingName == "/operating/console/getAll") {
@@ -54,12 +58,7 @@ string WebOperatingClass::operating_operating_browser_del(string data) {
 	else {
 		// 解码
 		Host = VariableClass::webBasicClass.UrlDecode(Host);
-		code = VariableClass::configDll.Config_DelUserAndPassword(Host.c_str()) ? 0 : 1;
-
-		// 如果是统一身份认证登录上传服务器
-		if (VariableClass::configClass.GetIsSSOLogin()) {
-			ServerDll::SumbitConfig();
-		}
+		code = ConfigDll::Config_DelUserAndPassword(Host.c_str()) ? 0 : 1;
 	}
 result:
 	sprintf_s(result_c, 100, result_format_s.c_str(), code);
@@ -79,12 +78,7 @@ string WebOperatingClass::operating_operating_browser_create(string data) {
 	else {
 		// 解码
 		Host = VariableClass::webBasicClass.UrlDecode(Host);
-		code = VariableClass::configDll.Config_CreateUserAndPassword(Host.c_str(), User.c_str(), Pass.c_str()) ? 0 : 1;
-
-		// 如果是统一身份认证登录上传服务器
-		if (VariableClass::configClass.GetIsSSOLogin()) {
-			ServerDll::SumbitConfig();
-		}
+		code = ConfigDll::Config_CreateUserAndPassword(Host.c_str(), User.c_str(), Pass.c_str()) ? 0 : 1;
 	}
 result:
 	sprintf_s(result_c, 100, result_format_s.c_str(), code);
@@ -103,7 +97,7 @@ string WebOperatingClass::operating_operating_browser_get(string data) {
 	else {
 		// 解码
 		Host = VariableClass::webBasicClass.UrlDecode(Host);
-		ConfigDll::Struct_UserAndPassword a = VariableClass::configDll.Config_ReadUserAndPassword(Host.c_str());
+		ConfigDll::Struct_UserAndPassword a = ConfigDll::Config_ReadUserAndPassword(Host.c_str());
 		if (strlen(a.Host) != 0) {
 			// 有数据
 			code = 0;
@@ -128,7 +122,7 @@ string WebOperatingClass::operating_operating_console_getAll(string data) {
 	string result_format_s = "{\"Code\":%d, \"List\":[%s]}";
 	string result_list = "";
 	int code = 0;
-	vector<ConfigDll::Struct_UserAndPassword> a = VariableClass::configDll.Config_ReadAllUserAndPassword();
+	vector<ConfigDll::Struct_UserAndPassword> a = ConfigDll::Config_ReadAllUserAndPassword();
 	for (int i = 0; i < a.size(); i++) {
 		string Host = a[i].Host;
 		string User = a[i].User;
@@ -143,5 +137,12 @@ string WebOperatingClass::operating_operating_console_getAll(string data) {
 	}
 	sprintf_s(result_c, 10000, result_format_s.c_str(), code, result_list.c_str());
 	return result_c;
+}
+
+void WebOperatingClass::SSOLoginUpdate() {
+	// 如果是统一身份认证登录上传服务器
+	if (VariableClass::configClass.GetIsSSOLogin()) {
+		ServerDll::SumbitConfig();
+	}
 }
 

@@ -10,7 +10,7 @@ private:
 	static std::string Version;
 
 public:
-	std::string DlgInitURL = "/passwordBox/ui/1/init";
+	std::string DlgInitURL = "/passwordBox/ui/3/init";
 	std::string DlgLoginURL = "/passwordBox/ui/1/login";
 	std::string DlgChangePasswordURL = "/passwordBox/ui/1/changePassword";
 	std::string DlgMainURL = "/passwordBox/ui/2/main";

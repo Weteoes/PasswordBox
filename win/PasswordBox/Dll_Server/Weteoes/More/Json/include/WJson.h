@@ -5,7 +5,7 @@
 #ifdef _DEBUG
 #pragma comment(lib,"Json/debug/jsoncpp.lib")
 #else
-#pragma comment(lib,"Json/releasae/jsoncpp.lib")
+#pragma comment(lib,"Json/release/jsoncpp.lib")
 #endif
 
 class WJsonClass

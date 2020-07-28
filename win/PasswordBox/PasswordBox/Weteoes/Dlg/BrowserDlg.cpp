@@ -22,7 +22,7 @@
 BrowserDlg::BrowserDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_Browser, pParent)
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
+	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void BrowserDlg::DoDataExchange(CDataExchange* pDX)
@@ -62,8 +62,7 @@ BOOL BrowserDlg::OnInitDialog()
 
 void BrowserDlg::OnPaint()
 {
-	if (IsIconic())
-	{
+	if (IsIconic()) {
 		CPaintDC dc(this); // 用于绘制的设备上下文
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
@@ -79,8 +78,7 @@ void BrowserDlg::OnPaint()
 		// 绘制图标
 		dc.DrawIcon(x, y, m_hIcon);
 	}
-	else
-	{
+	else {
 		CDialogEx::OnPaint();
 	}
 }
@@ -99,6 +97,9 @@ void BrowserDlg::ReadyVariable() {
 
 // 初始化窗口
 void BrowserDlg::ReadyDlg() {
+	// 设置窗口样式
+	if (dlgBorderStyle != BorderStyle_None) SetBorder(dlgBorderStyle);
+
 	// 初始化变量
 	dlg_CEF = IDC_Browser_CEF;
 	dlg_HWND = this->m_hWnd;
@@ -111,7 +112,6 @@ void BrowserDlg::ReadyDlg() {
 	SetWindowPos(NULL, 0, 0, dlgWidth, dlgHeight, SWP_NOMOVE);
 	GetDlgItem(dlg_CEF)->SetWindowPos(0, 0, 0, dlgWidth, dlgHeight, NULL);
 
-	if (dlgBorderStyle != BorderStyle_None) SetBorder(dlgBorderStyle);
 	// 阴影
 	//SetClassLong(dlg_HWND, GCL_STYLE, GetClassLong(dlg_HWND, GCL_STYLE) | CS_DROPSHADOW);
 	
@@ -206,6 +206,7 @@ void BrowserDlg::OnSize(UINT nType, int cx, int cy) {
 
 // Alt + F4
 void BrowserDlg::OnCancel() {
+	VariableClass::appDlgCallBackClass.OnCancel(browserKey);
 	CString a;
 	GetWindowText(a);
 	if (a == "Close") {

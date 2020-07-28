@@ -13,7 +13,6 @@ public:
 	static ConfigClass configClass;
 	static WebOperatingClass webOperatingClass;
 	static RSAClass rsaClass;
-	static ConfigDll configDll;
 	static WebBasicClass webBasicClass;
 	static AESClass aesClass;
 

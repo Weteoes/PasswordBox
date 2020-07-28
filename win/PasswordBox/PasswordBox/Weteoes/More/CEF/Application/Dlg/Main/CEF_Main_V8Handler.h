@@ -13,7 +13,6 @@ public:
 		);
 
 private:
-	void ShowLoginDlg();
 	void ShowChangePasswordDlg();
 };
 #endif

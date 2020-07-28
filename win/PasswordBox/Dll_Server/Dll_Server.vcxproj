@@ -147,6 +147,7 @@
     <ClCompile Include="Dll_Server.cpp" />
     <ClCompile Include="Weteoes\Application\HttpOperating.cpp" />
     <ClCompile Include="Weteoes\Application\Operating.cpp" />
+    <ClCompile Include="Weteoes\Dll\ConfigDll.cpp" />
     <ClCompile Include="Weteoes\Dll\WeteoesDll.cpp" />
     <ClCompile Include="Weteoes\More\Json\include\WJson.cpp" />
     <ClCompile Include="Weteoes\Variable.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Weteoes\Application\HttpOperating.h" />
     <ClInclude Include="Weteoes\Application\Operating.h" />
+    <ClInclude Include="Weteoes\Dll\ConfigDll.h" />
     <ClInclude Include="Weteoes\Dll\WeteoesDll.h" />
     <ClInclude Include="Weteoes\More\Json\include\allocator.h" />
     <ClInclude Include="Weteoes\More\Json\include\assertions.h" />

@@ -2,6 +2,7 @@
 
 bool Loading() {
 	if (!WeteoesDll().Loading()) { return false; }
+	if (!ConfigDll().Loading()) { return false; }
 	return true;
 }
 

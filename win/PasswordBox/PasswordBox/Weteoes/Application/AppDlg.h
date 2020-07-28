@@ -4,14 +4,15 @@
 class AppDlgClass {
 
 public:
-	void Exit();									// 退出程序
-	void Close();									// 关闭窗口
-	void Minimize();								// 最小化窗口
-	void Show(HWND dlg_HWND);						// 显示窗口(通过窗口句柄)
-	void Show(bool moveCenter = false);				// 显示窗口
-	void SetSize(int width, int height);			// 设置窗口大小
-	void MoveCenter(HWND dlg_HWND);					// 移动窗口到中间(通过窗口句柄)
-	void MoveCenter();								// 移动窗口到中间
+	void Exit();												// 退出程序
+	void Close();												// 关闭窗口
+	void Minimize(bool postCloseMsg = false);					// 最小化窗口
+	void Minimize(HWND dlg_HWND, bool postCloseMsg = false);	// 最小化窗口(通过窗口句柄)
+	void Show(bool moveCenter = false);							// 显示窗口
+	void Show(HWND dlg_HWND);									// 显示窗口(通过窗口句柄)
+	void SetSize(int width, int height);						// 设置窗口大小
+	void MoveCenter();											// 移动窗口到中间
+	void MoveCenter(HWND dlg_HWND);								// 移动窗口到中间(通过窗口句柄)
 
 private:
 	HWND dlg_HWND;

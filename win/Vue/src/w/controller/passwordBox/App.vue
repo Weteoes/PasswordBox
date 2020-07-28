@@ -15,6 +15,7 @@ export default {
       this.readySoftwareApi()
       this.readySoftwareDlgApi()
       this.readySoftwareFun()
+      this.readySoftwareDlgCallBack()
       this.readyUrl()
     },
     readyUrl () {
@@ -79,6 +80,9 @@ export default {
         },
         activate: (nState) => { }
       }
+    },
+    readySoftwareDlgCallBack () {
+      this.w.readySoftwareDlgCallBack = {}
     },
     readySoftwareFun () {
       this.w.softwareFun = {

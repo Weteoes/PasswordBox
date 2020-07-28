@@ -8,10 +8,13 @@ void AppCefBasicClass::ExecJavaScript(CefRefPtr<CefBrowser> browser, string js) 
 }
 
 string AppCefBasicClass::GetJavaScriptNamebyDlg(string dlgFun) {
-	string a = "weteoes.";
 	if (dlgFun == "OnActivate") {
 		// ´°¿Ú½¹µã
-		return a + "softwareDlgApi.activate_(%d)";
+		return jsHeader + "softwareDlgApi.activate_(%d)";
 	}
 	return "";
+}
+
+string AppCefBasicClass::GetJavaScriptNamebyCallBack() {
+	return jsHeader + "readySoftwareDlgCallBack";
 }

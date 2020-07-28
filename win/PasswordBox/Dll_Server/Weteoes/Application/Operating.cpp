@@ -2,6 +2,7 @@
 #include "Operating.h"
 
 bool OperatingClass::sumbitConfig() {
+    if (!PdLocalconfig()) { return false; }
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
     cookies.insert(std::pair<std::string, std::string>("JSESSIONID", w));
@@ -44,19 +45,29 @@ bool OperatingClass::getConfig() {
         if (all == 0) { return false; }
         int code = json["code"].asInt();
         if (code == 0) { 
-            std::string configData = json["config"].asString();
-            if (configData.empty()) { return true; }
+            std::string configServerData = json["config"].asString();
+            if (configServerData.empty()) { return true; }
             char* configFileChar = (char*)VariableClass::configFile.c_str();
             // 判断文件是否存在
             if (WeteoesDll::IO_Exists(configFileChar)) {
-                // 存在就备份
-                CopyFile(configFileChar, (VariableClass::configFile + ".bak").c_str(), false);
-                WeteoesDll::IO_Remove(configFileChar);
+                // 判断内容是否相同
+                char* configFileData;
+                int configFileDataLen = WeteoesDll::IO_ReadFile(configFileChar, configFileData);
+                std::string configFileDataStr(configFileData, configFileDataLen);
+                if (configFileDataStr != configServerData) {
+                    // 不相同数据需要覆盖，备份
+                    CopyFile(configFileChar, (VariableClass::configFile + ".bak").c_str(), false);
+                    WeteoesDll::IO_Remove(configFileChar);
+                }
+                else {
+                    // 相同数据不用覆盖
+                    return true;
+                }
             }
             WeteoesDll::IO_WriteFile(
                 configFileChar,
-                (char*)configData.c_str(),
-                (int)configData.length()
+                (char*)configServerData.c_str(),
+                (int)configServerData.length()
             );
             return true; 
         }
@@ -84,5 +95,11 @@ bool OperatingClass::pdLoginSession() {
         int code = json["code"].asInt();
         if (code == 0) { return true; }
     }
+    return false;
+}
+
+bool OperatingClass::PdLocalconfig() {
+    std::vector<ConfigDll::Struct_UserAndPassword> a = ConfigDll::Config_ReadAllUserAndPassword();
+    if (a.size() > 0) return true;
     return false;
 }

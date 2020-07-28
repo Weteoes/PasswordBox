@@ -3,6 +3,7 @@
 #include <Weteoes/Application/CEF/AppCookieVisitor.h>
 
 void LoginSSOClass::Loginin(CefRefPtr<CefBrowser> browser) {
+	// 获取Cookie
 	CefRefPtr<CefCookieVisitor> visitor(new AppCookieVisitor());
 	CefRefPtr<CefCookieManager> cefCookieManager = CefCookieManager::GetGlobalManager(nullptr);
 	if (cefCookieManager) {
@@ -12,10 +13,14 @@ void LoginSSOClass::Loginin(CefRefPtr<CefBrowser> browser) {
 
 void LoginSSOClass::Cookie(std::string key, std::string value) {
 	if (key == "JSESSIONID") {
+		// 只保存数据，判断由js调起
 		ConfigDll::Config_ServerSetw(value.c_str());
 		SetLoginSession(value);
-		if (PdLogin()) {
-			std::thread(&LoginSSOClass::ShowLoginDlg, this).detach();
+		// 隐藏登录窗口
+		VariableClass::CefBrowserMapClass cefBrowserMapClass = VariableClass::getCefBrowserMap(VariableClass::createDlgClass.login_sso_BrowserKey);
+		if (cefBrowserMapClass.dlgHwnd) {
+			// 隐藏（会发送关闭消息）
+			VariableClass::appDlgClass.Minimize(cefBrowserMapClass.dlgHwnd, true);
 		}
 	}
 }
@@ -42,8 +47,4 @@ bool LoginSSOClass::PdLogin() {
 
 bool LoginSSOClass::SetLoginSession(std::string w) {
 	return ServerDll::Set_Variable("w", (char*)w.c_str());
-}
-
-void LoginSSOClass::ShowLoginDlg() {
-	VariableClass::createDlgClass.login();
 }

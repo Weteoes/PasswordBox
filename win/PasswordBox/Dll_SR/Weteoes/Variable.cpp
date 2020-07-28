@@ -4,7 +4,6 @@
 WebOperatingClass VariableClass::webOperatingClass; 
 ConfigClass VariableClass::configClass;
 RSAClass VariableClass::rsaClass;
-ConfigDll VariableClass::configDll;
 WebBasicClass VariableClass::webBasicClass;
 AESClass VariableClass::aesClass;
 

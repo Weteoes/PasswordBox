@@ -1,10 +1,11 @@
 import app from './App'
 import dlgStyle1 from './DlgStyle1'
 import dlgStyle2 from './DlgStyle2'
-import viewInit from './views/DlgStyle1/Init'
-import viewLogin from './views/DlgStyle1/Login'
-import viewChangePassword from './views/DlgStyle1/ChangePassword'
-import viewMain from './views/DlgStyle2/Main'
+import dlgStyle3 from './DlgStyle3'
+import viewLogin from './views/dlgStyle1/Login'
+import viewChangePassword from './views/dlgStyle1/ChangePassword'
+import viewMain from './views/dlgStyle2/Main'
+import viewInit from './views/dlgStyle3/Init'
 import controllerError from '@/w/controller/error'
 
 export default {
@@ -16,7 +17,6 @@ export default {
         path: '1',
         component: dlgStyle1,
         children: [
-          { path: 'init', component: viewInit },
           { path: 'login', component: viewLogin },
           { path: 'changePassword', component: viewChangePassword }
         ]
@@ -26,6 +26,13 @@ export default {
         component: dlgStyle2,
         children: [
           { path: 'main', component: viewMain }
+        ]
+      },
+      {
+        path: '3',
+        component: dlgStyle3,
+        children: [
+          { path: 'init', component: viewInit }
         ]
       },
       controllerError.router

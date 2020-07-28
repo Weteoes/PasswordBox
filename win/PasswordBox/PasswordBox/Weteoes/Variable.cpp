@@ -5,7 +5,9 @@ LoginSSOClass VariableClass::loginSSOClass;
 AppConfigClass VariableClass::appConfigClass;
 AppIconClass VariableClass::appIconClass;
 AppDlgClass VariableClass::appDlgClass;
+AppDlgCallBackClass VariableClass::appDlgCallBackClass;
 CreateDlgClass VariableClass::createDlgClass;
+
 AppCefClass VariableClass::appCefClass;
 AppCefBasicClass VariableClass::appCefBasicClass;
 APP_Dll_SWR VariableClass::app_Dll_SWR;
