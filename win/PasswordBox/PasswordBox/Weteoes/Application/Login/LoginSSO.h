@@ -7,7 +7,8 @@ public:
 	void Cookie(std::string key, std::string value);
 
 public:
-	bool PdLogin();
+	bool PdLogin();						// 判断是否统一身份认证登录通过
+	bool GetServerConfig();				// 获取服务器配置文件
 
 private:
 	bool SetLoginSession(std::string w);

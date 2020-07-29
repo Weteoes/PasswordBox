@@ -37,12 +37,16 @@ bool LoginSSOClass::PdLogin() {
 		ConfigDll::Config_ServerSetw("");
 		return false;
 	}
-	// 更新本地配置
-	ServerDll::GetConfig();
+	// 更新本地配置（不更新，通过js调用GetServerConfig更新）
+	// GetServerConfig();
 	// 标记
 	VariableClass::isSSOLogin = true;
 	SRWDll::Set_Variable("isSSOLogin", "1");
 	return true;
+}
+
+bool LoginSSOClass::GetServerConfig() {
+	return ServerDll::GetConfig();
 }
 
 bool LoginSSOClass::SetLoginSession(std::string w) {

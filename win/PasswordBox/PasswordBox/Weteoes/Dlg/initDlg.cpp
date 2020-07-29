@@ -93,7 +93,11 @@ void initDlg::Ready() {
 	ReadyIcon();
 	VariableClass::appCefClass.Init_CEF();	// 初始化CEF
 	VariableClass::app_Dll_SWR.Start(0);	// 启动UI
-	VariableClass::loginSSOClass.PdLogin(); // 判断是否登录
+	// 判断是否统一身份认证登录
+	if (VariableClass::loginSSOClass.PdLogin()) {
+		// 获取配置文件
+		VariableClass::loginSSOClass.GetServerConfig();
+	}
 	CreateDlg();
 	VariableClass::appDlgClass.Exit();
 }

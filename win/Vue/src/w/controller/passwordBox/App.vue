@@ -82,7 +82,7 @@ export default {
       }
     },
     readySoftwareDlgCallBack () {
-      this.w.readySoftwareDlgCallBack = {}
+      this.w.softwareDlgCallBack = {}
     },
     readySoftwareFun () {
       this.w.softwareFun = {

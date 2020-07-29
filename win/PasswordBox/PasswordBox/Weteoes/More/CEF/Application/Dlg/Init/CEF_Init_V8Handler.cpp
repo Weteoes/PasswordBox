@@ -30,8 +30,15 @@ bool CEF_Init_V8Handler::Execute(
 		std::thread a(&CEF_Init_V8Handler::ShowLogin_SSODlg, this); a.detach(); // Create Thread
 		return true;
 	}
+	// 判断是否统一身份认证登录
 	else if (name == "PdSSOLogin") {
 		bool result = VariableClass::loginSSOClass.PdLogin();
+		retval = CefV8Value::CreateBool(result);
+		return true;
+	}	
+	// 判断统一身份认证服务器配置是否获取成功
+	else if (name == "SSOGetServerConfig") {
+		bool result = VariableClass::loginSSOClass.GetServerConfig();
 		retval = CefV8Value::CreateBool(result);
 		return true;
 	}

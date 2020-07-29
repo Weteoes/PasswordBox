@@ -46,7 +46,8 @@ bool OperatingClass::getConfig() {
         int code = json["code"].asInt();
         if (code == 0) { 
             std::string configServerData = json["config"].asString();
-            if (configServerData.empty()) { return true; }
+            // 服务器没数据
+            if (configServerData.empty()) { return false; }
             char* configFileChar = (char*)VariableClass::configFile.c_str();
             // 判断文件是否存在
             if (WeteoesDll::IO_Exists(configFileChar)) {

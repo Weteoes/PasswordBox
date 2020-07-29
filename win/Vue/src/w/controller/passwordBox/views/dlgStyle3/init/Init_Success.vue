@@ -21,13 +21,7 @@ export default {
     ready () {
       if (this.$parent.$data.data.optionsNow === 'local') {
         // 本地工作模式
-        const pass = this.$parent.$data.data.pass
-        if (pass === '') {
-          // 未知错误
-          this.unknowsError()
-          return
-        }
-        this.initLocal(pass)
+        this.initLocal()
       } else if (this.$parent.$data.data.optionsNow === 'server') {
         // 统一身份工作模式
         this.initServer()
@@ -41,11 +35,17 @@ export default {
       this.setStepActive(1)
     },
     // 本地工作模式
-    initLocal (pass) {
+    initLocal () {
+      const pass = this.$parent.$data.data.pass
+      if (pass === '') {
+        // 未知错误
+        this.unknowsError()
+        return
+      }
       const result = this.w.softwareApi.app('Init', 'AesInit', { pass: pass })
       if (!result) {
         this.showMessageBox('初始化数据失败', 'error')
-        // this.setStepActive(2)
+        this.setStepActive(0, '--')
       } else {
         // 初始化完成
         this.successFun(() => {
@@ -61,6 +61,22 @@ export default {
         this.setStepActive(1)
         return
       }
+      const getServerConfig = this.w.softwareApi.app('Init', 'SSOGetServerConfig')
+      // 判断是否
+      if (!getServerConfig) {
+        // 服务器无配置
+        if (this.$parent.$data.data.pass !== '') {
+          // 密码不为空说明初始化过
+          this.initLocal()
+          this.log('sso初始化完成')
+          return
+        } else {
+          // 没初始化过就设置bool，Init.vue有watch事件
+          this.$parent.$data.data.ServerInit = true
+          return
+        }
+      }
+      // 服务器有配置
       this.successFun(() => {
         this.w.softwareApi.app('Init', 'ShowLoginDlg')
       })
@@ -69,8 +85,10 @@ export default {
     successFun (fun) {
       setTimeout(fun, 600)
     },
-    setStepActive (stepActive) {
-      this.$parent.stepActive = stepActive
+    setStepActive (stepActive, type) {
+      if (type === undefined) this.$parent.stepActive = stepActive
+      else if (type === '--') this.$parent.stepActive--
+      else if (type === '++') this.$parent.stepActive++
     },
     showMessageBox (msg, type) {
       this.$parent.showMessageBox(msg, type)

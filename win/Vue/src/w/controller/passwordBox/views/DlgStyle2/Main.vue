@@ -75,7 +75,7 @@ export default {
   data () {
     return {
       w: window.weteoes,
-      dlgTitle: 'Password Box',
+      dlgTitle: '密码保管箱',
       dlgStyle: 'width: 900px', // 需要和readyCEFSize一起修改
       tableData: [], // 数据
       // 筛选规则

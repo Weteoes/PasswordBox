@@ -16,5 +16,5 @@ string AppCefBasicClass::GetJavaScriptNamebyDlg(string dlgFun) {
 }
 
 string AppCefBasicClass::GetJavaScriptNamebyCallBack() {
-	return jsHeader + "readySoftwareDlgCallBack";
+	return jsHeader + "softwareDlgCallBack";
 }

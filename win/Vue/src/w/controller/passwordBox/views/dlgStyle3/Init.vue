@@ -4,14 +4,16 @@
               align-center>
       <el-step v-for="(step, index) in steps"
                :key="index"
-               :title="step"
+               :title="step.title"
                @click.native="stepsClick(index + 1)"></el-step>
     </el-steps>
     <div class="stepData">
       <componentsOperatingOptions v-if="stepActive == 1"></componentsOperatingOptions>
-      <componentsLocal v-if="stepActive == 2 && data.optionsNow == 'local'"></componentsLocal>
       <componentsServer v-if="stepActive == 2 && data.optionsNow == 'server'"></componentsServer>
-      <componentsSuccess v-if="stepActive == 3"></componentsSuccess>
+      <componentsLocal v-if="!data.ServerInit && stepActive == 2 && data.optionsNow == 'local'"></componentsLocal>
+      <componentsLocal v-if="data.ServerInit && stepActive == 3 && data.optionsNow == 'server'"></componentsLocal>
+      <componentsSuccess v-if="!data.ServerInit && stepActive == 3"></componentsSuccess>
+      <componentsSuccess v-if="data.ServerInit && stepActive == 4"></componentsSuccess>
     </div>
   </div>
 </template>
@@ -56,15 +58,16 @@ export default {
       w: window.weteoes,
       dlgTitle: '密码保管箱',
       dlgStyle: 'width: 800px', // 需要和readyCEFSize一起修改
-      stepActive: 1, // 当前步骤
-      steps: ['选择工作模式', '设置初始密码', '初始化'],
+      stepActive: -1, // 当前步骤（1开始）
+      steps: [],
       element: {
         messageBox: null // 记录messagebox
       },
       // 步骤完成后同步到父级
       data: {
         optionsNow: '',
-        pass: ''
+        pass: '',
+        ServerInit: false // SSO登录后服务器无配置时需要初始化
       }
     }
   },
@@ -72,15 +75,26 @@ export default {
     ready () {
       this.$parent.dlgStyle = this.dlgStyle // 样式
       this.$parent.dlgTitle = this.dlgTitle // 标题
-      this.$parent.$parent.readyCEFSize({ w: 800, div: '.dlg2_a' }) // 设置窗口大小
-      this.w.softwareFun.addDlgMouseEvent(document.querySelector('.dlg2_aaa')) // 拖动条
       this.readySoftwareDlgCallBack()
+      this.readyData()
+      this.$parent.$parent.readyCEFSize({ w: 800, h: 480, div: '.dlg2_a' }) // 设置窗口大小
+      this.w.softwareFun.addDlgMouseEvent(document.querySelector('.dlg2_aaa')) // 拖动条
+    },
+    readyData () {
+      // 默认步骤
+      this.setSteps().local()
+      // 初始化步骤为第一个
+      this.stepActive = 1
+      // 初始化子数据
+      this.data.optionsNow = ''
+      this.data.pass = ''
+      this.data.ServerInit = false
     },
     // 软件窗口回调
     readySoftwareDlgCallBack () {
       const that = this
-      this.w.readySoftwareDlgCallBack.init = {
-        nextStepActive () {
+      this.w.softwareDlgCallBack.init = {
+        nextStepActive (hasConfig) {
           that.$data.stepActive++
         }
       }
@@ -92,6 +106,33 @@ export default {
       const now = this.$data.stepActive
       if (now > stepActive && now !== this.$data.steps.length) {
         this.$data.stepActive = stepActive
+      }
+    },
+    setSteps () {
+      const that = this
+      return {
+        local () {
+          that.steps = [
+            { title: '选择工作模式' },
+            { title: '设置初始密码' },
+            { title: '初始化' }
+          ]
+        },
+        server () {
+          that.steps = [
+            { title: '选择工作模式' },
+            { title: '统一身份认证' },
+            { title: '初始化' }
+          ]
+        },
+        serverNotInit () {
+          that.steps = [
+            { title: '选择工作模式' },
+            { title: '统一身份认证' },
+            { title: '设置初始密码' },
+            { title: '初始化' }
+          ]
+        }
       }
     },
     showMessageBox (msg, type) {
@@ -114,11 +155,20 @@ export default {
   watch: {
     'data.optionsNow': function (value, oldValue) {
       if (value === 'local') {
-        this.$data.steps[1] = '设置初始密码'
+        this.setSteps().local() // 默认步骤
       } else if (value === 'server') {
-        this.$data.steps[1] = '统一身份认证'
+        this.setSteps().server() // SSO
       } else {
-        this.$data.steps[1] = '设置初始密码'
+        this.setSteps().local() // 默认步骤
+      }
+    },
+    'data.ServerInit': function (value, oldValue) {
+      this.setSteps().serverNotInit() // SSO没初始化过
+    },
+    stepActive: function (value, oldValue) {
+      if (value === 1) {
+        // 如果是第一个步骤，重新初始化
+        this.readyData()
       }
     }
   },
