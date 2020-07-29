@@ -2,7 +2,6 @@
 #include "Operating.h"
 
 bool OperatingClass::sumbitConfig() {
-    if (!PdLocalconfig()) { return false; }
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
     cookies.insert(std::pair<std::string, std::string>("JSESSIONID", w));
@@ -96,11 +95,5 @@ bool OperatingClass::pdLoginSession() {
         int code = json["code"].asInt();
         if (code == 0) { return true; }
     }
-    return false;
-}
-
-bool OperatingClass::PdLocalconfig() {
-    std::vector<ConfigDll::Struct_UserAndPassword> a = ConfigDll::Config_ReadAllUserAndPassword();
-    if (a.size() > 0) return true;
     return false;
 }

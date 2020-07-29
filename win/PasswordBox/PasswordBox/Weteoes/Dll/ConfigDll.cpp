@@ -14,6 +14,14 @@ ConfigDll::Config_ServerGetw_				ConfigDll::Config_ServerGetw;
 
 ConfigDll::Set_Variable_					ConfigDll::Set_Variable;
 
+
+// 代理ServerDll
+ConfigDll::Server_SumbitConfig_				ConfigDll::Server_SumbitConfig;
+ConfigDll::Server_GetConfig_				ConfigDll::Server_GetConfig;
+ConfigDll::Server_PdLogin_					ConfigDll::Server_PdLogin;
+
+ConfigDll::Server_Set_Variable_				ConfigDll::Server_Set_Variable;
+
 bool ConfigDll::Loading()
 {
 	HMODULE dll = LoadLibrary(TEXT("Config.dll"));//加载dll
@@ -31,5 +39,13 @@ bool ConfigDll::Loading()
 	Config_ServerGetw =				(Config_ServerGetw_)				GetProcAddress(dll, "Config_ServerGetw");
 
 	Set_Variable =					(Set_Variable_)						GetProcAddress(dll, "Set_Variable");
+
+
+	// 代理ServerDll
+	Server_SumbitConfig =			(Server_SumbitConfig_)				GetProcAddress(dll, "Server_SumbitConfig");
+	Server_GetConfig =				(Server_GetConfig_)					GetProcAddress(dll, "Server_GetConfig");
+	Server_PdLogin =				(Server_PdLogin_)					GetProcAddress(dll, "Server_PdLogin");
+
+	Server_Set_Variable =			(Server_Set_Variable_)				GetProcAddress(dll, "Server_Set_Variable");
 	return true;
 }

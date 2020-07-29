@@ -19,7 +19,6 @@ bool Ready() {
 	if (!WeteoesDll().Loading()) { return false; }
 	if (!ConfigDll().Loading()) { return false; }
 	if (!ManagementDll().Loading()) { return false; }
-	if (!ServerDll().Loading()) { return false; }
 	if (!ReadyVariableMap()) { return false; }
 	return true;
 }

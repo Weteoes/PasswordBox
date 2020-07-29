@@ -7,8 +7,5 @@ public:
 	bool sumbitConfig();				// 提交配置
 	bool getConfig();					// 获取配置
 	bool pdLoginSession();				// 判断登录态是否正常
-
-private:
-	bool PdLocalconfig();				// 判断本地配置是否正常
 };
 #endif

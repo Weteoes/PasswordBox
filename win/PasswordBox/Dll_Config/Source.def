@@ -12,3 +12,8 @@ EXPORTS
 	Config_ServerGetw
 
 	Set_Variable
+
+	Server_SumbitConfig
+	Server_GetConfig
+	Server_PdLogin
+	Server_Set_Variable

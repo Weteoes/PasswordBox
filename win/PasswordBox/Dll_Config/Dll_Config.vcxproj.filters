@@ -51,6 +51,9 @@
     <ClCompile Include="Weteoes\More\tinyxml2\tinyxml2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Weteoes\Dll\ServerDll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source.def">
@@ -95,6 +98,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\More\tinyxml2\tinyxml2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Dll\ServerDll.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

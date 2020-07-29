@@ -48,7 +48,6 @@ bool CPasswordBoxApp::ReadyDll() {
 	if (!ManagementDll().Loading()) { return false; }
 	if (!SRWDll().Loading()) { return false; }
 	if (!ConfigDll().Loading()) { return false; }
-	if (!ServerDll().Loading()) { return false; }
 	return true;
 }
 

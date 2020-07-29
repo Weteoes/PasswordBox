@@ -16,7 +16,7 @@ bool CEF_ChangePassword_V8Handler::Execute(
 		bool result = ConfigDll::Config_ResetAESPassword((char*)oldPass.c_str(), (char*)newPass.c_str());
 		if (result && VariableClass::isSSOLogin) {
 			// 修改成功,并且是统一身份认证登录
-			ServerDll::SumbitConfig();
+			ConfigDll::Server_SumbitConfig();
 		}
 		retval = CefV8Value::CreateBool(result);
 		return true;

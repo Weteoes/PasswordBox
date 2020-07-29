@@ -26,6 +26,14 @@ private:
 
 	typedef bool								(__stdcall* Set_Variable_)						(char* key, char* value);
 
+private:
+	// 代理ServerDll
+	typedef bool(__stdcall* Server_SumbitConfig_)				();
+	typedef bool(__stdcall* Server_GetConfig_)					();
+	typedef bool(__stdcall* Server_PdLogin_)					();
+
+	typedef bool(__stdcall* Server_Set_Variable_)				(char* key, char* value);
+
 public:
 	bool Loading();
 	static Config_CreateUserAndPassword_	 Config_CreateUserAndPassword;
@@ -40,6 +48,14 @@ public:
 	static Config_ServerGetw_				 Config_ServerGetw;
 
 	static Set_Variable_					 Set_Variable;		// Dll全局变量保存
+
+public:
+	// 代理ServerDll
+	static Server_SumbitConfig_				 Server_SumbitConfig;
+	static Server_GetConfig_				 Server_GetConfig;
+	static Server_PdLogin_					 Server_PdLogin;
+
+	static Server_Set_Variable_				 Server_Set_Variable;
 
 };
 #endif

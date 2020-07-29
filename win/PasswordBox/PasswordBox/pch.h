@@ -14,7 +14,6 @@ using namespace std;
 #include <Weteoes/Dll/ManagementDll.h>
 #include <Weteoes/Dll/SRWDll.h>
 #include <Weteoes/Dll/ConfigDll.h>
-#include <Weteoes/Dll/ServerDll.h>
 #include <Weteoes/Variable.h>
 
 #endif //PCH_H
