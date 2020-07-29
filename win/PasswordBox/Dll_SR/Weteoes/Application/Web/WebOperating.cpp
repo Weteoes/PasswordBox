@@ -27,15 +27,15 @@ bool WebOperatingClass::Entrance(string operatingUrl, string &result) {
 		return true;
 	}
 	else if (operatingName == "/operating/browser/create") {
+		SSOLoginGetConfig();
 		operating_operating_browser_del(operatingData); // 删除原本的
 		result = operating_operating_browser_create(operatingData); // 创建
-		// 如果是统一身份认证登录上传服务器
 		SSOLoginUpdate();
 		return true;
 	}
 	else if (operatingName == "/operating/browser/del") {
+		SSOLoginGetConfig();
 		result = operating_operating_browser_del(operatingData);
-		// 如果是统一身份认证登录上传服务器
 		SSOLoginUpdate();
 		return true;
 	}
@@ -136,6 +136,13 @@ string WebOperatingClass::operating_operating_console_getAll(string data) {
 	}
 	sprintf_s(result_c, 10000, result_format_s.c_str(), code, result_list.c_str());
 	return result_c;
+}
+
+void WebOperatingClass::SSOLoginGetConfig() {
+	// 如果是统一身份认证登录获取最新数据
+	if (VariableClass::configClass.GetIsSSOLogin()) {
+		ConfigDll::Server_GetConfig();
+	}
 }
 
 void WebOperatingClass::SSOLoginUpdate() {
