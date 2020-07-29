@@ -81,6 +81,9 @@ export default {
       // 筛选规则
       filters: {
         user: []
+      },
+      element: {
+        messageBox: null // 记录messagebox
       }
     }
   },
@@ -144,15 +147,9 @@ export default {
         (r) => {
           const data = r.data
           if (data.Code === 0) {
-            this.$message({
-              message: '操作成功',
-              type: 'success'
-            })
+            this.showMessageBox('操作成功', 'success')
           } else {
-            this.$message({
-              message: '操作失败',
-              type: 'error'
-            })
+            this.showMessageBox('操作失败', 'error')
             // 重新加载列表
             this.tableLoad()
           }
@@ -176,6 +173,16 @@ export default {
     // user筛选
     filterUserHandler (value, row, column) {
       return value === row.user
+    },
+    showMessageBox (msg, type) {
+      if (this.element.messageBox !== null) {
+        this.element.messageBox.close()
+      }
+      this.element.messageBox = this.$message({
+        showClose: true,
+        message: msg,
+        type: type
+      })
     },
     log (...msg) {
       window.console.log(...msg)
