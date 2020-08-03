@@ -76,7 +76,6 @@ std::string HttpOperatingClass::HttpRequestUpdateFile(std::string ip, int port, 
         sent = HttpSendRequest(hRequest, NULL, 0, buffer, (DWORD)strlen(buffer));
     }
     if (!sent) return "";
-
     while (TRUE) {
         char cReadBuffer[4096];
         unsigned long lNumberOfBytesRead;

@@ -5,7 +5,10 @@ ConfigDll::Config_CreateUserAndPassword_	ConfigDll::Config_CreateUserAndPassword
 ConfigDll::Config_ReadUserAndPassword_	 	ConfigDll::Config_ReadUserAndPassword;
 ConfigDll::Config_ReadAllUserAndPassword_	ConfigDll::Config_ReadAllUserAndPassword;
 ConfigDll::Config_DelUserAndPassword_		ConfigDll::Config_DelUserAndPassword;
-ConfigDll::Config_Exsits_					ConfigDll::Config_Exsits;
+
+ConfigDll::Config_ExsitsUserAndPassword_	ConfigDll::Config_ExsitsUserAndPassword;
+ConfigDll::Config_ExsitsServer_				ConfigDll::Config_ExsitsServer;
+
 ConfigDll::Config_SetAESPassword_			ConfigDll::Config_SetAESPassword;
 ConfigDll::Config_ResetAESPassword_			ConfigDll::Config_ResetAESPassword;
 
@@ -30,7 +33,10 @@ bool ConfigDll::Loading()
 	Config_ReadUserAndPassword =    (Config_ReadUserAndPassword_)		GetProcAddress(dll, "Config_ReadUserAndPassword");
 	Config_ReadAllUserAndPassword = (Config_ReadAllUserAndPassword_)	GetProcAddress(dll, "Config_ReadAllUserAndPassword");
 	Config_DelUserAndPassword =     (Config_DelUserAndPassword_)		GetProcAddress(dll, "Config_DelUserAndPassword");
-	Config_Exsits =					(Config_Exsits_)					GetProcAddress(dll, "Config_Exsits");
+
+	Config_ExsitsUserAndPassword =	(Config_ExsitsUserAndPassword_)		GetProcAddress(dll, "Config_ExsitsUserAndPassword");
+	Config_ExsitsServer =			(Config_ExsitsServer_)				GetProcAddress(dll, "Config_ExsitsServer");
+
 	Config_SetAESPassword =			(Config_SetAESPassword_)			GetProcAddress(dll, "Config_SetAESPassword");
 	Config_ResetAESPassword =		(Config_ResetAESPassword_)			GetProcAddress(dll, "Config_ResetAESPassword");
 

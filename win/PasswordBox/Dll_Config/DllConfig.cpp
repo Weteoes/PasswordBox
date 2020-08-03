@@ -54,9 +54,15 @@ extern "C" _declspec(dllexport) bool Config_DelUserAndPassword(const char* host)
 	return result;
 }
 
-extern "C" _declspec(dllexport) bool Config_Exsits() {
+extern "C" _declspec(dllexport) bool Config_ExsitsUserAndPassword() {
 	if (!Loading()) { return false; }
 	std::string a = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::UserAndPassword;
+	return WeteoesDll::IO_Exists((char*)a.c_str());
+}
+
+extern "C" _declspec(dllexport) bool Config_ExsitsServer() {
+	if (!Loading()) { return false; }
+	std::string a = WeteoesDll::Basics_GetNowFilePath() + ConfigFileClass::Server;
 	return WeteoesDll::IO_Exists((char*)a.c_str());
 }
 
@@ -75,8 +81,6 @@ extern "C" _declspec(dllexport) bool Config_ResetAESPassword(char* oldPass, char
 	dllMutex.unlock();
 	return result;
 }
-
-
 
 extern "C" _declspec(dllexport) bool Config_ServerSetw(const char* w) {
 	if (!Loading()) { return false; }

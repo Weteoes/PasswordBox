@@ -93,17 +93,25 @@ void initDlg::Ready() {
 	ReadyIcon();
 	VariableClass::appCefClass.Init_CEF();	// 初始化CEF
 	VariableClass::app_Dll_SWR.Start(0);	// 启动UI
-	// 判断是否统一身份认证登录
-	if (VariableClass::loginSSOClass.PdLogin()) {
-		// 获取配置文件
-		VariableClass::loginSSOClass.GetServerConfig();
-	}
 	CreateDlg();
 	VariableClass::appDlgClass.Exit();
 }
 
 bool initDlg::CreateDlg() {
-	if (ConfigDll::Config_Exsits()) {
+	// 判断是否统一身份认证登录
+	if (ConfigDll::Config_ExsitsServer()) {
+		// 判断统一身份认证登录是否有效
+		if (VariableClass::loginSSOClass.PdLogin()) {
+			// 获取配置文件
+			VariableClass::loginSSOClass.GetServerConfig();
+		}
+		else {
+			//统一身份认证登录无效
+			VariableClass::createDlgClass.init();
+			return true; // 因为窗口是不会关闭的，等于return
+		}
+	}
+	if (ConfigDll::Config_ExsitsUserAndPassword()) {
 		// 配置文件存在
 		VariableClass::createDlgClass.login();
 	}

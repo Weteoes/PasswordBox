@@ -4,7 +4,10 @@ EXPORTS
 	Config_ReadUserAndPassword
 	Config_ReadAllUserAndPassword
 	Config_DelUserAndPassword
-	Config_Exsits
+
+	Config_ExsitsUserAndPassword
+	Config_ExsitsServer
+
 	Config_SetAESPassword
 	Config_ResetAESPassword
 

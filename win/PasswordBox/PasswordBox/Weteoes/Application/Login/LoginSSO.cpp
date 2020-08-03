@@ -32,7 +32,7 @@ bool LoginSSOClass::PdLogin() {
 	std::string wStr(result, len);
 	if (wStr.empty()) { return false; }
 	SetLoginSession(wStr);
-	if (!ConfigDll::Server_PdLogin) {
+	if (!ConfigDll::Server_PdLogin()) {
 		// µ«¬ºÃ¨ ß–ß£¨«Âø’≈‰÷√
 		ConfigDll::Config_ServerSetw("");
 		return false;
