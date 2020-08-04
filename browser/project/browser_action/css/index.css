@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  /* chrome 默认大小 */
+  font-size: 12px;
+}
+
+#app {
+  width: 200px;
+  height: auto;
+  /* border: 1px solid #000; */
+}
+
+.console {
+  height: auto;
+  padding: 5px;
+}
+
+.console > .title {
+  padding-top: 5px;
+  text-align: center;
+  color: #000;
+  font-size: 16px;
+}
+
+.console > .options {
+  width: 80%;
+  height: auto;
+  margin: 20px auto;
+}
+
+.options_only {
+  width: 100%;
+  height: auto;
+  margin: 5px 0;
+  font-size: 14px !important;
+}
+
+.options_only > .options_only_switch {
+  display: flex;
+}
+
+.options_only_switch > .title {
+  flex: 3;
+}
+.options_only_switch > .switch {
+  flex: 1;
+}

@@ -50,6 +50,12 @@ void CEF_Init_V8Handler::ShowMainDlg() {
 }
 
 void CEF_Init_V8Handler::ShowLoginDlg() {
+	// 判断是否有窗口(初始化窗口)
+	VariableClass::CefBrowserMapClass cefBrowserMapClass = VariableClass::getCefBrowserMap("init");
+	if (cefBrowserMapClass.dlgHwnd) {
+		// 隐藏掉（防止焦点在其他窗口导致该窗口没识别到）
+		VariableClass::appDlgClass.Minimize(cefBrowserMapClass.dlgHwnd);
+	}
 	VariableClass::createDlgClass.login();
 }
 

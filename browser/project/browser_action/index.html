@@ -1,0 +1,30 @@
+﻿<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+  <link rel="stylesheet" type="text/css" href="../modules/element/index.css" />
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <div class="console" v-for="console_name in console_options">
+      <div class="title" v-text="console_name.title"></div>
+      <div class="options">
+        <div class="options_only" v-for="value,key in console_name.options">
+          <!-- 如果是switch -->
+          <div class="options_only_switch" v-if="value.type == 'switch'">
+            <div class="title" v-text="value.title"></div>
+            <div class="switch">
+              <el-switch v-model="value.status" @change="console_options_switch_click(value)"></el-switch>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../modules/vue.min.js"></script>
+  <script src="../modules/element/index.js"></script>
+  <script src="js/index.js"></script>
+</body>

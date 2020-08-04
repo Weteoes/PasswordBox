@@ -1,17 +1,17 @@
 {
     "manifest_version": 2,
-    "name": "Password Box",
+    "name": "密码保管箱 (Password Box)",
     "version": "1.0",
     "description": "可实现网页保存账户,下次即可自动输入账户",
     "author": "Weteoes",
     "homepage_url": "https://github.com/Weteoes/",
     "icons": {
-      "16": "img/icon.png",
-      "48": "img/icon.png",
-      "128": "img/icon.png"
+        "16": "img/icon.png",
+        "48": "img/icon.png",
+        "128": "img/icon.png"
     },
     "background": {
-      "page": "background/index.html"
+        "page": "background/index.html"
     },
     // Vue 取消安全
     "content_security_policy": "style-src 'self' 'unsafe-inline';script-src 'self' 'unsafe-eval' https://cdn.bootcss.com; object-src 'self' ;",
@@ -19,17 +19,21 @@
     "browser_action": {
         "default_icon": "img/icon.png",
         // 图标悬停时的标题，可选
-        "default_title": "Password Box"
-        //"default_popup": "browser_action/index.html"
+        "default_title": "密码保管箱",
+        "default_popup": "browser_action/index.html"
     },
     // 需要直接注入页面的JS
     "content_scripts": [
         {
             //"matches": ["http://*/*", "https://*/*"],
             // "<all_urls>" 表示匹配所有地址
-            "matches": ["<all_urls>"],
+            "matches": [
+                "<all_urls>"
+            ],
             // 多个JS按顺序注入
-            "js": ["content_scripts/login.js"],
+            "js": [
+                "content_scripts/login.js"
+            ],
             // JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式
             // "css": ["css/custom.css"],
             // 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle
