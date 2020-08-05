@@ -40,9 +40,17 @@ bool WebOperatingClass::Entrance(string operatingUrl, string &result) {
 		return true;
 	}
 	else if (operatingName == "/operating/console/getAll") {
+		SSOLoginGetConfig();
 		result = operating_operating_console_getAll(operatingData);
 		return true;
 	}
+	//// 模拟退出登录
+	//else if (operatingName == "/operating/console/exit") {
+	//	std::string w = "1";
+	//	//ConfigDll::Config_ServerSetw(w.c_str());
+	//	ConfigDll::Server_Set_Variable((char*)"w", (char*)w.c_str());
+	//	return true;
+	//}
 	return false;
 }
 
@@ -139,16 +147,26 @@ string WebOperatingClass::operating_operating_console_getAll(string data) {
 }
 
 void WebOperatingClass::SSOLoginGetConfig() {
+	SSOMetux.lock();
 	// 如果是统一身份认证登录获取最新数据
 	if (VariableClass::configClass.GetIsSSOLogin()) {
-		ConfigDll::Server_GetConfig();
+		if (!ConfigDll::Server_GetConfig()) {
+			// 更新失败
+			ApplicationExports::SSO_Login();
+		}
 	}
+	SSOMetux.unlock();
 }
 
 void WebOperatingClass::SSOLoginUpdate() {
+	SSOMetux.lock();
 	// 如果是统一身份认证登录上传服务器
 	if (VariableClass::configClass.GetIsSSOLogin()) {
-		ConfigDll::Server_SumbitConfig();
+		if (!ConfigDll::Server_SumbitConfig()) {
+			// 更新失败
+			ApplicationExports::SSO_Login();
+		}
 	}
+	SSOMetux.unlock();
 }
 

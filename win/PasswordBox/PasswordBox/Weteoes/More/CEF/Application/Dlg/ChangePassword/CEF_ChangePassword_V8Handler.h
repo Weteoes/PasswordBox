@@ -7,9 +7,9 @@ class CEF_ChangePassword_V8Handler {
 public:
 	bool Execute(
 		const CefString& name,
-		CefRefPtr<CefDictionaryValue> arguments,
-		CefRefPtr<CefV8Value>& retval,
-		CefString& exception
-		);
+		CefRefPtr<CefDictionaryValue> arguments = NULL,
+		CefRefPtr<CefV8Value>& retval = CefRefPtr<CefV8Value>(),
+		CefString& exception = CefString()
+	);
 };
 #endif

@@ -91,7 +91,7 @@ void BrowserDlg::Ready() {
 }
 
 void BrowserDlg::ReadyVariable() {
-	VariableClass::dlg_CEF = dlg_CEF;
+	VariableClass::dlg_CEF = browser;
 	VariableClass::dlg_HWND = dlg_HWND;
 }
 

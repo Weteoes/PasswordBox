@@ -37,7 +37,7 @@ public:
 
 
 public:
-	static int dlg_CEF;								// 当前活动窗口CEF控件句柄
+	static CefRefPtr<CefBrowser> dlg_CEF;			// 当前活动窗口CEF控件句柄
 	static HWND dlg_HWND;							// 当前活动窗口句柄
 
 public:

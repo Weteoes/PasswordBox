@@ -15,6 +15,7 @@ private:
 	string operating_operating_console_getAll(string data);
 
 private:
+	std::mutex SSOMetux;		// 线程锁
 	void SSOLoginGetConfig();	// 如果是统一身份认证，保持最新数据
 	void SSOLoginUpdate();		// 如果是统一身份认证，更新服务器
 

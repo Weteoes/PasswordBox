@@ -51,6 +51,9 @@
     <ClCompile Include="Weteoes\Application\Security\AES.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Weteoes\Dll\ApplicationExports.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Weteoes\More\openssl\include\openssl\__DECC_INCLUDE_EPILOGUE.H">
@@ -411,6 +414,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\Application\Security\AES.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Dll\ApplicationExports.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
