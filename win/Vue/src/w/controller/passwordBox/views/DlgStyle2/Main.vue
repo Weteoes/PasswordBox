@@ -1,7 +1,13 @@
 <template>
   <div class="dlg_form">
     <div class="only">
-      <div class="title">当前共找到<span v-text="tableData.length"></span>条记录</div>
+      <div class="title onlyInlineBlock">当前共找到<span v-text="tableData.length"></span>条记录</div>
+      <div class="title ssoSumbit onlyInlineBlock"
+           @click="ssoSumbitClick"
+           v-if="isSSO">
+        <div class="el-icon-refresh"></div>
+        <span>立即提交</span>
+      </div>
     </div>
     <div class="table">
       <el-table :data="tableData"
@@ -54,11 +60,21 @@
   padding: 10px 10px 0 10px;
 }
 
+.onlyInlineBlock {
+  display: inline-block;
+  // vertical-align: top;
+}
+
 .title {
   height: 20px;
   margin: 5px 0 0 5px;
   font-size: 14px;
   color: #909399;
+}
+
+.ssoSumbit {
+  float: right;
+  cursor: pointer;
 }
 
 .table {
@@ -78,6 +94,7 @@ export default {
       dlgTitle: '密码保管箱',
       dlgStyle: 'width: 900px', // 需要和readyCEFSize一起修改
       tableData: [], // 数据
+      isSSO: false, // 是否统一身份认证登录
       // 筛选规则
       filters: {
         user: []
@@ -96,6 +113,7 @@ export default {
       this.tableLoad() // 加载数据
       this.tableScroll() // Scroll事件
       this.readyDlgApi() // 设置窗口API回调
+      this.readySSO() // 判断是否是统一身份认证登录
       // DEBUG（可以不执行，执行是为了调试，不影响使用）
       // 初始化筛选规则
       this.tableReadyFilter()
@@ -108,6 +126,15 @@ export default {
           // 重新加载表格
           this.tableLoad()
         }
+      }
+    },
+    // 判断是否是统一身份认证登录
+    readySSO () {
+      const a = this.w.softwareApi.app('Main', 'PdSSOLogin')
+      if (a) {
+        this.isSSO = true
+      } else {
+        this.isSSO = false
       }
     },
     tableLoad () {
@@ -173,6 +200,16 @@ export default {
     // user筛选
     filterUserHandler (value, row, column) {
       return value === row.user
+    },
+    // SSO立即提交数据到服务器
+    ssoSumbitClick () {
+      this.log('统一身份认证-提交数据中')
+      const a = this.w.softwareApi.app('Main', 'SSOSumbitServerConfig')
+      if (a) {
+        this.showMessageBox('数据提交成功', 'success')
+      } else {
+        this.showMessageBox('数据提交失败', 'error')
+      }
     },
     showMessageBox (msg, type) {
       if (this.element.messageBox !== null) {

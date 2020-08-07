@@ -38,7 +38,7 @@ std::string HttpOperatingClass::HttpRequestUpdateFile(std::string ip, int port, 
         char* fileData;
         int fileDataLen = WeteoesDll::IO_ReadFile((char*)file.c_str(), fileData);
         if (fileDataLen == 0) { return ""; }
-        std::string fileDataStr = std::string(fileData, (size_t)fileDataLen - 1);
+        std::string fileDataStr = std::string(fileData, (size_t)fileDataLen);
 
         //allocate memory to contain the whole file + HEADER
         int bufferSize = sizeof(char) * fileDataLen + 2048;

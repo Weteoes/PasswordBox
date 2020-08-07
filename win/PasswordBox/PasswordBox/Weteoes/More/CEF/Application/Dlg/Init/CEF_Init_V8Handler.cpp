@@ -42,6 +42,12 @@ bool CEF_Init_V8Handler::Execute(
 		retval = CefV8Value::CreateBool(result);
 		return true;
 	}
+	// 统一身份认证服务器配置提交
+	else if (name == "SSOSumbitServerConfig") {
+		bool result = VariableClass::loginSSOClass.SumbitServerConfig();
+		retval = CefV8Value::CreateBool(result);
+		return true;
+	}
 	return false;
 }
 

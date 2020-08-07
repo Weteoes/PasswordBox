@@ -9,6 +9,7 @@ public:
 public:
 	bool PdLogin();						// 判断是否统一身份认证登录通过
 	bool GetServerConfig();				// 获取服务器配置文件
+	bool SumbitServerConfig();			// 提交服务器配置文件
 
 private:
 	bool SetLoginSession(std::string w);

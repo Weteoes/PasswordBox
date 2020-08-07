@@ -17,6 +17,14 @@ bool CEF_Main_V8Handler::Execute(
 		std::thread a(&CEF_Main_V8Handler::ShowChangePasswordDlg, this); a.detach(); //Create Thread
 		return true;
 	}
+	else if (name == "PdSSOLogin") {
+		VariableClass::cef_Init_V8Handler.Execute("PdSSOLogin", arguments, retval, exception);
+		return true;
+	}
+	else if (name == "SSOSumbitServerConfig") {
+		VariableClass::cef_Init_V8Handler.Execute("SSOSumbitServerConfig", arguments, retval, exception);
+		return true;
+	}
 	return false;
 }
 

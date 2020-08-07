@@ -99,7 +99,9 @@ void initDlg::Ready() {
 
 bool initDlg::CreateDlg() {
 	// 判断是否统一身份认证登录
-	if (ConfigDll::Config_ExsitsServer()) {
+	char* result = new char('\0');
+	int len = ConfigDll::Config_ServerGetw(result);
+	if (len != 0) {
 		// 判断统一身份认证登录是否有效
 		if (VariableClass::loginSSOClass.PdLogin()) {
 			// 获取配置文件

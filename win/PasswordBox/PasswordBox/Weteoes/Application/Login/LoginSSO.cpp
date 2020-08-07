@@ -12,7 +12,7 @@ void LoginSSOClass::Loginin(CefRefPtr<CefBrowser> browser) {
 }
 
 void LoginSSOClass::Cookie(std::string key, std::string value) {
-	if (key == "JSESSIONID") {
+	if (key == "w") {
 		// 只保存数据，判断由js调起
 		ConfigDll::Config_ServerSetw(value.c_str());
 		SetLoginSession(value);
@@ -34,7 +34,7 @@ bool LoginSSOClass::PdLogin() {
 	SetLoginSession(wStr);
 	if (!ConfigDll::Server_PdLogin()) {
 		// 登录态失效，清空配置
-		ConfigDll::Config_ServerSetw("");
+		// ConfigDll::Config_ServerSetw("");
 		return false;
 	}
 	// 更新本地配置（不更新，通过js调用GetServerConfig更新）
@@ -47,6 +47,10 @@ bool LoginSSOClass::PdLogin() {
 
 bool LoginSSOClass::GetServerConfig() {
 	return ConfigDll::Server_GetConfig();
+}
+
+bool LoginSSOClass::SumbitServerConfig() {
+	return ConfigDll::Server_SumbitConfig();
 }
 
 bool LoginSSOClass::SetLoginSession(std::string w) {

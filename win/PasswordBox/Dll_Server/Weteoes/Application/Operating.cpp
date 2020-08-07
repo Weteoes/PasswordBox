@@ -4,7 +4,7 @@
 bool OperatingClass::sumbitConfig() {
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
-    cookies.insert(std::pair<std::string, std::string>("JSESSIONID", w));
+    cookies.insert(std::pair<std::string, std::string>("w", w));
     std::string a = HttpOperatingClass::HttpRequestUpdateFile(
         VariableClass::serverDomain, 
         VariableClass::serverPort, 
@@ -28,7 +28,7 @@ bool OperatingClass::sumbitConfig() {
 bool OperatingClass::getConfig() {
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
-    cookies.insert(std::pair<std::string, std::string>("JSESSIONID", w));
+    cookies.insert(std::pair<std::string, std::string>("w", w));
     std::string a = HttpOperatingClass::HttpRequestUpdateFile(
         VariableClass::serverDomain, 
         VariableClass::serverPort, 
@@ -78,7 +78,7 @@ bool OperatingClass::getConfig() {
 bool OperatingClass::pdLoginSession() {
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
-    cookies.insert(std::pair<std::string, std::string>("JSESSIONID", w));
+    cookies.insert(std::pair<std::string, std::string>("w", w));
     std::string a = HttpOperatingClass::HttpRequestUpdateFile(
         VariableClass::serverDomain,
         VariableClass::serverPort,
