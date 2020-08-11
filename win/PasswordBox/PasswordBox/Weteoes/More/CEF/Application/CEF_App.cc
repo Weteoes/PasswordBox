@@ -81,7 +81,7 @@ void CEF_App::OnWebKitInitialized() {
         "        minimize () { native function Dlg_Minimize(); return Dlg_Minimize(); },"
         "        close () { native function Dlg_Close(); return Dlg_Close(); },"
         "        exit () { native function Dlg_Exit(); return Dlg_Exit(); },"
-        "        create (key, url) { native function Dlg_Create(key, url); return Dlg_Create(key, url); }"
+        "        create (url, key) { native function Dlg_Create(url, key); return Dlg_Create(url, key); }"
         "    },"
         "    app (app, fun, args) { args = JSON.stringify(args); native function App(app, fun, args); return App(app, fun, args); }"
         "};";

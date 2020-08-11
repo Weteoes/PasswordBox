@@ -50,8 +50,8 @@ bool CEF_V8Handler::Execute(
 	else if (name == "Dlg_Create") {
 		string key = arguments[0]->GetStringValue();
 		string url = arguments[1]->GetStringValue();
-		if (!url.empty()) {
-			thread a(&CEF_V8Handler::Dlg_CreateThread, this, key, url);
+		if (!url.empty() && !key.empty()) {
+			thread a(&CEF_V8Handler::Dlg_CreateThread, this, url, key);
 			a.detach();
 		}
 		return true;
@@ -62,8 +62,8 @@ bool CEF_V8Handler::Execute(
 	return false;
 }
 
-void CEF_V8Handler::Dlg_CreateThread(string key, string url) {
-	VariableClass::createDlgClass.browser(key, url, true);
+void CEF_V8Handler::Dlg_CreateThread(string url, string key) {
+	VariableClass::createDlgClass.browser(url, key, true);
 }
 
 void CEF_V8Handler::Dlg_Mouse_Down(int x, int y) {
