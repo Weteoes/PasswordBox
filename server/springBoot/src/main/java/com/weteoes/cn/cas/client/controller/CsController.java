@@ -1,5 +1,7 @@
 package com.weteoes.cn.cas.client.controller;
 
+import com.weteoes.cn.cas.client.jdbc.controller.JdbcConfig;
+import com.weteoes.cn.cas.client.jdbc.controller.SessionOperating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,28 @@ public class CsController {
     @RequestMapping("a")
     String a() {
         return "cs/a";
+    }
+
+    @ResponseBody
+    @RequestMapping("b")
+    String b() {
+        JdbcConfig.initJDBC(jdbcTemplate);
+        String result = "";
+        HttpSession session = request.getSession();
+        String id = session.getId();
+        result += id + "<br/>";
+        result += "session:<br/>";
+        int maxInactiveInterval = session.getMaxInactiveInterval();
+        result += "-maxInactiveInterval:" + maxInactiveInterval + "<br/>";
+        long lastAccessedTime = session.getLastAccessedTime();
+        result += "-lastAccessedTime:" + lastAccessedTime + "<br/>";
+        long creationTime = session.getCreationTime();
+        result += "-creationTime:" + creationTime + "<br/>";
+        String uid = SessionOperating.getUid(session.getId());
+        result += "uid:" + uid + "<br/>";
+
+        //SessionOperating.delete(session.getId());
+        return result;
     }
 
 //    @ResponseBody

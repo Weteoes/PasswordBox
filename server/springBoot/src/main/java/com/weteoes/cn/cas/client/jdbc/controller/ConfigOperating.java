@@ -2,7 +2,6 @@ package com.weteoes.cn.cas.client.jdbc.controller;
 
 import com.google.gson.JsonObject;
 import com.weteoes.cn.cas.client.jdbc.tables.Config;
-
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;

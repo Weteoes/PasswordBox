@@ -2,6 +2,7 @@ package com.weteoes.cn.cas.client.controller;
 
 import com.google.gson.JsonObject;
 import com.weteoes.cn.cas.client.jdbc.controller.JdbcConfig;
+import com.weteoes.cn.cas.client.jdbc.controller.SessionOperating;
 import com.weteoes.cn.cas.client.jdbc.tables.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,17 +23,14 @@ public class ConfigController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private HttpServletRequest request;
-
-    private void initJDBC() {
-        if (jdbcTemplate != null) JdbcConfig.jdbcTemplate = jdbcTemplate;
-    }
 
     @ResponseBody
     @RequestMapping("sumbit")
     String sumbit (MultipartFile file) {
-        initJDBC();
+        JdbcConfig.initJDBC(jdbcTemplate);
         JsonObject result = new JsonObject();
         int code = -1;
         String msg = "unknown error";
@@ -40,15 +38,13 @@ public class ConfigController {
             code = -1;
             msg = "未选择需上传的文件";
         } else {
-            // 有数据的时候
-            JsonObject userInfo = SSOController.getUserInfo(request);
-            if (userInfo.size() == 0) {
+            String uid = SessionOperating.getUid(request.getSession().getId());
+            if (uid.isEmpty()) {
                 code = -1;
                 msg = "未登录";
             } else {
                 try {
                     JsonObject selectJson = new JsonObject();
-                    String uid = userInfo.get("uid").getAsString();
                     selectJson.addProperty("uid", uid);
                     // 获取文件内容
                     byte[] fileBytes = file.getBytes();
@@ -87,25 +83,23 @@ public class ConfigController {
     @ResponseBody
     @RequestMapping("get")
     String get () {
-        initJDBC();
+        JdbcConfig.initJDBC(jdbcTemplate);
         JsonObject result = new JsonObject();
         int code = -1;
         String msg = "unknown error";
-        // 有数据的时候
-        JsonObject userInfo = SSOController.getUserInfo(request);
-        if (userInfo.size() == 0) {
+        String uid = SessionOperating.getUid(request.getSession().getId());
+        if (uid.isEmpty()) {
             code = -1;
             msg = "未登录";
         } else {
             JsonObject selectJson = new JsonObject();
-            String uid = userInfo.get("uid").getAsString();
             selectJson.addProperty("uid", uid);
             List<Map<String, Object>> list = ConfigOperating.select(selectJson);
             // 判断是否有数据
             if (list.size() == 0) {
                 // 数据库没数据
                 code = -1;
-                msg = "config error";
+                msg = "config empty";
             } else {
                 // 数据库有数据
                 Map<String, Object> only = list.get(0);

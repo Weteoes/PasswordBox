@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @EnableCasClient
-@SpringBootApplication
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds=-1)
+@SpringBootApplication
 @ComponentScan({
         "com.weteoes.cn.cas.client.application",
         "com.weteoes.cn.cas.client.controller",

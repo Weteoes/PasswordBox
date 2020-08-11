@@ -12,6 +12,10 @@ public class JdbcConfig {
     @Autowired
     public static JdbcTemplate jdbcTemplate;
 
+    public static void initJDBC(JdbcTemplate jdbc) {
+        if (jdbcTemplate == null) JdbcConfig.jdbcTemplate = jdbc;
+    }
+
     // 参数（where a = '1' and b ='2'）
     public static String getSQLString(JsonObject args) {
         String result = " ";
