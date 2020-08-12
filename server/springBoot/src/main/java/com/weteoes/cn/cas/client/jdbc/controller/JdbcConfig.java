@@ -1,21 +1,10 @@
 package com.weteoes.cn.cas.client.jdbc.controller;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.util.Map;
 
 public class JdbcConfig {
-    @Autowired
-    public static JdbcTemplate jdbcTemplate;
-
-    public static void initJDBC(JdbcTemplate jdbc) {
-        if (jdbcTemplate == null) JdbcConfig.jdbcTemplate = jdbc;
-    }
-
     // 参数（where a = '1' and b ='2'）
     public static String getSQLString(JsonObject args) {
         String result = " ";

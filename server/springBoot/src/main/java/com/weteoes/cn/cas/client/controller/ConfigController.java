@@ -1,19 +1,16 @@
 package com.weteoes.cn.cas.client.controller;
 
 import com.google.gson.JsonObject;
-import com.weteoes.cn.cas.client.jdbc.controller.JdbcConfig;
+import com.weteoes.cn.cas.client.application.BasicClass;
+import com.weteoes.cn.cas.client.application.VariableClass;
 import com.weteoes.cn.cas.client.jdbc.controller.SessionOperating;
 import com.weteoes.cn.cas.client.jdbc.tables.Config;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.weteoes.cn.cas.client.jdbc.controller.ConfigOperating;
-import com.weteoes.cn.cas.client.controller.SSOController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -21,16 +18,9 @@ import java.util.Map;
 @RequestMapping("config")
 public class ConfigController {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private HttpServletRequest request;
-
     @ResponseBody
     @RequestMapping("sumbit")
     String sumbit (MultipartFile file) {
-        JdbcConfig.initJDBC(jdbcTemplate);
         JsonObject result = new JsonObject();
         int code = -1;
         String msg = "unknown error";
@@ -38,7 +28,7 @@ public class ConfigController {
             code = -1;
             msg = "未选择需上传的文件";
         } else {
-            String uid = SessionOperating.getUid(request.getSession().getId());
+            String uid = getLoginUid();
             if (uid.isEmpty()) {
                 code = -1;
                 msg = "未登录";
@@ -83,11 +73,10 @@ public class ConfigController {
     @ResponseBody
     @RequestMapping("get")
     String get () {
-        JdbcConfig.initJDBC(jdbcTemplate);
         JsonObject result = new JsonObject();
         int code = -1;
         String msg = "unknown error";
-        String uid = SessionOperating.getUid(request.getSession().getId());
+        String uid = getLoginUid();
         if (uid.isEmpty()) {
             code = -1;
             msg = "未登录";
@@ -112,5 +101,22 @@ public class ConfigController {
         result.addProperty("code", code);
         result.addProperty("msg", msg);
         return result.toString();
+    }
+
+    // 获取登录用户UID
+    private String getLoginUid() {
+        // 方式一
+        JsonObject jsonObject = SSOController.getUserInfo();
+        if (jsonObject.size() > 0) {
+            return jsonObject.get("uid").getAsString();
+        }
+
+        // 方式二
+        String w = BasicClass.getCookie(VariableClass.that.sessionName);
+        if (!w.isEmpty()) {
+            String uid = SessionOperating.getUid(w);
+            if (!uid.isEmpty()) { return uid; }
+        }
+        return "";
     }
 }

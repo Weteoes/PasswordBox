@@ -1,11 +1,10 @@
 package com.weteoes.cn.cas.client.controller;
 
-import com.weteoes.cn.cas.client.jdbc.controller.JdbcConfig;
+import com.weteoes.cn.cas.client.application.BasicClass;
+import com.weteoes.cn.cas.client.application.VariableClass;
 import com.weteoes.cn.cas.client.jdbc.controller.SessionOperating;
 import org.jasig.cas.client.authentication.AttributePrincipal;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.JsonObject;
@@ -19,11 +18,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("sso")
 public class SSOController {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private HttpServletRequest request;
 
     @Value("${cas-logout-url}")
     private String CAS_LOGOUT_URL;
@@ -31,7 +25,7 @@ public class SSOController {
     @ResponseBody
     @RequestMapping("login")
     String login() {
-        JsonObject result = getUserInfo(request);
+        JsonObject result = getUserInfo();
         int code = -1;
         if (result.size() != 0) {
             code = 0;
@@ -48,22 +42,25 @@ public class SSOController {
 
     @RequestMapping("redirect")
     String redirect(@RequestParam String url) {
-        AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
+        AttributePrincipal principal = (AttributePrincipal) VariableClass.that.request.getUserPrincipal();
         if (principal == null) {
             return "sso/redirect";
         }
         // 登录成功，保存到数据库，永久保存
-        JdbcConfig.initJDBC(jdbcTemplate);
-        String uid = getUserInfo(request).get("uid").getAsString();
+        String uid = getUserInfo().get("uid").getAsString();
         if (!uid.isEmpty()) {
-            SessionOperating.insert(request.getSession().getId(), uid);
+            String w = BasicClass.getCookie(VariableClass.that.sessionName);
+            // 如果有session就保存一个
+            if (!w.isEmpty()) {
+                SessionOperating.insert(w, uid);
+            }
         }
         return "redirect:" + url;
     }
 
-    public static JsonObject getUserInfo(HttpServletRequest request) {
+    public static JsonObject getUserInfo() {
         JsonObject result = new JsonObject();
-        AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
+        AttributePrincipal principal = (AttributePrincipal)VariableClass.that.request.getUserPrincipal();
         if (principal != null) {
             Map attributes = principal.getAttributes();
             result.addProperty("id", (String)attributes.get("id"));

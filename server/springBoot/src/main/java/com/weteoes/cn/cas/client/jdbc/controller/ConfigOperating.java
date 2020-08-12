@@ -1,6 +1,7 @@
 package com.weteoes.cn.cas.client.jdbc.controller;
 
 import com.google.gson.JsonObject;
+import com.weteoes.cn.cas.client.application.VariableClass;
 import com.weteoes.cn.cas.client.jdbc.tables.Config;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ public class ConfigOperating {
         List<Map<String, Object>> list = new ArrayList();
         try {
             String sql = "select * from config " + JdbcConfig.getSQLString(args);
-            list = JdbcConfig.jdbcTemplate.queryForList(sql);
+            list = VariableClass.that.jdbcTemplate.queryForList(sql);
             return list;
         } catch (Exception e) {
             e.printStackTrace();
@@ -27,7 +28,7 @@ public class ConfigOperating {
             Config a = new Config();
             a.setUid(uid);
             a.setConfig(config);
-            JdbcConfig.jdbcTemplate.update(connection -> {
+            VariableClass.that.jdbcTemplate.update(connection -> {
                 String sql = "UPDATE config SET config=? WHERE uid = ?";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, config);
@@ -46,7 +47,7 @@ public class ConfigOperating {
             Config a = new Config();
             a.setUid(uid);
             a.setConfig(config);
-            JdbcConfig.jdbcTemplate.update(connection -> {
+            VariableClass.that.jdbcTemplate.update(connection -> {
                 String sql = "insert into config(uid, config) values(?, ?)";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, a.getUid());
