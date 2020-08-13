@@ -7,7 +7,7 @@ OperatingClass VariableClass::operatingClass;
 
 
 std::string VariableClass::serverDomain = "passwordbox.weteoes.cn";
-std::string VariableClass::serverDomainPdLoginUrl = "/sso/login";
+std::string VariableClass::serverDomainPdLoginUrl = "/config/login";
 std::string VariableClass::serverDomainConfigSumbitUrl = "/config/sumbit";
 std::string VariableClass::serverDomainConfigGetUrl = "/config/get";
 int VariableClass::serverPort = 443;

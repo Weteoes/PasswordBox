@@ -103,6 +103,19 @@ public class ConfigController {
         return result.toString();
     }
 
+    @ResponseBody
+    @RequestMapping("login")
+    String login() {
+        JsonObject result = new JsonObject();
+        int code = -1;
+        String uid = getLoginUid();
+        if (!uid.isEmpty()) {
+            code = 0;
+        }
+        result.addProperty("code", code);
+        return result.toString();
+    }
+
     // 获取登录用户UID
     private String getLoginUid() {
         // 方式一
