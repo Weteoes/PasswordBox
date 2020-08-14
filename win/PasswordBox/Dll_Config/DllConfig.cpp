@@ -137,6 +137,14 @@ extern "C" _declspec(dllexport) bool Server_PdLogin() {
 	return result;
 }
 
+extern "C" _declspec(dllexport) bool Server_NetWorkisConnect() {
+	if (!Loading()) { return false; }
+	dllMutex.lock();
+	bool result = ServerDll::NetWorkisConnect();
+	dllMutex.unlock();
+	return result;
+}
+
 extern "C" _declspec(dllexport) bool Server_Set_Variable(char* key, char* value) {
 	if (!Loading()) { return false; }
 	return ServerDll::Set_Variable(key, value);

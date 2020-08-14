@@ -34,6 +34,7 @@ private:
 	typedef bool(__stdcall* Server_SumbitConfig_)				();
 	typedef bool(__stdcall* Server_GetConfig_)					();
 	typedef bool(__stdcall* Server_PdLogin_)					();
+	typedef bool(__stdcall* Server_NetWorkisConnect_)			();
 
 	typedef bool(__stdcall* Server_Set_Variable_)				(char* key, char* value);
 
@@ -60,6 +61,7 @@ public:
 	static Server_SumbitConfig_				 Server_SumbitConfig;
 	static Server_GetConfig_				 Server_GetConfig;
 	static Server_PdLogin_					 Server_PdLogin;
+	static Server_NetWorkisConnect_			 Server_NetWorkisConnect;
 
 	static Server_Set_Variable_				 Server_Set_Variable;
 

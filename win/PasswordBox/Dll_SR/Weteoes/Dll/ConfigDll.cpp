@@ -20,7 +20,8 @@ ConfigDll::Set_Variable_					ConfigDll::Set_Variable;
 
 // ¥˙¿ÌServerDll
 ConfigDll::Server_SumbitConfig_				ConfigDll::Server_SumbitConfig;
-ConfigDll::Server_GetConfig_				ConfigDll::Server_GetConfig;
+ConfigDll::Server_GetConfig_				ConfigDll::Server_GetConfig; 
+ConfigDll::Server_NetWorkisConnect_			ConfigDll::Server_NetWorkisConnect;
 ConfigDll::Server_PdLogin_					ConfigDll::Server_PdLogin;
 
 ConfigDll::Server_Set_Variable_				ConfigDll::Server_Set_Variable;
@@ -51,6 +52,7 @@ bool ConfigDll::Loading()
 	Server_SumbitConfig =			(Server_SumbitConfig_)				GetProcAddress(dll, "Server_SumbitConfig");
 	Server_GetConfig =				(Server_GetConfig_)					GetProcAddress(dll, "Server_GetConfig");
 	Server_PdLogin =				(Server_PdLogin_)					GetProcAddress(dll, "Server_PdLogin");
+	Server_NetWorkisConnect =		(Server_NetWorkisConnect_)			GetProcAddress(dll, "Server_NetWorkisConnect");
 
 	Server_Set_Variable =			(Server_Set_Variable_)				GetProcAddress(dll, "Server_Set_Variable");
 	return true;

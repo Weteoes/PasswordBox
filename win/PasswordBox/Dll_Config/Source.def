@@ -19,4 +19,5 @@ EXPORTS
 	Server_SumbitConfig
 	Server_GetConfig
 	Server_PdLogin
+	Server_NetWorkisConnect
 	Server_Set_Variable

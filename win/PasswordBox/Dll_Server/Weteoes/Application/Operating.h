@@ -4,8 +4,11 @@
 
 class OperatingClass {
 public:
-	bool sumbitConfig();				// 提交配置
-	bool getConfig();					// 获取配置
-	bool pdLoginSession();				// 判断登录态是否正常
+	bool SumbitConfig();				// 提交配置
+	bool GetConfig();					// 获取配置
+	bool PdLoginSession();				// 判断登录态是否正常
+
+public:
+	bool NetWorkisConnect();			// 判断网络是否连接
 };
 #endif

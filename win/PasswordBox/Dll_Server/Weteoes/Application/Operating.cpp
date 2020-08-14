@@ -1,7 +1,11 @@
 #include "pch.h"
 #include "Operating.h"
+#include "Wininet.h"
 
-bool OperatingClass::sumbitConfig() {
+bool OperatingClass::SumbitConfig() {
+    // 判断网络连接
+    if (!NetWorkisConnect()) { return false; }
+    // 操作
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
     cookies.insert(std::pair<std::string, std::string>("w", w));
@@ -25,7 +29,10 @@ bool OperatingClass::sumbitConfig() {
 }
 
 
-bool OperatingClass::getConfig() {
+bool OperatingClass::GetConfig() {
+    // 判断网络连接
+    if (!NetWorkisConnect()) { return false; }
+    // 操作
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
     cookies.insert(std::pair<std::string, std::string>("w", w));
@@ -75,7 +82,10 @@ bool OperatingClass::getConfig() {
     return false;
 }
 
-bool OperatingClass::pdLoginSession() {
+bool OperatingClass::PdLoginSession() {
+    // 判断网络连接
+    if (!NetWorkisConnect()) { return false; }
+    // 操作
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
     cookies.insert(std::pair<std::string, std::string>("w", w));
@@ -96,4 +106,18 @@ bool OperatingClass::pdLoginSession() {
         if (code == 0) { return true; }
     }
     return false;
+}
+
+// 判断网络是否连接
+bool OperatingClass::NetWorkisConnect() {
+    bool con;
+    for (int i = 0; i < 6; i++) {
+        DWORD flag;
+        con = InternetGetConnectedState(&flag, 0);
+        if (!con) { 
+            Sleep(1000);
+            continue; 
+        }
+    }
+    return con;
 }

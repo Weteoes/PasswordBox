@@ -2,4 +2,6 @@ LIBRARY "Server"
 EXPORTS
 	SumbitConfig
 	GetConfig
+	PdLogin
+	NetWorkisConnect
 	Set_Variable
