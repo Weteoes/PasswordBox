@@ -36,6 +36,9 @@
     <ClCompile Include="Weteoes\Dll\ConfigDll.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Weteoes\Dll\LogDll.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -90,6 +93,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Weteoes\Dll\ConfigDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Weteoes\Dll\LogDll.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

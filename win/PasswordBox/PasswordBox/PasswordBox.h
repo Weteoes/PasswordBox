@@ -29,7 +29,8 @@ public:
 
 private:
 	bool Ready();
-	bool ReadyDll();
+	bool ReadyLog();	// 日志
+	bool ReadyDll();	// dll
 	bool ReadyProcess();
 
 };

@@ -26,8 +26,7 @@ WeteoesDll::Base64_Encode_ WeteoesDll::Base64_Encode;
 WeteoesDll::Base64_UnEncode_ WeteoesDll::Base64_UnEncode;
 WeteoesDll::CMD_Run_ WeteoesDll::CMD_Run;
 
-bool WeteoesDll::Loading()
-{
+bool WeteoesDll::Ready() {
 	HMODULE dll = LoadLibrary(TEXT("WeteoesDll.dll"));//º”‘ÿdll
 	if (!dll) { MessageBox(NULL, TEXT("º”‘ÿWeteoesDLL ß∞‹ code:-1"), TEXT(""), MB_OK); return FALSE; }
 	Basics_GetNowFilePath =

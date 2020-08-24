@@ -1,0 +1,4 @@
+LIBRARY "Log"
+EXPORTS
+	Write
+	Info

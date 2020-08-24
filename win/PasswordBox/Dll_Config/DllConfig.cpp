@@ -5,15 +5,15 @@
 std::mutex dllMutex;
 
 bool Loading() {
-	if (!WeteoesDll().Loading()) { return false; }
-	if (!ServerDll().Loading()) { return false; }
-	if (!SRWDll().Loading()) { return false; }
+	if (!WeteoesDll::Ready()) { return false; }
+	if (!ServerDll::Ready()) { return false; }
+	if (!SRWDll::Ready()) { return false; }
 	return true;
 }
 
 char* GetChars(std::string data_s) { //std::string to char* 不能public因为std::string
-	int len = (int)data_s.length();
-	char* result = (char*)calloc(len + 1, sizeof(char));
+	int len = (int)data_s.length() + 1;
+	char* result = (char*)calloc(len, sizeof(char));
 	for (int i = 0; i < len; i++) {
 		result[i] = data_s[i];
 	}

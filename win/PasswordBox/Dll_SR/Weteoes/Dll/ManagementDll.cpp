@@ -3,8 +3,7 @@
 
 ManagementDll::Get_ ManagementDll::Get;
 
-bool ManagementDll::Loading()
-{
+bool ManagementDll::Ready() {
 	HMODULE dll = LoadLibrary(TEXT("Management.dll"));//º”‘ÿdll
 	if (!dll) { MessageBox(NULL, TEXT("º”‘ÿManagement-DLL ß∞‹ code:-1"), TEXT(""), MB_OK); return false; }
 	Get =

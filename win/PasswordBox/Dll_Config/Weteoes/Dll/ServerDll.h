@@ -1,7 +1,6 @@
 #ifndef ServerDll_H
 #define ServerDll_H
-class ServerDll
-{
+class ServerDll {
 private:
 	typedef bool			(__stdcall* SumbitConfig_)				();
 	typedef bool			(__stdcall* GetConfig_)					();
@@ -11,7 +10,7 @@ private:
 	typedef bool			(__stdcall* Set_Variable_)				(char* key, char* value); 
 
 public:
-	bool Loading();
+	static bool Ready();
 	static SumbitConfig_				SumbitConfig;
 	static GetConfig_					GetConfig;
 	static PdLogin_						PdLogin;

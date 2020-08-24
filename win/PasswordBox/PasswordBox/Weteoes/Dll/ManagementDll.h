@@ -6,7 +6,7 @@ private:
 	typedef char*(__stdcall *Get_)(char*);
 
 public:
-	bool Loading();
+	static bool Ready();
 	static Get_ Get;
 };
 #endif

@@ -10,5 +10,8 @@ public:
 
 public:
 	bool NetWorkisConnect();			// ÅĞ¶ÏÍøÂçÊÇ·ñÁ¬½Ó
+
+private:
+	void LogInfo(std::string msg);
 };
 #endif

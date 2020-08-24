@@ -17,6 +17,10 @@ DWORD HttpOperatingClass::defaultHttpFlac = {
 };
 
 
+std::string HttpOperatingClass::HttpRequest(std::string ip, int port, std::string url, std::string file, std::string type, bool isSSL, std::map<std::string, std::string> cookies) {
+    return HttpRequestUpdateFile(ip, port, url, file, type, isSSL, cookies);
+}
+
 std::string HttpOperatingClass::HttpRequestUpdateFile(std::string ip, int port, std::string url, std::string file, std::string snedType, bool isSSL, std::map<std::string, std::string> cookies) {
     // Local variables
     //std::string file = "1.txt";         //Filename to be loaded

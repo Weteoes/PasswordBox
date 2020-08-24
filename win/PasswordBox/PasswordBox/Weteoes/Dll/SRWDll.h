@@ -11,7 +11,7 @@ private:
 	typedef bool(__stdcall* Set_Variable_)(char* key, char* value);
 
 public:
-	bool Loading();
+	static bool Ready();
 	static Web_Entrance_ Web_Entrance;		// Web入口
 	static RSA_Encode_ RSA_Encode;			// RSA 加密
 	static RSA_UnEncode_ RSA_UnEncode;		// RSA 解密

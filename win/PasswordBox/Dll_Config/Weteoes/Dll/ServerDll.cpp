@@ -8,8 +8,7 @@ ServerDll::NetWorkisConnect_		ServerDll::NetWorkisConnect;
 
 ServerDll::Set_Variable_			ServerDll::Set_Variable; 
 
-bool ServerDll::Loading()
-{
+bool ServerDll::Ready() {
 	HMODULE dll = LoadLibrary(TEXT("Server.dll"));//º”‘ÿdll
 	if (!dll) { MessageBox(NULL, TEXT("º”‘ÿServer-DLL ß∞‹ code:-1"), TEXT(""), MB_OK); return false; }
 	SumbitConfig =			(SumbitConfig_)				GetProcAddress(dll, "SumbitConfig");

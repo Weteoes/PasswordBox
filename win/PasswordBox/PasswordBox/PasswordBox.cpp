@@ -39,15 +39,36 @@ CPasswordBoxApp theApp;
 bool CPasswordBoxApp::Ready() {
 	if (!ReadyDll()) { exit(0x01); }
 	if (!ReadyProcess()) { exit(0x02); }
+	if (!ReadyLog()) { exit(0x03); }
+	return true;
+}
+
+bool CPasswordBoxApp::ReadyLog() {
+	time_t tt = time(NULL); // 时间戳
+	struct tm t;
+	localtime_s(&t, &tt);
+	char* timeC = new char[200];
+	sprintf_s(timeC, 200, "%d/%d/%d %d:%d:%d",
+		t.tm_year + 1900,
+		t.tm_mon + 1,
+		t.tm_mday,
+		t.tm_hour,
+		t.tm_min,
+		t.tm_sec
+	);
+	std::string msg = std::string(timeC) + " Process Start";
+	LogDll::Write("\n");
+	LogDll::Info(msg.c_str());
 	return true;
 }
 
 // 初始化 Dll
 bool CPasswordBoxApp::ReadyDll() {
-	if (!WeteoesDll().Loading()) { return false; }
-	if (!ManagementDll().Loading()) { return false; }
-	if (!SRWDll().Loading()) { return false; }
-	if (!ConfigDll().Loading()) { return false; }
+	if (!WeteoesDll::Ready()) { return false; }
+	if (!ManagementDll::Ready()) { return false; }
+	if (!SRWDll::Ready()) { return false; }
+	if (!ConfigDll::Ready()) { return false; }
+	if (!LogDll::Ready()) { return false; }
 	return true;
 }
 

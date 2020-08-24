@@ -117,14 +117,21 @@ bool initDlg::CreateDlg() {
 		}
 		else {
 			// 网络未连接
+			LogDll::Info("initDlg::CreateDlg Internet Error");
 			MessageBox("网络连接失败,程序转为离线工作状态.程序将在下次启动时尝试重新连接服务", "Connect Timeout", MB_OK);
 		}
 	}
+	else {
+		LogDll::Info("initDlg::CreateDlg Detect Session Len 0");
+	}
+
+	// 判断配置文件是否存在
 	if (ConfigDll::Config_ExsitsUserAndPassword()) {
-		// 配置文件存在
+		LogDll::Info("initDlg::CreateDlg Config_ExsitsUserAndPassword Yes");
 		VariableClass::createDlgClass.login();
 	}
 	else {
+		LogDll::Info("initDlg::CreateDlg Config_ExsitsUserAndPassword No");
 		VariableClass::createDlgClass.init();
 	}
 	return true;

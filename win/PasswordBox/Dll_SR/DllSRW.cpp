@@ -3,6 +3,13 @@
 #include <Weteoes/Application/Security/RSA.h>
 #include <Weteoes/Application/Sockets/WebSocket.h>
 
+bool ReadyDll() {
+	if (!WeteoesDll::Ready()) { return false; }
+	if (!ConfigDll::Ready()) { return false; }
+	if (!ManagementDll::Ready()) { return false; }
+	if (!ApplicationExports::Ready()) { return false; }
+	return true;
+}
 
 bool ReadyVariableMap() {
 	static bool first = true;
@@ -16,10 +23,7 @@ bool ReadyVariableMap() {
 }
 
 bool Ready() {
-	if (!WeteoesDll().Loading()) { return false; }
-	if (!ConfigDll().Loading()) { return false; }
-	if (!ManagementDll().Loading()) { return false; }
-	if (!ApplicationExports().Loading()) { return false; }
+	if (!ReadyDll()) { return false; }
 	if (!ReadyVariableMap()) { return false; }
 	return true;
 }

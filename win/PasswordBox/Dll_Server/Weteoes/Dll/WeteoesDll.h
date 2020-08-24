@@ -34,7 +34,7 @@ private:
 	typedef char* (__stdcall* CMD_Run_)(char* shell);
 
 public:
-	bool Loading();
+	static bool Ready();
 	static Basics_GetNowFilePath_ Basics_GetNowFilePath; //获取当前运行位置
 	static Basics_Replace_ Basics_Replace; //替换字符串
 	static Basics_IsNum_ Basics_IsNum; //判断是否是数字

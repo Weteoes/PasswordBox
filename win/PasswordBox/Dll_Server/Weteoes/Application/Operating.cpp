@@ -18,6 +18,8 @@ bool OperatingClass::SumbitConfig() {
         VariableClass::serverIsSSL, 
         cookies
     );
+
+    LogInfo("SumbitConfig JSON:" + a);
     Json::Value json = WJsonClass::GetJson((char*)a.c_str());
 	if (json != NULL) {
 		int all = json.size();
@@ -36,7 +38,7 @@ bool OperatingClass::GetConfig() {
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
     cookies.insert(std::pair<std::string, std::string>("w", w));
-    std::string a = HttpOperatingClass::HttpRequestUpdateFile(
+    std::string a = HttpOperatingClass::HttpRequest(
         VariableClass::serverDomain, 
         VariableClass::serverPort, 
         VariableClass::serverDomainConfigGetUrl, 
@@ -45,6 +47,8 @@ bool OperatingClass::GetConfig() {
         VariableClass::serverIsSSL, 
         cookies
     );
+
+    // LogInfo("GetConfig JSON:" + a);
     Json::Value json = WJsonClass::GetJson((char*)a.c_str());
     if (json != NULL) {
         int all = json.size();
@@ -89,7 +93,7 @@ bool OperatingClass::PdLoginSession() {
     std::string w = VariableClass::getVariable("w");
     std::map<std::string, std::string> cookies;
     cookies.insert(std::pair<std::string, std::string>("w", w));
-    std::string a = HttpOperatingClass::HttpRequestUpdateFile(
+    std::string a = HttpOperatingClass::HttpRequest(
         VariableClass::serverDomain,
         VariableClass::serverPort,
         VariableClass::serverDomainPdLoginUrl,
@@ -98,6 +102,8 @@ bool OperatingClass::PdLoginSession() {
         VariableClass::serverIsSSL,
         cookies
     );
+
+    LogInfo("PdLoginSession JSON:" + a);
     Json::Value json = WJsonClass::GetJson((char*)a.c_str());
     if (json != NULL) {
         int all = json.size();
@@ -110,14 +116,49 @@ bool OperatingClass::PdLoginSession() {
 
 // ÅÐ¶ÏÍøÂçÊÇ·ñÁ¬½Ó
 bool OperatingClass::NetWorkisConnect() {
-    bool con;
+    // ÅÐ¶Ï±¾µØÁ¬½Ó×´Ì¬
+    bool result = false;
     for (int i = 0; i < 6; i++) {
         DWORD flag;
-        con = InternetGetConnectedState(&flag, 0);
+        bool con = InternetGetConnectedState(&flag, 0);
         if (!con) { 
             Sleep(1000);
             continue; 
         }
+        else { break; }
     }
-    return con;
+
+    // ÅÐ¶ÏÍøÒ³·þÎñÆ÷×´Ì¬
+    for (int i = 0; i < 6; i++) {
+        std::string a = HttpOperatingClass::HttpRequest(
+            VariableClass::serverDomain,
+            VariableClass::serverPort,
+            "",
+            "",
+            "POST",
+            VariableClass::serverIsSSL
+        );
+        if (a.empty()) {
+            Sleep(1000);
+            continue;
+        }
+        else { 
+            result = true;
+            break; 
+        }
+    }
+
+    // Log
+    if (result) {
+        LogInfo("NetWorkisConnect Yes");
+    }
+    else {
+        LogInfo("NetWorkisConnect No");
+    }
+    return result;
+}
+
+void OperatingClass::LogInfo(std::string msg) {
+    msg = "[Dll_Server] OperatingClass::" + msg;
+    LogDll::Info(msg.c_str());
 }

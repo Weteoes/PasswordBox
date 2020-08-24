@@ -39,7 +39,7 @@ private:
 	typedef bool(__stdcall* Server_Set_Variable_)				(char* key, char* value);
 
 public:
-	bool Loading();
+	static bool Ready();
 	static Config_CreateUserAndPassword_	 Config_CreateUserAndPassword;
 	static Config_ReadUserAndPassword_		 Config_ReadUserAndPassword;
 	static Config_ReadAllUserAndPassword_	 Config_ReadAllUserAndPassword;

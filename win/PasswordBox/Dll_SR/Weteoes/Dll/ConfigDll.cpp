@@ -26,8 +26,7 @@ ConfigDll::Server_PdLogin_					ConfigDll::Server_PdLogin;
 
 ConfigDll::Server_Set_Variable_				ConfigDll::Server_Set_Variable;
 
-bool ConfigDll::Loading()
-{
+bool ConfigDll::Ready() {
 	HMODULE dll = LoadLibrary(TEXT("Config.dll"));//º”‘ÿdll
 	if (!dll) { MessageBox(NULL, TEXT("º”‘ÿConfig-DLL ß∞‹ code:-1"), TEXT(""), MB_OK); return false; }
 	Config_CreateUserAndPassword =  (Config_CreateUserAndPassword_)		GetProcAddress(dll, "Config_CreateUserAndPassword");

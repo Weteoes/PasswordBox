@@ -1,8 +1,9 @@
 #include <pch.h>
 
 bool Loading() {
-	if (!WeteoesDll().Loading()) { return false; }
-	if (!ConfigDll().Loading()) { return false; }
+	if (!WeteoesDll::Ready()) { return false; }
+	if (!ConfigDll::Ready()) { return false; }
+	if (!LogDll::Ready()) { return false; }
 	return true;
 }
 
