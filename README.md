@@ -1,6 +1,9 @@
 # PasswordBox
     可实现网页保存账户,下次即可自动输入账户
-
+    
+## 官网(VueCli + ts)
+    path:./server/vue
+    
 ## chrome 浏览器插件项目
     需要在浏览器内安装插件
 
