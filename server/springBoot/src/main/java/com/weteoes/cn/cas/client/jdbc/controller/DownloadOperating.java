@@ -2,7 +2,10 @@ package com.weteoes.cn.cas.client.jdbc.controller;
 
 import com.google.gson.JsonObject;
 import com.weteoes.cn.cas.client.application.VariableClass;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

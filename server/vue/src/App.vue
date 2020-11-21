@@ -26,39 +26,6 @@ export default {
           if (r != null) return unescape(decodeURI(r[2]))
           return null
         },
-        // Ajax
-        ajax: (url, method, data) => {
-          if (data === '' || data === undefined) {
-            data = {}
-          }
-          const result = new Promise((resolve, reject) => {
-            this.$axios({
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-              }, // 不发送options请求
-              method: method,
-              url: url,
-              data: data,
-              // 格式化data
-              transformRequest: [
-                function (data) {
-                  let ret = ''
-                  for (const it in data) {
-                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-                  }
-                  return ret
-                }
-              ]
-            }).then((r) => {
-              this.debugLog(r)
-              resolve(r)
-            }).catch((e) => {
-              this.debugLog(e)
-              reject(e)
-            })
-          })
-          return result
-        },
         // Cookie
         cookie: {
           get (name) {

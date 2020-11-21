@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.weteoes.cn.cas</groupId>
     <artifactId>client</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>client</name>
     <description>Demo project for Spring Boot</description>
 

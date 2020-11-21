@@ -10,7 +10,7 @@
         <el-menu-item>
           <div class="logo">
             <img src="@/assets/logo.png" />
-            <span>密码保管箱</span>
+            <span>密码保管箱 ( Password Box )</span>
           </div>
         </el-menu-item>
         <el-menu-item index="GitHub">GitHub</el-menu-item>
@@ -23,8 +23,10 @@
         <div class="png"><img draggable="false" src="@/assets/step0.png"/></div>
         <div class="data onlyStepData">
           <div class="data">
-            <div class="title">界面简洁无广告</div>
-            <div class="text">界面简洁，但功能不减，无多余内容</div>
+            <div class="title">密码保管箱</div>
+            <div class="text">界面简洁，无广告</div>
+            <div class="text">基于Chrome插件、CEF、VueCli制作</div>
+            <div class="text">如有任何建议，可邮件: mail@weteoes.cn</div>
             <div class="downloadData">
               <div class="title">立即下载</div>
               <div class="downloadBuuton">
@@ -66,6 +68,8 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
 import { State } from 'vuex-class'
 import FooterVue from './Footer.vue'
+import * as apiDownload from '@/api/download'
+import * as lodash from 'lodash'
 
 @Component({
   components: {
@@ -95,30 +99,33 @@ export default class Home extends Vue {
 
   // 初始化下载地址
   downloadReady () {
-    this.stateWeteoes.basic.ajax(
-      'https://passwordbox.weteoes.cn/download/get',
-      'post',
-      {}
-    ).then((e: any) => {
-      const data = e.data;
-      (window as any).b = data.data
-      for (const only of data.data) {
-        const onlyKey: string = only.key
-        const onlyURL: string = only.url
-        this.downloadUrlList.set(onlyKey, onlyURL)
-      }
-    }).catch(() => {
-      this.log('获取下载地址失败')
-    })
+    apiDownload.downloadList()
+      .then((e: any) => {
+        const data = e.data
+        for (const only of data) {
+          const onlyKey: string = only.key
+          const onlyURL: string = only.url
+          this.downloadUrlList.set(onlyKey, onlyURL)
+        }
+      })
+      .catch((e: object) => {
+        this.log('获取下载地址失败')
+        console.error(e)
+      })
   }
 
-  downloadBuuton (key: string) {
+  // 下载事件
+  downloadBuuton = lodash.throttle((key: string) => {
     if (key === null) return
     const url = this.downloadUrlList.get(key)
     if (url === undefined) return
+    apiDownload.downloadLog({ type: key })
+      .catch((e: object) => { console.error(e) })
     window.open(url)
     if (this.stateDebug) { this.log('download', key, url) }
-  }
+  }, 1000, {
+    trailing: false
+  })
 
   log (...data: any) {
     console.log(...data)
@@ -126,7 +133,6 @@ export default class Home extends Vue {
 
   mounted () {
     this.downloadReady()
-    if (this.stateDebug) { (window as any).a = this }
   }
 }
 </script>
