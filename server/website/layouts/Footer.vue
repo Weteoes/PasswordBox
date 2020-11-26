@@ -18,56 +18,92 @@
 </template>
 
 <style lang="less" scoped>
-footer {
-  @minWidth: 1200px;
-  @padding: 30px;
+@media screen and (min-width: 601px) {
+  footer {
+    @minWidth: 1200px;
+    @padding: 30px;
 
-  & {
-    background: #f5f5f6;
-    color: #808080;
-    padding: @padding 0 10px;
-  }
-  > .center {
     & {
-      .minWidth();
+      background: #f5f5f6;
+      color: #808080;
+      padding: @padding 0 10px;
     }
-    > .left {
-      .inline();
-      padding-left: @padding;
-      width: 500px;
-    }
-
-    > .right {
-      .inline();
-      padding-left: 35px;
-    }
-
-    > .onlyModule {
-      > .title {
-        font-size: 20px;
-        padding-bottom: 10px;
+    > .center {
+      & {
+        .minWidth();
+      }
+      > .left {
+        .inline();
+        padding-left: @padding;
+        width: 500px;
       }
 
-      > .info {
-        font-size: 15px;
+      > .right {
+        .inline();
+        padding-left: 33px;
+      }
+
+      > .onlyModule {
+        > .title {
+          font-size: 20px;
+          padding-bottom: 10px;
+        }
+
+        > .info {
+          font-size: 15px;
+        }
+      }
+
+      .inline () {
+        display: inline-block;
+        vertical-align: top;
       }
     }
 
-    .inline () {
-      display: inline-block;
-      vertical-align: top;
+    > .more {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .minWidth() {
+      width: @minWidth;
+      margin: 0 auto;
     }
   }
+}
 
-  > .more {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 14px;
-  }
+@media screen and (max-width: 600px) {
+  footer {
+    @padding: 10px;
 
-  .minWidth() {
-    width: @minWidth;
-    margin: 0 auto;
+    & {
+      background: #f5f5f6;
+      color: #808080;
+      padding: @padding 0 10px;
+    }
+    > .center {
+      > .onlyModule {
+        & {
+          width: 90vw;
+          margin: 0 auto 20px;
+        }
+        > .title {
+          font-size: 20px;
+          padding-bottom: 10px;
+        }
+
+        > .info {
+          font-size: 15px;
+        }
+      }
+    }
+
+    > .more {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+    }
   }
 }
 </style>

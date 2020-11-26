@@ -1,17 +1,21 @@
 <template>
   <div id="Index">
     <div class="top">
-      <div class="one">
-        <div class="logo">
-          <img src="/static/logo.png" />
-          <div>密码保管箱 - Password Box</div>
+      <a-affix class="affix" :offset-top="top">
+        <div class="one">
+          <div class="center">
+            <div class="logo">
+              <img src="/static/logo.png" />
+              <div>密码保管箱 - Password Box</div>
+            </div>
+            <div class="operating">
+              <a target="_blank" href="https://github.com/Weteoes/PasswordBox">
+                <a-button @click="downloadLog('github')">GitHub</a-button>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="operating">
-          <a target="_blank" href="https://github.com/Weteoes/PasswordBox">
-            <a-button @click="downloadLog('github')">GitHub</a-button>
-          </a>
-        </div>
-      </div>
+      </a-affix>
       <div class="data">
         <div class="left">
           <img src="/static/software.jpg" />
@@ -88,6 +92,13 @@ import * as lodash from 'lodash'
   head() {
     return {
       title: '主页',
+      meta: [
+        {
+          name: 'viewport',
+          content:
+            'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no',
+        },
+      ],
     }
   },
 })
@@ -127,8 +138,9 @@ export default class Index extends Vue {
     }
   )
 
-  // 日志
+  // 访问日志
   downloadLog(key: String) {
+    if (location.hostname === '127.0.0.1') return
     apiDownload.downloadLog({ type: key }).catch((e: object) => {
       console.error(e)
     })
@@ -142,149 +154,305 @@ export default class Index extends Vue {
 </script>
 
 <style lang="less" scoped>
-#Index {
-  @minWidth: 1200px;
-
-  & {
-    min-width: @minWidth;
-  }
-
-  > .top {
-    @padding: 30px;
-
+@media screen and (min-width: 601px) {
+  #Index {
+    @minWidth: 1200px;
     & {
-      width: 100%;
-      height: 600px;
-      background: linear-gradient(30deg, #1f95ff 0, #42d0f7);
+      min-width: @minWidth;
     }
 
-    > .one {
+    > .top {
+      @padding: 30px;
+
       & {
-        .minWidth();
-        padding-top: 10px;
-        height: 55px;
+        width: 100%;
+        padding-bottom: 60px;
+        background: linear-gradient(30deg, #1f95ff 0, #42d0f7);
       }
-      > .logo {
+
+      // 导航条固定在头部时
+      .ant-affix .one {
+        background: linear-gradient(30deg, #1f95ff 0, #42d0f7);
+      }
+      > .affix .one {
         & {
-          height: 100%;
-          padding-left: @padding;
-          float: left;
+          padding-top: 10px;
+          height: 55px;
         }
-        > img {
-          width: 40px;
-        }
-        > div {
-          color: #fff;
-          font-size: 18px;
-          line-height: 40px;
-          padding-left: 10px;
-          float: right;
-        }
-      }
-      > .operating {
-        height: 100%;
-        float: right;
-        padding-top: 5px;
-        padding-right: @padding;
-      }
-    }
-
-    > .data {
-      & {
-        .minWidth();
-        padding: 80px @padding 0;
-      }
-      > .left {
-        @width: 600px;
-        & {
-          width: @width;
-        }
-        > img {
-          width: @width;
-          float: left;
-        }
-      }
-      > .right {
-        & {
-          width: 340px;
-          padding-right: 30px;
-          color: #fff;
-          float: right;
-          font-size: 16px;
-        }
-
-        > .title {
-          font-weight: bold;
-          font-size: 30px;
-          padding: 30px;
-          padding-left: 0;
-        }
-
-        > .info {
-          padding: 3px;
-          padding-left: 0;
-        }
-
-        > .download {
+        > .center {
           & {
-            padding-top: 40px;
+            .minWidth();
+          }
+
+          > .logo {
+            & {
+              height: 100%;
+              padding-left: @padding;
+              float: left;
+            }
+            > img {
+              width: 40px;
+            }
+            > div {
+              color: #fff;
+              font-size: 18px;
+              line-height: 40px;
+              padding-left: 10px;
+              float: right;
+            }
+          }
+          > .operating {
+            height: 100%;
+            float: right;
+            padding-top: 5px;
+            padding-right: @padding;
+          }
+        }
+      }
+
+      > .data {
+        & {
+          .minWidth();
+          padding: 80px @padding 0;
+        }
+        > .left {
+          @width: 600px;
+          & {
+            width: @width;
+            display: inline-block;
+          }
+          > img {
+            width: @width;
+          }
+        }
+        > .right {
+          & {
+            width: 340px;
+            padding-right: 30px;
+            color: #fff;
+            float: right;
+            font-size: 16px;
+          }
+
+          > .title {
+            font-weight: bold;
+            font-size: 30px;
+            padding: 30px;
+            padding-left: 0;
+          }
+
+          > .info {
+            padding: 3px;
+            padding-left: 0;
+          }
+
+          > .download {
+            & {
+              padding-top: 40px;
+            }
+            > .title {
+              padding-bottom: 10px;
+            }
+            > .only {
+              margin: 5px;
+              margin-left: 0;
+            }
+          }
+        }
+      }
+    }
+
+    > .features {
+      & {
+        .minWidth();
+        padding: 30px 0;
+      }
+
+      > .title {
+        font-weight: bold;
+        font-size: 32px;
+        text-align: center;
+      }
+
+      > .info {
+        padding-top: 5px;
+        color: #808080;
+        text-align: center;
+      }
+
+      > .more {
+        & {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        > .only {
+          & {
+            width: 250px;
+            text-align: center;
+            padding: 10px;
+          }
+          > .icon {
+            font-size: 46px;
           }
           > .title {
+            font-size: 16px;
             padding-bottom: 10px;
           }
-          > .only {
-            margin: 5px;
-            margin-left: 0;
+        }
+      }
+    }
+
+    .minWidth() {
+      width: @minWidth;
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #Index {
+    > .top {
+      @padding: 5px;
+
+      & {
+        width: 100%;
+        padding-bottom: 40px;
+        background: linear-gradient(30deg, #1f95ff 0, #42d0f7);
+      }
+
+      // 导航条固定在头部时
+      .ant-affix .one {
+        background: linear-gradient(30deg, #1f95ff 0, #42d0f7);
+      }
+      > .affix .one {
+        & {
+          padding: 10px 0;
+        }
+        > .center {
+          > .logo {
+            & {
+              .inline();
+              height: 100%;
+              padding-left: @padding;
+            }
+            > img {
+              width: 40px;
+            }
+            > div {
+              color: #fff;
+              font-size: 18px;
+              line-height: 40px;
+              padding-left: 10px;
+              float: right;
+            }
+          }
+          > .operating {
+            .inline();
+            height: 100%;
+            float: right;
+            padding-top: 5px;
+            padding-right: @padding;
+          }
+        }
+      }
+
+      > .data {
+        & {
+          padding: 25px @padding 0;
+        }
+        > .left {
+          & {
+            width: 100%;
+            text-align: center;
+          }
+          > img {
+            width: 90vw;
+          }
+        }
+        > .right {
+          & {
+            width: 340px;
+            padding-right: 30px;
+            color: #fff;
+            font-size: 16px;
+            margin: 0 auto;
+          }
+
+          > .title {
+            font-weight: bold;
+            font-size: 30px;
+            padding: 30px;
+            padding-left: 0;
+          }
+
+          > .info {
+            padding: 3px;
+            padding-left: 0;
+          }
+
+          > .download {
+            & {
+              padding-top: 40px;
+            }
+            > .title {
+              padding-bottom: 10px;
+            }
+            > .only {
+              margin: 5px;
+              margin-left: 0;
+            }
           }
         }
       }
     }
-  }
 
-  > .features {
-    & {
-      .minWidth();
-      padding: 30px 0;
-    }
-
-    > .title {
-      font-weight: bold;
-      font-size: 32px;
-      text-align: center;
-    }
-
-    > .info {
-      padding-top: 5px;
-      color: #808080;
-      text-align: center;
-    }
-
-    > .more {
+    > .features {
       & {
-        display: flex;
-        justify-content: space-between;
+        padding: 30px 0;
       }
 
-      > .only {
+      > .title {
+        font-weight: bold;
+        font-size: 32px;
+        text-align: center;
+      }
+
+      > .info {
+        padding-top: 5px;
+        color: #808080;
+        text-align: center;
+      }
+
+      > .more {
         & {
-          width: 250px;
-          text-align: center;
-          padding: 10px;
+          display: flex;
+          justify-content: space-between;
+          flex-flow: column;
         }
-        > .icon {
-          font-size: 46px;
-        }
-        > .title {
-          font-size: 16px;
-          padding-bottom: 10px;
+
+        > .only {
+          & {
+            width: 250px;
+            text-align: center;
+            padding: 10px;
+            margin: 0 auto;
+          }
+          > .icon {
+            font-size: 46px;
+          }
+          > .title {
+            font-size: 16px;
+            padding-bottom: 10px;
+          }
         }
       }
     }
-  }
 
-  .minWidth() {
-    width: @minWidth;
-    margin: 0 auto;
+    .inline() {
+      display: inline-block;
+      vertical-align: top;
+    }
   }
 }
 </style>
