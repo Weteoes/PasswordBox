@@ -4,9 +4,11 @@ let variable = {
     RunTimeConnect: null, // socket长连接
     readyFunction: false, // 是否已经执行过
 }; 
+
 function log(...msg) {
     console.log(...msg);
 }
+
 function main() {
     let passInput = findPassInput();
     if (passInput == null) { 
@@ -106,6 +108,29 @@ function findPassInput() {
 }
 
 function findUserInput(passInput) {
+
+    // 通过类型获取
+    const findByType = () => {
+        let userInputType = "input[type=email]";
+        let a = document.querySelectorAll(userInputType);
+        if (a.length >= 1) {
+            return find(userInputType, passInput);
+        }
+        return null;
+    }
+    
+    // 通过列表获取（优先级最高）
+    const findByList = ()=> {
+        const host = location.host // 获取Host
+        let id = ""
+        switch (host) {
+            case "www.iqiyi.com":
+                id = "[data-pwdloginbox=name]"
+        }
+        return document.querySelector("input[type=text]" + id)
+    }
+
+    // 通过密码框往上获取
     const findByPassInput = () => {
         let userInputType = "input[type=text]";
         let a = document.querySelectorAll(userInputType);
@@ -115,15 +140,7 @@ function findUserInput(passInput) {
         return null;
     }
 
-    const findByType = () => {
-        let userInputType = "input[type=email]";
-        let a = document.querySelectorAll(userInputType);
-        if (a.length >= 1) {
-            return find(userInputType, passInput);
-        }
-        return null;
-    }
-
+    // 通过密码框往上获取
     const find = (userInputType, passInput) => {
         // 如果有2个input以上，包括2个
         let passInputParent = null;
@@ -151,7 +168,7 @@ function findUserInput(passInput) {
             }    
         }
     }
-    const result = findByType() || findByPassInput();
+    const result = findByList() || findByType() || findByPassInput();
     return result;
 }
 
