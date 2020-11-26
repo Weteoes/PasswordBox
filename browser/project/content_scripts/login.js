@@ -127,7 +127,10 @@ function findUserInput(passInput) {
             case "www.iqiyi.com":
                 id = "[data-pwdloginbox=name]"
         }
-        return document.querySelector("input[type=text]" + id)
+        if (id) {
+            return document.querySelector("input[type=text]" + id)
+        }
+        return null;
     }
 
     // 通过密码框往上获取
