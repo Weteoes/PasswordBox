@@ -33,7 +33,6 @@ void AppDlgClass::Minimize(HWND dlg_HWND, bool postCloseMsg) {
 		nFullHeight = GetSystemMetrics(SM_CYSCREEN);
 	// 移动窗口位置,设置0像素,移到最角落,不然会存在阴影
 	SetWindowPos(dlg_HWND, NULL, nFullWidth, nFullHeight, 0, 0, SWP_NOSIZE);  
-
 	ShowWindow(dlg_HWND, SW_HIDE);
 }
 
@@ -93,6 +92,13 @@ void AppDlgClass::Dlg_SetNowRect(bool SetWH) {
 	CRect DlgCRect;
 	// 获取在屏幕中的坐标
 	GetWindowRect(dlg_HWND, &DlgCRect); 
+	// 获取屏幕大小
+	int nFullWidth = GetSystemMetrics(SM_CXSCREEN),
+		nFullHeight = GetSystemMetrics(SM_CYSCREEN);
+	// 如果坐标超出屏幕（缩小窗口到任务栏时的设置事件）
+	if (DlgCRect.left >= nFullWidth && DlgCRect.top >= nFullHeight) {
+		return;
+	}
 	Dlg_.x = DlgCRect.left;
 	Dlg_.y = DlgCRect.top;
 	if (SetWH) { 

@@ -79,7 +79,15 @@ std::string HttpOperatingClass::HttpRequestUpdateFile(std::string ip, int port, 
         // 如果没有文件
         sent = HttpSendRequest(hRequest, NULL, 0, buffer, (DWORD)strlen(buffer));
     }
-    if (!sent) return "";
+    if (!sent) { 
+        int error = GetLastError();
+        switch (error) {
+        case ERROR_INTERNET_CANNOT_CONNECT:
+            MessageBox(NULL, _T("请检查网络代理设置"),_T(""), MB_OK);
+            break;
+        }
+        return ""; 
+    }
     while (TRUE) {
         char cReadBuffer[4096];
         unsigned long lNumberOfBytesRead;

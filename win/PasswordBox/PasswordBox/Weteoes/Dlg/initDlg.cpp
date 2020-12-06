@@ -150,8 +150,18 @@ void initDlg::ReadyIcon() {
 LRESULT initDlg::OnNotifyMsg(WPARAM wparam, LPARAM lparam) {
 	if (wparam != IDI_ICON1) { return -1; }
 	switch (lparam) {
-	case WM_LBUTTONDOWN:
-		VariableClass::appDlgClass.Show();
+	case WM_LBUTTONDOWN: {
+			// 判断是否有窗口
+			VariableClass::CefBrowserMapClass cefBrowserMapClass = VariableClass::getCefBrowserMap(VariableClass::createDlgClass.main_BrowserKey);
+			if (cefBrowserMapClass.dlgHwnd) {
+				// 如果有就显示，不创建新的窗口
+				VariableClass::appDlgClass.Show(cefBrowserMapClass.dlgHwnd);
+			}
+			else {
+				// 如果没有main窗口,显示焦点窗口（未登录情况）
+				VariableClass::appDlgClass.Show(true);
+			}
+		}
 		break;
 	case WM_RBUTTONDOWN: 
 		// 注意：菜单是弹出式菜单，菜单索引项是弹出式菜单，子菜单不是
