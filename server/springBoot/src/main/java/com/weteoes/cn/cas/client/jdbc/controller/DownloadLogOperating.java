@@ -23,7 +23,7 @@ public class DownloadLogOperating {
     public static List<Map<String, Object>> get () {
         List<Map<String, Object>> list = new ArrayList();
         try {
-            String sql = "select type, count(*) as count from downloadlog group by type";
+            String sql = "select type, count(*) as count, max(date) as date from downloadlog group by type";
             list = VariableClass.that.jdbcTemplate.queryForList(sql);
             return list;
         } catch (Exception e) {

@@ -77,6 +77,7 @@ public class DownloadConteoller {
                     JsonObject downloadOnly = new JsonObject();
                     downloadOnly.addProperty("type", only.get("type").toString());
                     downloadOnly.addProperty("count", only.get("count").toString());
+                    downloadOnly.addProperty("date", only.get("date").toString());
                     downloadList.add(downloadOnly);
                 }
                 code = 0;

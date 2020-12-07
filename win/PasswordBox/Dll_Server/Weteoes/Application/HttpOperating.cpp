@@ -83,7 +83,7 @@ std::string HttpOperatingClass::HttpRequestUpdateFile(std::string ip, int port, 
         int error = GetLastError();
         switch (error) {
         case ERROR_INTERNET_CANNOT_CONNECT:
-            MessageBox(NULL, _T("请检查网络代理设置"),_T(""), MB_OK);
+            //MessageBox(NULL, _T("请检查网络代理设置"),_T(""), MB_OK);
             break;
         }
         return ""; 

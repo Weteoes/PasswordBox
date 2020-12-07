@@ -1,7 +1,7 @@
 <template>
   <div id="Index">
     <div class="top">
-      <a-affix class="affix" :offset-top="top">
+      <a-affix class="affix">
         <div class="one">
           <div class="center">
             <div class="logo">
@@ -38,38 +38,64 @@
         </div>
       </div>
     </div>
+    <div class="features featuresNoneBorder">
+      <div class="onlyFeatures">
+        <div class="title">加密算法不可逆</div>
+        <div class="info">若加密密钥丢失，数据将无法被再次解密</div>
+        <div class="more">
+          <!-- 安全 -->
+          <div class="only">
+            <div class="icon">
+              <a-icon type="safety" />
+            </div>
+            <div class="title">安全</div>
+            <div class="info">
+              AES 256 加密算法，在遗失密码的情况下数据将无法被再次解密
+            </div>
+          </div>
+          <!-- 云同步 -->
+          <div class="only">
+            <div class="icon">
+              <a-icon type="cloud" />
+            </div>
+            <div class="title">云同步</div>
+            <div class="info">
+              支持SSO单点登录，将加密后的数据保存云端，在无密码的情况下，该数据无法被解读
+            </div>
+          </div>
+          <!-- 本地工作模式 -->
+          <div class="only">
+            <div class="icon">
+              <a-icon type="desktop" />
+            </div>
+            <div class="title">本地工作模式</div>
+            <div class="info">
+              支持本地工作模式，数据将保存在本地，可在无需网络的环境下使用
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="features">
-      <div class="title">加密算法不可逆</div>
-      <div class="info">若加密密钥丢失，数据将无法被再次解密</div>
-      <div class="more">
-        <!-- 安全 -->
-        <div class="only">
-          <div class="icon">
-            <a-icon type="safety" />
+      <div class="onlyFeatures onlyFeaturesTwo">
+        <div class="title">免费使用</div>
+        <div class="info">无需任何额外收费</div>
+        <div class="more">
+          <!-- 安全 -->
+          <div class="only">
+            <div class="icon">
+              <a-icon type="key" />
+            </div>
+            <div class="title">无限</div>
+            <div class="info">不限数量的网站账户信息记录</div>
           </div>
-          <div class="title">安全</div>
-          <div class="info">
-            AES 256 加密算法，在遗失密码的情况下数据将无法被再次解密
-          </div>
-        </div>
-        <!-- 云同步 -->
-        <div class="only">
-          <div class="icon">
-            <a-icon type="cloud" />
-          </div>
-          <div class="title">云同步</div>
-          <div class="info">
-            支持SSO单点登录，将加密后的数据保存云端，在无密码的情况下，该数据无法被解读
-          </div>
-        </div>
-        <!-- 本地工作模式 -->
-        <div class="only">
-          <div class="icon">
-            <a-icon type="desktop" />
-          </div>
-          <div class="title">本地工作模式</div>
-          <div class="info">
-            支持本地工作模式，数据将保存在本地，可在无需网络的环境下使用
+          <!-- 云同步 -->
+          <div class="only">
+            <div class="icon">
+              <a-icon type="chrome" />
+            </div>
+            <div class="title">支持主流浏览器</div>
+            <div class="info">支持基于Chrome制作的所有主流浏览器</div>
           </div>
         </div>
       </div>
@@ -262,25 +288,39 @@ export default class Index extends Vue {
       }
     }
 
+    > .featuresNoneBorder {
+      border-top: none !important;
+    }
     > .features {
       & {
         .minWidth();
         padding: 30px 0;
+        border-top: 1px solid #e8e8e8;
       }
 
-      > .title {
+      > .onlyFeatures {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      > .onlyFeaturesTwo {
+        width: 700px;
+        margin: 0 auto;
+      }
+
+      .title {
         font-weight: bold;
         font-size: 32px;
         text-align: center;
       }
 
-      > .info {
+      .info {
         padding-top: 5px;
         color: #808080;
         text-align: center;
       }
 
-      > .more {
+      .more {
         & {
           display: flex;
           justify-content: space-between;
@@ -407,24 +447,35 @@ export default class Index extends Vue {
       }
     }
 
+    > .featuresNoneBorder {
+      border-top: none !important;
+    }
     > .features {
       & {
+        width: 95vw;
+        margin: 0 auto;
         padding: 30px 0;
+        border-top: 1px solid #e8e8e8;
       }
 
-      > .title {
+      > .onlyFeatures {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .title {
         font-weight: bold;
         font-size: 32px;
         text-align: center;
       }
 
-      > .info {
+      .info {
         padding-top: 5px;
         color: #808080;
         text-align: center;
       }
 
-      > .more {
+      .more {
         & {
           display: flex;
           justify-content: space-between;
