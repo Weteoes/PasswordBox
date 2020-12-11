@@ -9,7 +9,7 @@
       </div>
       <div class="right onlyModule">
         <div class="title">联系我们</div>
-        <div class="info">如有任何意见或建议，可通过一下方式联系到我们</div>
+        <div class="info">如有任何意见或建议，可通过以下方式联系到我们</div>
         <div class="info">邮箱：mail@weteoes.cn</div>
       </div>
     </div>

@@ -118,13 +118,6 @@ import * as lodash from 'lodash'
   head() {
     return {
       title: '主页',
-      meta: [
-        {
-          name: 'viewport',
-          content:
-            'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no',
-        },
-      ],
     }
   },
 })
@@ -145,7 +138,7 @@ export default class Index extends Vue {
         }
       })
       .catch((e: object) => {
-        console.error(e)
+        window.console.error(e)
       })
   }
 
@@ -167,8 +160,9 @@ export default class Index extends Vue {
   // 访问日志
   downloadLog(key: String) {
     if (location.hostname === '127.0.0.1') return
+    if (this.$common.getQueryVariable('w') === '1') return
     apiDownload.downloadLog({ type: key }).catch((e: object) => {
-      console.error(e)
+      window.console.error(e)
     })
   }
 
@@ -203,7 +197,7 @@ export default class Index extends Vue {
       > .affix .one {
         & {
           padding-top: 10px;
-          height: 55px;
+          height: 60px;
         }
         > .center {
           & {
@@ -230,7 +224,7 @@ export default class Index extends Vue {
           > .operating {
             height: 100%;
             float: right;
-            padding-top: 5px;
+            padding: 4px 0;
             padding-right: @padding;
           }
         }
@@ -391,7 +385,7 @@ export default class Index extends Vue {
             .inline();
             height: 100%;
             float: right;
-            padding-top: 5px;
+            padding: 4px 0;
             padding-right: @padding;
           }
         }
@@ -510,6 +504,7 @@ export default class Index extends Vue {
 
 <style lang="less">
 #Index {
+  // 按钮样式
   button.ant-btn {
     & {
       background: transparent;
@@ -521,6 +516,19 @@ export default class Index extends Vue {
       background: #fff;
       color: #000;
     }
+  }
+  // 动画
+  @keyframes animation_nav {
+    0% {
+      top: -60px;
+    }
+
+    to {
+      top: 0;
+    }
+  }
+  .affix > .ant-affix {
+    animation: animation_nav 0.3s;
   }
 }
 </style>
