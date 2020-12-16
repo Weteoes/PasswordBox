@@ -9,9 +9,9 @@
               <div>密码保管箱 - Password Box</div>
             </div>
             <div class="operating">
-              <a target="_blank" href="https://github.com/Weteoes/PasswordBox">
-                <a-button @click="downloadLog('github')">GitHub</a-button>
-              </a>
+              <a-button class="only" @click="ssoRegistered">
+                注册账户
+              </a-button>
             </div>
           </div>
         </div>
@@ -34,6 +34,12 @@
             <a-button class="only" @click="downloadBuuton('win')">
               电脑客户端
             </a-button>
+          </div>
+          <div class="github">
+            <div class="title">GitHub：</div>
+            <a target="_blank" href="https://github.com/Weteoes/PasswordBox">
+              <a-button @click="downloadLog('github')">GitHub</a-button>
+            </a>
           </div>
         </div>
       </div>
@@ -124,6 +130,8 @@ import * as lodash from 'lodash'
 export default class Index extends Vue {
   // 下载URL
   downloadUrlList: Map<string, string> = new Map()
+  // 注册账号URL
+  ssoRegisteredUrl: string = 'https://sso.weteoes.cn/Registered/byMail/?'
 
   // 初始化下载地址
   downloadReady() {
@@ -156,6 +164,20 @@ export default class Index extends Vue {
       trailing: false,
     }
   )
+
+  // 注册账号事件throttle
+  ssoRegistered = lodash.throttle(this.ssoRegistered_, 1000, {
+    trailing: false,
+  })
+
+  // 注册账号事件
+  ssoRegistered_() {
+    const url = (this.ssoRegisteredUrl +=
+      'callback=' + encodeURIComponent(location.href))
+    if (url === undefined) return
+    this.downloadLog('ssoRegistered')
+    window.open(url)
+  }
 
   // 访问日志
   downloadLog(key: String) {
@@ -257,8 +279,6 @@ export default class Index extends Vue {
           > .title {
             font-weight: bold;
             font-size: 30px;
-            padding: 30px;
-            padding-left: 0;
           }
 
           > .info {
@@ -269,6 +289,19 @@ export default class Index extends Vue {
           > .download {
             & {
               padding-top: 40px;
+            }
+            > .title {
+              padding-bottom: 10px;
+            }
+            > .only {
+              margin: 5px;
+              margin-left: 0;
+            }
+          }
+
+          > .github {
+            & {
+              padding-top: 20px;
             }
             > .title {
               padding-bottom: 10px;
@@ -428,6 +461,19 @@ export default class Index extends Vue {
           > .download {
             & {
               padding-top: 40px;
+            }
+            > .title {
+              padding-bottom: 10px;
+            }
+            > .only {
+              margin: 5px;
+              margin-left: 0;
+            }
+          }
+
+          > .github {
+            & {
+              padding-top: 20px;
             }
             > .title {
               padding-bottom: 10px;
