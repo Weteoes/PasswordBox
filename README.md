@@ -7,8 +7,7 @@
     可实现网页保存账户,下次即可自动输入账户
 
 ## 官网(VueCli + ts)
-    最新：./server/website
-    历史：./server/vue
+    路径：./server/website
     
 ## chrome 浏览器插件项目
     需要在浏览器内安装插件
