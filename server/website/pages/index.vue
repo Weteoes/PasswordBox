@@ -22,9 +22,9 @@
         </div>
         <div class="right">
           <div class="title">密码保管箱</div>
-          <div class="info">不再忘记密码，强密码解决方案</div>
+          <div class="info">从此不再忘记密码，强密码解决方案</div>
           <div class="info">
-            使用AES 256加密算法，可自动登录网页，数据云同步，多浏览器支持
+            使用AES 256加密算法，可自动登录网页，数据云同步，支持主流浏览器
           </div>
           <div class="download">
             <div class="title">下载地址：</div>

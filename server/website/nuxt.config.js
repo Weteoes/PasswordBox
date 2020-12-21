@@ -12,7 +12,12 @@ export default {
         content:
           'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no',
       },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          '密码保管箱，从此不再忘记密码，强密码解决方案。免费使用，不限数量的网站账户信息记录。数据支持云同步，支持主流浏览器。AES 256 加密算法，在遗失密码的情况下数据将无法被再次解密。',
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
