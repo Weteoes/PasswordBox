@@ -166,11 +166,13 @@ export default class Index extends Vue {
 
   // 下载URL
   downloadUrlList: Map<string, string> = new Map()
-  // 注册账号URL
-  ssoRegisteredUrl: string = 'https://sso.weteoes.cn/Registered/byMail/?'
-  // 登录账号URL
-  @namespace('sso').Getter('ssoLoginUrl') ssoLoginUrl: string |undefined
-  @namespace('sso').Getter('ssoSignOutUrl') ssoSignOutUrl: string |undefined
+  // URL信息
+  @(namespace('url').Getter('ssoRegisteredUrl')) ssoRegisteredUrl:
+    | string
+    | undefined
+
+  @(namespace('url').Getter('ssoLoginUrl')) ssoLoginUrl: string | undefined
+  @(namespace('url').Getter('ssoSignOutUrl')) ssoSignOutUrl: string | undefined
 
   // 初始化下载地址
   downloadReady() {
@@ -224,8 +226,7 @@ export default class Index extends Vue {
 
   // 注册账号事件
   ssoRegistered_() {
-    const url =
-      this.ssoRegisteredUrl + 'callback=' + encodeURIComponent(location.href)
+    const url = this.ssoRegisteredUrl + encodeURIComponent(location.href)
     if (url === undefined) return
     window.open(url)
   }
@@ -285,7 +286,6 @@ export default class Index extends Vue {
     this.downloadReady()
     this.getLoggedInfo()
     this.downloadLog('website')
-    ;(<any>window).a = this
   }
 }
 </script>
