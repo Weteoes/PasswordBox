@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         "com.weteoes.cn.cas.client.application",
         "com.weteoes.cn.cas.client.controller",
         "com.weteoes.cn.cas.client.cas.configuration",
-        "com.weteoes.cn.cas.client.jdbc.controller"
+        "com.weteoes.cn.cas.client.jdbc.application"
 })
 public class ClientApplication {
     public static void main(String[] args) {

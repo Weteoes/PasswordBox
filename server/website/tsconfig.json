@@ -13,7 +13,10 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    // 启用 vue-class-component 及 vuex-class 需要开启此选项
     "experimentalDecorators": true,
+    // // 启用 vuex-class 需要开启此选项
+    // "strictFunctionTypes": false,
     "baseUrl": ".",
     "paths": {
       "~/*": [
@@ -25,7 +28,8 @@
     },
     "types": [
       "@types/node",
-      "@nuxt/types"
+      "@nuxt/types",
+      "ant-design-vue/types",
     ]
   },
   "exclude": [

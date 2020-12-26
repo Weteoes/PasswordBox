@@ -6,12 +6,36 @@
           <div class="center">
             <div class="logo">
               <img src="/static/logo.png" />
-              <div>密码保管箱 - Password Box</div>
+              <div>密码保管箱</div>
             </div>
             <div class="operating">
-              <a-button class="only" @click="ssoRegistered">
-                注册账户
-              </a-button>
+              <div v-if="logged">
+                <a-popover placement="bottom">
+                  <template slot="content">
+                    <div class="userOperatingPopover">
+                      <div id="signOut" class="only" @click="ssoSignOut">
+                        退出登录
+                      </div>
+                    </div>
+                  </template>
+                  <div>
+                    <a-avatar
+                      shape="square"
+                      :style="{
+                        backgroundColor: 'rgb(80 166 204)',
+                        verticalAlign: 'middle',
+                      }"
+                      v-text="userInfo.user"
+                    ></a-avatar>
+                  </div>
+                </a-popover>
+              </div>
+              <div v-else>
+                <a-button class="only" @click="ssoRegistered">
+                  注册账户
+                </a-button>
+                <a-button class="only" @click="ssoLogin"> 登录 </a-button>
+              </div>
             </div>
           </div>
         </div>
@@ -113,8 +137,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
+import { Getter, Action, namespace } from 'vuex-class'
 import FooterVue from '@/layouts/Footer.vue'
 import * as apiDownload from '@/api/download'
+import * as apiSSO from '@/api/sso'
 import * as lodash from 'lodash'
 
 @Component({
@@ -128,21 +154,38 @@ import * as lodash from 'lodash'
   },
 })
 export default class Index extends Vue {
+  // 是否已经登录
+  logged: boolean = false
+  // 登录信息
+  userInfo: object = {
+    id: null,
+    uid: 'B23028DA-E444-4C1F-BB5E-E6AB09746372',
+    user: 'a',
+    code: 0,
+  }
+
   // 下载URL
   downloadUrlList: Map<string, string> = new Map()
   // 注册账号URL
   ssoRegisteredUrl: string = 'https://sso.weteoes.cn/Registered/byMail/?'
+  // 登录账号URL
+  @namespace('sso').Getter('ssoLoginUrl') ssoLoginUrl: string |undefined
+  @namespace('sso').Getter('ssoSignOutUrl') ssoSignOutUrl: string |undefined
 
   // 初始化下载地址
   downloadReady() {
     apiDownload
       .downloadList()
       .then((e: any) => {
-        const data = e.data
-        for (const only of data) {
-          const onlyKey: string = only.key
-          const onlyURL: string = only.url
-          this.downloadUrlList.set(onlyKey, onlyURL)
+        if (e.code === 0) {
+          const data = e.data
+          for (const only of data) {
+            const onlyKey: string = only.key
+            const onlyURL: string = only.url
+            this.downloadUrlList.set(onlyKey, onlyURL)
+          }
+        } else {
+          this.showErrorInfo('获取下载地址错误')
         }
       })
       .catch((e: object) => {
@@ -150,33 +193,72 @@ export default class Index extends Vue {
       })
   }
 
-  // 下载事件
-  downloadBuuton = lodash.throttle(
-    (key: string) => {
-      if (key === null) return
-      this.downloadLog(key)
-      const url = this.downloadUrlList.get(key)
-      if (url === undefined) return
-      window.open(url)
-    },
-    1000,
-    {
-      trailing: false,
-    }
-  )
+  // 下载事件throttle
+  downloadBuuton = lodash.throttle(this.downloadBuuton_, 1000, {
+    trailing: false,
+  })
 
   // 注册账号事件throttle
   ssoRegistered = lodash.throttle(this.ssoRegistered_, 1000, {
     trailing: false,
   })
 
+  // 登录账号事件throttle
+  ssoLogin = lodash.throttle(this.ssoLogin_, 1000, {
+    trailing: false,
+  })
+
+  // 注销账号事件throttle
+  ssoSignOut = lodash.throttle(this.ssoSignOut_, 1000, {
+    trailing: false,
+  })
+
+  // 下载事件
+  downloadBuuton_(key: string) {
+    if (key === null) return
+    this.downloadLog(key)
+    const url = this.downloadUrlList.get(key)
+    if (url === undefined) return
+    window.open(url)
+  }
+
   // 注册账号事件
   ssoRegistered_() {
-    const url = (this.ssoRegisteredUrl +=
-      'callback=' + encodeURIComponent(location.href))
+    const url =
+      this.ssoRegisteredUrl + 'callback=' + encodeURIComponent(location.href)
     if (url === undefined) return
-    this.downloadLog('ssoRegistered')
     window.open(url)
+  }
+
+  // 登录账号事件
+  ssoLogin_() {
+    const url = this.ssoLoginUrl + encodeURIComponent(location.href)
+    if (url === undefined) return
+    location.href = url
+  }
+
+  // 注销账号
+  ssoSignOut_() {
+    const url = this.ssoSignOutUrl + encodeURIComponent(location.href)
+    if (url === undefined) return
+    location.href = url
+  }
+
+  // 尝试获取登录信息
+  getLoggedInfo() {
+    apiSSO
+      .getInfo()
+      .then((e: any) => {
+        if (e.code === 0) {
+          this.logged = true
+          this.userInfo = e
+        } else {
+          this.logged = false
+        }
+      })
+      .catch((e: object) => {
+        console.error(e)
+      })
   }
 
   // 访问日志
@@ -188,16 +270,38 @@ export default class Index extends Vue {
     })
   }
 
+  /**
+   * Default
+   */
+  // 全局错误提示
+  showErrorInfo(msg: string | undefined) {
+    if (msg) {
+      this.$message.destroy()
+      this.$message.error(msg)
+    }
+  }
+
   mounted() {
     this.downloadReady()
+    this.getLoggedInfo()
     this.downloadLog('website')
+    ;(<any>window).a = this
   }
 }
 </script>
 
 <style lang="less" scoped>
-@media screen and (min-width: 601px) {
-  #Index {
+#Index {
+  > .top {
+    // 导航栏
+    > .affix .one {
+      > .center {
+        > .operating {
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 601px) {
     @minWidth: 1200px;
     & {
       min-width: @minWidth;
@@ -375,10 +479,8 @@ export default class Index extends Vue {
       margin: 0 auto;
     }
   }
-}
 
-@media screen and (max-width: 600px) {
-  #Index {
+  @media screen and (max-width: 600px) {
     > .top {
       @padding: 5px;
 
@@ -441,6 +543,7 @@ export default class Index extends Vue {
           & {
             width: 340px;
             padding-right: 30px;
+            padding-left: 6px;
             color: #fff;
             font-size: 16px;
             margin: 0 auto;
@@ -575,6 +678,28 @@ export default class Index extends Vue {
   }
   .affix > .ant-affix {
     animation: animation_nav 0.3s;
+  }
+}
+
+// 因为dom有scoped，且不在#Index内
+// 用户操作气泡
+.userOperatingPopover {
+  .only {
+    & {
+      width: 80px;
+      height: 35px;
+      line-height: 35px;
+      transition: 0.2s;
+      padding: 0 10px;
+      border-radius: 3px;
+    }
+    &:hover {
+      background: #dbdbdb;
+    }
+  }
+  > #signOut {
+    text-align: center;
+    cursor: pointer;
   }
 }
 </style>

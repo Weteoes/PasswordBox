@@ -1,16 +1,16 @@
 package com.weteoes.cn.cas.client.jdbc.controller;
 
-import com.weteoes.cn.cas.client.application.VariableClass;
+import com.weteoes.cn.cas.client.jdbc.application.CommonJDBC;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DownloadLogOperating {
+public class DownloadLogOperatingJDBC {
     public static boolean add (String type) {
         try {
             String sql = "insert into downloadlog(type, date) values(?, now())";
-            int result = VariableClass.that.jdbcTemplate.update(sql, type);
+            int result = CommonJDBC.getJdbcTemplate().update(sql, type);
             if (result > 0) return true;
             return false;
         } catch (Exception e) {
@@ -24,7 +24,7 @@ public class DownloadLogOperating {
         List<Map<String, Object>> list = new ArrayList();
         try {
             String sql = "select type, count(*) as count, max(date) as date from downloadlog group by type";
-            list = VariableClass.that.jdbcTemplate.queryForList(sql);
+            list = CommonJDBC.getJdbcTemplate().queryForList(sql);
             return list;
         } catch (Exception e) {
             e.printStackTrace();

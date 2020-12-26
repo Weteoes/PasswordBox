@@ -1,6 +1,7 @@
 package com.weteoes.cn.cas.client.jdbc.controller;
 
 import com.weteoes.cn.cas.client.application.VariableClass;
+import com.weteoes.cn.cas.client.jdbc.application.CommonJDBC;
 import com.weteoes.cn.cas.client.jdbc.tables.Session;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -9,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SessionOperating {
+public class SessionOperatingJDBC {
 
     public static String getUid (String w) {
         List<Map<String, Object>> list = new ArrayList();
         try {
             String sql = String.format("select * from session where session = '%s'", w);
-            list = VariableClass.that.jdbcTemplate.queryForList(sql);
+            list = CommonJDBC.getJdbcTemplate().queryForList(sql);
             if (list.size() > 0) {
                 String uid = list.get(0).get("uid").toString();
                 return uid;
@@ -32,7 +33,7 @@ public class SessionOperating {
             Session a = new Session();
             a.setSession(w);
             a.setUid(uid);
-            VariableClass.that.jdbcTemplate.update(connection -> {
+            CommonJDBC.getJdbcTemplate().update(connection -> {
                 String sql = "insert into session(session, uid, createTime) values(?, ?, ?)";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, a.getSession());
@@ -49,7 +50,7 @@ public class SessionOperating {
 
     public static boolean delete (String w) {
         String sql = "delete from session where session=?";
-        int a = VariableClass.that.jdbcTemplate.update(sql, w);
+        int a = CommonJDBC.getJdbcTemplate().update(sql, w);
         if (a > 0) return true;
         return false;
     }

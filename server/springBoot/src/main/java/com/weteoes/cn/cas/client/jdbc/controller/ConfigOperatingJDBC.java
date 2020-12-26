@@ -1,7 +1,7 @@
 package com.weteoes.cn.cas.client.jdbc.controller;
 
 import com.google.gson.JsonObject;
-import com.weteoes.cn.cas.client.application.VariableClass;
+import com.weteoes.cn.cas.client.jdbc.application.CommonJDBC;
 import com.weteoes.cn.cas.client.jdbc.tables.Config;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ConfigOperating {
+public class ConfigOperatingJDBC {
 
     public static List<Map<String, Object>> select (JsonObject args) {
         List<Map<String, Object>> list = new ArrayList();
         try {
-            String sql = "select * from config " + JdbcConfig.getSQLString(args);
-            list = VariableClass.that.jdbcTemplate.queryForList(sql);
+            String sql = "select * from config " + CommonJDBC.getSQLString(args);
+            list = CommonJDBC.getJdbcTemplate().queryForList(sql);
             return list;
         } catch (Exception e) {
             e.printStackTrace();
@@ -28,7 +28,7 @@ public class ConfigOperating {
             Config a = new Config();
             a.setUid(uid);
             a.setConfig(config);
-            VariableClass.that.jdbcTemplate.update(connection -> {
+            CommonJDBC.getJdbcTemplate().update(connection -> {
                 String sql = "UPDATE config SET config=? WHERE uid = ?";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, config);
@@ -47,7 +47,7 @@ public class ConfigOperating {
             Config a = new Config();
             a.setUid(uid);
             a.setConfig(config);
-            VariableClass.that.jdbcTemplate.update(connection -> {
+            CommonJDBC.getJdbcTemplate().update(connection -> {
                 String sql = "insert into config(uid, config) values(?, ?)";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, a.getUid());

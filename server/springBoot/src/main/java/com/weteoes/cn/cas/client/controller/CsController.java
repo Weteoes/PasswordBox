@@ -1,7 +1,7 @@
 package com.weteoes.cn.cas.client.controller;
 
+import com.weteoes.cn.cas.client.application.HttpServletRequestHandler;
 import com.weteoes.cn.cas.client.application.VariableClass;
-import com.weteoes.cn.cas.client.jdbc.controller.SessionOperating;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +23,13 @@ public class CsController {
     String b() {
         String result = "";
         result += "cookies:<br/>";
-        Cookie[] cookies = VariableClass.that.request.getCookies();
+        Cookie[] cookies = HttpServletRequestHandler.request.getCookies();
         if (cookies != null) {
             for (Cookie i : cookies) {
                 result += String.format("-%s:%s<br/>", i.getName(), i.getValue());
             }
         }
-        HttpSession session = VariableClass.that.request.getSession();
+        HttpSession session = HttpServletRequestHandler.request.getSession();
         String id = session.getId();
         result += id + "<br/>";
         result += "session:<br/>";

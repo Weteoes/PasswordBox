@@ -21,7 +21,7 @@ public class DownloadConteoller {
         int code = -1;
         try {
             JsonObject jsonObject = new JsonObject();
-            List<Map<String, Object>> resultList = DownloadOperating.select(jsonObject);
+            List<Map<String, Object>> resultList = DownloadOperatingJDBC.select(jsonObject);
             if (resultList.size() > 0) {
                 JsonArray downloadList = new JsonArray();
                 for (Map<String, Object> only: resultList) {
@@ -48,7 +48,7 @@ public class DownloadConteoller {
         int code = -1;
         try {
             if (logModel.hasData()) {
-                boolean jdbcResult = DownloadLogOperating.add(logModel.getType());
+                boolean jdbcResult = DownloadLogOperatingJDBC.add(logModel.getType());
                 if (jdbcResult) {
                     code = 0;
                 }
@@ -70,7 +70,7 @@ public class DownloadConteoller {
         int code = -1;
         try {
             JsonObject jsonObject = new JsonObject();
-            List<Map<String, Object>> resultList = DownloadLogOperating.get();
+            List<Map<String, Object>> resultList = DownloadLogOperatingJDBC.get();
             if (resultList.size() > 0) {
                 JsonArray downloadList = new JsonArray();
                 for (Map<String, Object> only: resultList) {
