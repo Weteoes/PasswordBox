@@ -1,6 +1,6 @@
-package com.weteoes.cn.cas.client.controller.request.download;
+package com.weteoes.cn.cas.client.controller.json;
 
-public class LogModel {
+public class Download_LogModel {
     String type;
 
     public String getType() {
@@ -12,7 +12,7 @@ public class LogModel {
     }
 
     public boolean hasData () {
-        if (type == null) { return false; }
+        if (type == null || type.isEmpty()) { return false; }
         return true;
     }
 }

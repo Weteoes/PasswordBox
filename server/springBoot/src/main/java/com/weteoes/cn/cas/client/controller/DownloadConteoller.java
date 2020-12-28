@@ -2,7 +2,7 @@ package com.weteoes.cn.cas.client.controller;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.weteoes.cn.cas.client.controller.request.download.LogModel;
+import com.weteoes.cn.cas.client.controller.json.Download_LogModel;
 import com.weteoes.cn.cas.client.jdbc.controller.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +43,7 @@ public class DownloadConteoller {
 
     @ResponseBody
     @RequestMapping(value = "log", method = RequestMethod.POST)
-    String log(@RequestBody LogModel logModel) {
+    String log(@RequestBody Download_LogModel logModel) {
         JsonObject result = new JsonObject();
         int code = -1;
         try {

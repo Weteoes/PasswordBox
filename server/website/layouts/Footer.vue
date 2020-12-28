@@ -10,7 +10,16 @@
       <div class="right onlyModule">
         <div class="title">联系我们</div>
         <div class="info">如有任何意见或建议，可通过以下方式联系到我们</div>
-        <div class="info">邮箱：mail@weteoes.cn</div>
+        <div class="info">
+          邮箱：
+          <a href="mailto:mail@weteoes.cn" target="_blank"> mail@weteoes.cn </a>
+        </div>
+        <div class="info">
+          GitHub:
+          <a href="https://github.com/Weteoes/PasswordBox" target="_blank">
+            Weteoes/PasswordBox
+          </a>
+        </div>
       </div>
     </div>
     <div class="more">粤ICP备19082525号</div>

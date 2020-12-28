@@ -59,12 +59,6 @@
               电脑客户端
             </a-button>
           </div>
-          <div class="github">
-            <div class="title">GitHub：</div>
-            <a target="_blank" href="https://github.com/Weteoes/PasswordBox">
-              <a-button @click="downloadLog('github')">GitHub</a-button>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -292,15 +286,6 @@ export default class Index extends Vue {
 
 <style lang="less" scoped>
 #Index {
-  > .top {
-    // 导航栏
-    > .affix .one {
-      > .center {
-        > .operating {
-        }
-      }
-    }
-  }
   @media screen and (min-width: 601px) {
     @minWidth: 1200px;
     & {
@@ -374,6 +359,7 @@ export default class Index extends Vue {
         > .right {
           & {
             width: 340px;
+            padding-top: 50px;
             padding-right: 30px;
             color: #fff;
             float: right;
@@ -393,19 +379,6 @@ export default class Index extends Vue {
           > .download {
             & {
               padding-top: 40px;
-            }
-            > .title {
-              padding-bottom: 10px;
-            }
-            > .only {
-              margin: 5px;
-              margin-left: 0;
-            }
-          }
-
-          > .github {
-            & {
-              padding-top: 20px;
             }
             > .title {
               padding-bottom: 10px;
@@ -564,19 +537,6 @@ export default class Index extends Vue {
           > .download {
             & {
               padding-top: 40px;
-            }
-            > .title {
-              padding-bottom: 10px;
-            }
-            > .only {
-              margin: 5px;
-              margin-left: 0;
-            }
-          }
-
-          > .github {
-            & {
-              padding-top: 20px;
             }
             > .title {
               padding-bottom: 10px;

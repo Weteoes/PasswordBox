@@ -1,4 +1,4 @@
-package com.sample;
+package com.weteoes.cn.cas.client.jdbc.tables;
 
 
 public class Download {

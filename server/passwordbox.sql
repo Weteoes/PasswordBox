@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 21/11/2020 20:42:13
+ Date: 28/12/2020 19:28:37
 */
 
 SET NAMES utf8mb4;
@@ -43,7 +43,9 @@ CREATE TABLE `download`  (
 DROP TABLE IF EXISTS `downloadlog`;
 CREATE TABLE `downloadlog`  (
   `type` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `date` datetime(0) NOT NULL
+  `count` int(11) NOT NULL,
+  `date` datetime(0) NOT NULL,
+  PRIMARY KEY (`type`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
