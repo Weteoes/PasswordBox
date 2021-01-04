@@ -9,7 +9,21 @@
 
 <body>
   <div id="app">
-    <div class="console" v-for="console_name in console_options">
+    <div id="initAESPass" v-if="useType === 'browser' && browser.configEmpty">
+      <div class="icon">
+        <i class="el-icon-key"></i>
+      </div>
+      <div class="title">第一次使用需要设置您的密码</div>
+      <div class="warn">密码丢失意味着数据将丢失</div>
+      <div class="data">
+        <el-input v-model="browser.data.aesInput" placeholder="请输入密码" show-password></el-input>
+        <el-input v-model="browser.data.aesInput1" placeholder="请再次输入密码" show-password></el-input>
+      </div>
+      <div class="operating">
+        <el-button size="mini" type="primary" @click="initAESPassClick">确定</el-button>
+      </div>
+    </div>
+    <div class="console" v-for="console_name in console_options" v-else>
       <div class="title" v-text="console_name.title"></div>
       <div class="options">
         <div class="options_only" v-for="value,key in console_name.options">

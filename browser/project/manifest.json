@@ -20,6 +20,7 @@
         "default_icon": "img/icon.png",
         // 图标悬停时的标题，可选
         "default_title": "密码保管箱",
+        // "default_popup": "browser_action/index.html"
         "default_popup": "browser_action/index.html"
     },
     // 需要直接注入页面的JS

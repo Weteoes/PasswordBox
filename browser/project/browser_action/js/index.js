@@ -1,7 +1,18 @@
 new Vue({
   el: "#app",
-  data () {
+  data() {
     return {
+      // 使用类型
+      useType: '',
+      backgroundPage: null,
+      // 浏览器云存储
+      browser: {
+        configEmpty: false,
+        data: {
+          aesInput: '',
+          aesInput1: ''
+        }
+      },
       console_options: [
         {
           name: "passwordBox", title: "密码保管箱", options: [
@@ -13,11 +24,26 @@ new Vue({
     }
   },
   methods: {
-    console_options_switch_click (value) {
+    readyBrowser() {
+      // 获取背景
+      this.backgroundPage = chrome.extension.getBackgroundPage()
+      this.useType = this.backgroundPage.Weteoes.config.useType
+      switch (this.useType) {
+        case "browser":
+          // 如果服务器配置为空，则需要设置AES密码
+          this.browser.configEmpty = this.backgroundPage.Weteoes.browser.data.configEmpty
+          break
+      }
+
+    },
+    initAESPassClick() {
+      this.$message('这是一条消息提示');
+    },
+    console_options_switch_click(value) {
       this.options_save(value.key, value.status);
       this.log(value.key, value.status);
     },
-    options_save (key, value) {
+    options_save(key, value) {
       window.localStorage.setItem(key, value);
       // const that = this
       // let obj = { "console_options": this.console_options };
@@ -27,10 +53,10 @@ new Vue({
       //   that.log('保存成功!');
       // });
     },
-    options_read (key) {
+    options_read(key) {
       return window.localStorage.getItem(key);
     },
-    options_readAll () {
+    options_readAll() {
       for (let name_only of this.console_options) {
         for (let options_only of name_only.options) {
           let a = this.options_read(options_only.key);
@@ -49,11 +75,14 @@ new Vue({
         }
       }
     },
-    log (...msg) {
+    log(...msg) {
       window.console.log(...msg);
     }
   },
-  mounted () {
-    this.options_readAll();
+  mounted() {
+    // this.readyBrowser()
+    this.options_readAll()
+    this.useType = 'browser'
+    this.browser.configEmpty = true
   },
 })
