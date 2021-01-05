@@ -197,7 +197,6 @@ readyBrowserAES()
  */
 // 初始化
 function readyBrowserAES() {
-  console.log('aes', location.host, variable.browserLoginHost, location.host === variable.browserLoginHost)
   if (location.host === variable.browserLoginHost) {
     let w = getLoginSession()
     console.log("aaa", w)
