@@ -22,7 +22,9 @@
         </div>
       </div>
     </div>
-    <div class="more">粤ICP备19082525号</div>
+    <div class="more">
+      <a href="https://beian.miit.gov.cn" target="_blank">粤ICP备19082525号</a>
+    </div>
   </footer>
 </template>
 

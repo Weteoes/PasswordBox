@@ -131,7 +131,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator'
-import { Getter, Action, namespace } from 'vuex-class'
+import { namespace } from 'vuex-class'
 import FooterVue from '@/layouts/Footer.vue'
 import * as apiDownload from '@/api/download'
 import * as apiSSO from '@/api/sso'
@@ -252,7 +252,7 @@ export default class Index extends Vue {
         }
       })
       .catch((e: object) => {
-        console.error(e)
+        window.console.error(e)
       })
   }
 
