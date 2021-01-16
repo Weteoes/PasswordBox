@@ -15,6 +15,10 @@ private:
 	virtual void Send_Socket_While(SOCKET); // 循环发送Socket
 
 private:
+	// 获取socket内容配置a:1，返回1
+	std::string getDataConfig(std::string data, std::string config);
+	// 是否浏览器插件
+	bool isBrowser(std::string data);
 	std::string OtherSend();
 	std::string GetHeader(std::string);
 	bool fileByte(std::string); // 是否需要通过Byte传输的格式
@@ -59,13 +63,13 @@ SOCKADDR_IN WebSocketClass::Socket_Initialization() {
 
 void WebSocketClass::Socket_RunShell(SOCKET client, std::string data) { //执行动作
 	std::string result = "";
-	if (data.find("GET") != 0) { result = OtherSend(); goto f_result; }
+	if (data.find("GET") == -1) { result = OtherSend(); goto f_result; }
 	else {
 		std::string file = data.substr(4);
 		file = file.substr(0, file.find(" "));
 		if (file == "/") { file = "/index.html"; }
 		// operating
-		if (VariableClass::webOperatingClass.Entrance(file, result)) {
+		if (isBrowser(data) && VariableClass::webOperatingClass.Entrance(file, result)) {
 			result = GetHeader("") + result;
 			goto f_result;
 		}
@@ -105,9 +109,33 @@ void WebSocketClass::Send_Socket_While(SOCKET) {
 	return;
 }
 
+bool WebSocketClass::isBrowser(std::string data) {
+	std::string cs = getDataConfig(data, "Host:");
+	int end = cs.find(":");
+	if (end == -1) {
+		return false;
+	}
+	std::string address = cs.substr(0, end);
+	if (address != "127.0.0.1") {
+		return false;
+	}
+	return true;
+}
+
 std::string WebSocketClass::OtherSend() {
 	return GetHeader("") + "404";
 }
+
+std::string WebSocketClass::getDataConfig(std::string data, std::string config) {
+	int i = data.find(config) + config.size() + 1;
+	if (i == -1) {
+		return "";
+	}
+	int end = data.find('\n', i);
+	std::string result = data.substr(i, (end - i));
+	return result;
+}
+
 inline std::string WebSocketClass::GetHeader(std::string file) {
 	std::string result = "HTTP/1.1 200 OK\r\ncharset=UTF-8\r\nServer: Weteoes\r\n";
 #ifdef _DEBUG
