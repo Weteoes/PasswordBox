@@ -4,15 +4,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Component } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
 
-export default Vue.extend({
-  mounted() {
-    this.$router.push('/')
-  },
+@Component({
   head() {
     return {
-      title: '页面未找到',
+      title: '页面未找到' + this._title,
     }
   },
 })
+export default class error404 extends Vue {
+  @(namespace('seo').Getter('title')) _title: string | undefined
+  mounted() {
+    this.$router.push('/')
+  }
+}
 </script>

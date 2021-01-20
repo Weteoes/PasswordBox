@@ -143,7 +143,7 @@ import * as lodash from 'lodash'
   },
   head() {
     return {
-      title: '主页',
+      title: '密码保管箱 - 强密码解决方案',
     }
   },
 })

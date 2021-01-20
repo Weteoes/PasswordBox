@@ -4,7 +4,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - 密码保管箱',
+    titleTemplate: '%s',
     meta: [
       { charset: 'utf-8' },
       {
