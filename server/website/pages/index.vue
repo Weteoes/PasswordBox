@@ -62,64 +62,66 @@
         </div>
       </div>
     </div>
-    <div class="features featuresNoneBorder">
-      <div class="onlyFeatures">
-        <div class="title">加密算法不可逆</div>
-        <div class="info">若加密密钥丢失，数据将无法被再次解密</div>
-        <div class="more">
-          <!-- 安全 -->
-          <div class="only">
-            <div class="icon">
-              <a-icon type="safety" />
+    <div class="data">
+      <div class="features featuresNoneBorder">
+        <div class="onlyFeatures">
+          <div class="title">加密算法不可逆</div>
+          <div class="info">若加密密钥丢失，数据将无法被再次解密</div>
+          <div class="more">
+            <!-- 安全 -->
+            <div class="only">
+              <div class="icon">
+                <a-icon type="safety" />
+              </div>
+              <div class="title">安全</div>
+              <div class="info">
+                AES 256 加密算法，在遗失密码的情况下数据将无法被再次解密
+              </div>
             </div>
-            <div class="title">安全</div>
-            <div class="info">
-              AES 256 加密算法，在遗失密码的情况下数据将无法被再次解密
+            <!-- 云同步 -->
+            <div class="only">
+              <div class="icon">
+                <a-icon type="cloud" />
+              </div>
+              <div class="title">云同步</div>
+              <div class="info">
+                支持SSO单点登录，将加密后的数据保存云端，在无密码的情况下，该数据无法被解读
+              </div>
             </div>
-          </div>
-          <!-- 云同步 -->
-          <div class="only">
-            <div class="icon">
-              <a-icon type="cloud" />
-            </div>
-            <div class="title">云同步</div>
-            <div class="info">
-              支持SSO单点登录，将加密后的数据保存云端，在无密码的情况下，该数据无法被解读
-            </div>
-          </div>
-          <!-- 本地工作模式 -->
-          <div class="only">
-            <div class="icon">
-              <a-icon type="desktop" />
-            </div>
-            <div class="title">本地工作模式</div>
-            <div class="info">
-              支持本地工作模式，数据将保存在本地，可在无需网络的环境下使用
+            <!-- 本地工作模式 -->
+            <div class="only">
+              <div class="icon">
+                <a-icon type="desktop" />
+              </div>
+              <div class="title">本地工作模式</div>
+              <div class="info">
+                支持本地工作模式，数据将保存在本地，可在无需网络的环境下使用
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="features">
-      <div class="onlyFeatures onlyFeaturesTwo">
-        <div class="title">免费使用</div>
-        <div class="info">无需任何额外收费</div>
-        <div class="more">
-          <!-- 安全 -->
-          <div class="only">
-            <div class="icon">
-              <a-icon type="key" />
+      <div class="features">
+        <div class="onlyFeatures onlyFeaturesTwo">
+          <div class="title">免费使用</div>
+          <div class="info">无需任何费用，即刻下载，即刻使用</div>
+          <div class="more">
+            <!-- 安全 -->
+            <div class="only">
+              <div class="icon">
+                <a-icon type="key" />
+              </div>
+              <div class="title">无限制使用</div>
+              <div class="info">不限数量的网站账户信息记录</div>
             </div>
-            <div class="title">无限</div>
-            <div class="info">不限数量的网站账户信息记录</div>
-          </div>
-          <!-- 云同步 -->
-          <div class="only">
-            <div class="icon">
-              <a-icon type="chrome" />
+            <!-- 云同步 -->
+            <div class="only">
+              <div class="icon">
+                <a-icon type="chrome" />
+              </div>
+              <div class="title">支持主流浏览器</div>
+              <div class="info">支持基于Chrome制作的所有主流浏览器</div>
             </div>
-            <div class="title">支持主流浏览器</div>
-            <div class="info">支持基于Chrome制作的所有主流浏览器</div>
           </div>
         </div>
       </div>
@@ -286,8 +288,7 @@ export default class Index extends Vue {
 
 <style lang="less" scoped>
 #Index {
-  @media screen and (min-width: 601px) {
-    @minWidth: 1200px;
+  .Media_Browser({
     & {
       min-width: @minWidth;
     }
@@ -333,10 +334,15 @@ export default class Index extends Vue {
             }
           }
           > .operating {
-            height: 100%;
-            float: right;
-            padding: 4px 0;
-            padding-right: @padding;
+            & {
+              height: 100%;
+              float: right;
+              padding: 4px 0;
+              padding-right: @padding;
+            }
+            button {
+              margin-left: 5px;
+            }
           }
         }
       }
@@ -392,56 +398,62 @@ export default class Index extends Vue {
       }
     }
 
-    > .featuresNoneBorder {
-      border-top: none !important;
-    }
-    > .features {
+    > .data {
       & {
         .minWidth();
-        padding: 30px 0;
-        border-top: 1px solid #e8e8e8;
       }
 
-      > .onlyFeatures {
-        width: 100%;
-        margin: 0 auto;
+      > .featuresNoneBorder {
+        border-top: none !important;
       }
 
-      > .onlyFeaturesTwo {
-        width: 700px;
-        margin: 0 auto;
-      }
-
-      .title {
-        font-weight: bold;
-        font-size: 32px;
-        text-align: center;
-      }
-
-      .info {
-        padding-top: 5px;
-        color: #808080;
-        text-align: center;
-      }
-
-      .more {
+      > .features {
         & {
-          display: flex;
-          justify-content: space-between;
+          padding: 30px 0;
+          border-top: 1px solid #e8e8e8;
         }
 
-        > .only {
+        > .onlyFeatures {
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        > .onlyFeaturesTwo {
+          width: 700px;
+          margin: 0 auto;
+        }
+
+        .title {
+          font-weight: bold;
+          font-size: 32px;
+          text-align: center;
+        }
+
+        .info {
+          padding-top: 5px;
+          color: #808080;
+          text-align: center;
+        }
+
+        .more {
           & {
-            width: 250px;
-            text-align: center;
-            padding: 10px;
+            display: flex;
+            justify-content: space-between;
           }
-          > .icon {
-            font-size: 46px;
-          }
-          > .title {
-            font-size: 16px;
-            padding-bottom: 10px;
+
+          > .only {
+            & {
+              width: 250px;
+              text-align: center;
+              padding: 10px;
+            }
+            > .icon {
+              font-size: 46px;
+            }
+            > .title {
+              font-size: 16px;
+              padding-bottom: 10px;
+            }
           }
         }
       }
@@ -451,9 +463,9 @@ export default class Index extends Vue {
       width: @minWidth;
       margin: 0 auto;
     }
-  }
+  });
 
-  @media screen and (max-width: 600px) {
+  .Media_Phone({
     > .top {
       @padding: 5px;
 
@@ -490,11 +502,16 @@ export default class Index extends Vue {
             }
           }
           > .operating {
-            .inline();
-            height: 100%;
-            float: right;
-            padding: 4px 0;
-            padding-right: @padding;
+            & {
+              .inline();
+              height: 100%;
+              float: right;
+              padding: 4px 0;
+              padding-right: @padding;
+            }
+            button {
+              margin-left: 5px;
+            }
           }
         }
       }
@@ -550,64 +567,70 @@ export default class Index extends Vue {
       }
     }
 
-    > .featuresNoneBorder {
-      border-top: none !important;
-    }
-    > .features {
+    > .data {
       & {
         width: 95vw;
         margin: 0 auto;
-        padding: 30px 0;
-        border-top: 1px solid #e8e8e8;
       }
-
-      > .onlyFeatures {
-        width: 100%;
-        margin: 0 auto;
+      
+      > .featuresNoneBorder {
+        border-top: none !important;
       }
-
-      .title {
-        font-weight: bold;
-        font-size: 32px;
-        text-align: center;
-      }
-
-      .info {
-        padding-top: 5px;
-        color: #808080;
-        text-align: center;
-      }
-
-      .more {
+      > .features {
         & {
-          display: flex;
-          justify-content: space-between;
-          flex-flow: column;
+          padding: 30px 0;
+          border-top: 1px solid #e8e8e8;
         }
 
-        > .only {
+        > .onlyFeatures {
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .title {
+          font-weight: bold;
+          font-size: 32px;
+          text-align: center;
+        }
+
+        .info {
+          padding-top: 5px;
+          color: #808080;
+          text-align: center;
+        }
+
+        .more {
           & {
-            width: 250px;
-            text-align: center;
-            padding: 10px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-flow: column;
           }
-          > .icon {
-            font-size: 46px;
-          }
-          > .title {
-            font-size: 16px;
-            padding-bottom: 10px;
+
+          > .only {
+            & {
+              width: 250px;
+              text-align: center;
+              padding: 10px;
+              margin: 0 auto;
+            }
+            > .icon {
+              font-size: 46px;
+            }
+            > .title {
+              font-size: 16px;
+              padding-bottom: 10px;
+            }
           }
         }
       }
-    }
 
+    }
+   
     .inline() {
       display: inline-block;
       vertical-align: top;
     }
-  }
+  });
 }
 </style>
 

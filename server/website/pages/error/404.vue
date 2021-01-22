@@ -1,5 +1,5 @@
 <template>
-  <div>404 Not Found</div>
+  <div>error 404 Not Found</div>
 </template>
 
 <script lang="ts">

@@ -1,5 +1,8 @@
 <template>
   <footer id="Footer">
+    <!-- 返回顶部 -->
+    <a-back-top />
+    <!-- Footer -->
     <div class="center">
       <div class="left onlyModule">
         <div class="title">关于</div>
@@ -15,7 +18,7 @@
           <a href="mailto:mail@weteoes.cn" target="_blank"> mail@weteoes.cn </a>
         </div>
         <div class="info">
-          GitHub:
+          GitHub：
           <a href="https://github.com/Weteoes/PasswordBox" target="_blank">
             Weteoes/PasswordBox
           </a>
@@ -29,7 +32,7 @@
 </template>
 
 <style lang="less" scoped>
-@media screen and (min-width: 601px) {
+.Media_Browser({
   footer {
     @minWidth: 1200px;
     @padding: 30px;
@@ -82,9 +85,9 @@
       margin: 0 auto;
     }
   }
-}
+});
 
-@media screen and (max-width: 600px) {
+.Media_Phone({
   footer {
     @padding: 10px;
 
@@ -116,5 +119,5 @@
       font-size: 14px;
     }
   }
-}
+});
 </style>
