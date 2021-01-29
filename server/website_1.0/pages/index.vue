@@ -5,7 +5,7 @@
         <div class="one">
           <div class="center">
             <div class="logo">
-              <img src="/static/logo.png">
+              <img src="/static/logo.png" />
               <div>密码保管箱</div>
             </div>
             <div class="operating">
@@ -26,7 +26,7 @@
                         verticalAlign: 'middle',
                       }"
                       v-text="userInfo.user"
-                    />
+                    ></a-avatar>
                   </div>
                 </a-popover>
               </div>
@@ -34,9 +34,7 @@
                 <a-button class="only" @click="ssoRegistered">
                   注册账户
                 </a-button>
-                <a-button class="only" @click="ssoLogin">
-                  登录
-                </a-button>
+                <a-button class="only" @click="ssoLogin"> 登录 </a-button>
               </div>
             </div>
           </div>
@@ -44,22 +42,16 @@
       </a-affix>
       <div class="data">
         <div class="left">
-          <img src="/static/software.jpg">
+          <img src="/static/software.jpg" />
         </div>
         <div class="right">
-          <div class="title">
-            密码保管箱
-          </div>
-          <div class="info">
-            从此不再忘记密码，强密码解决方案
-          </div>
+          <div class="title">密码保管箱</div>
+          <div class="info">从此不再忘记密码，强密码解决方案</div>
           <div class="info">
             使用AES 256加密算法，可自动登录网页，数据云同步，支持主流浏览器
           </div>
           <div class="download">
-            <div class="title">
-              下载地址：
-            </div>
+            <div class="title">下载地址：</div>
             <a-button class="only" @click="downloadBuuton('browser')">
               浏览器插件
             </a-button>
@@ -73,21 +65,15 @@
     <div class="data">
       <div class="features featuresNoneBorder">
         <div class="onlyFeatures">
-          <div class="title">
-            加密算法不可逆
-          </div>
-          <div class="info">
-            若加密密钥丢失，数据将无法被再次解密
-          </div>
+          <div class="title">加密算法不可逆</div>
+          <div class="info">若加密密钥丢失，数据将无法被再次解密</div>
           <div class="more">
             <!-- 安全 -->
             <div class="only">
               <div class="icon">
                 <a-icon type="safety" />
               </div>
-              <div class="title">
-                安全
-              </div>
+              <div class="title">安全</div>
               <div class="info">
                 AES 256 加密算法，在遗失密码的情况下数据将无法被再次解密
               </div>
@@ -97,9 +83,7 @@
               <div class="icon">
                 <a-icon type="cloud" />
               </div>
-              <div class="title">
-                云同步
-              </div>
+              <div class="title">云同步</div>
               <div class="info">
                 支持SSO单点登录，将加密后的数据保存云端，在无密码的情况下，该数据无法被解读
               </div>
@@ -109,9 +93,7 @@
               <div class="icon">
                 <a-icon type="desktop" />
               </div>
-              <div class="title">
-                本地工作模式
-              </div>
+              <div class="title">本地工作模式</div>
               <div class="info">
                 支持本地工作模式，数据将保存在本地，可在无需网络的环境下使用
               </div>
@@ -121,42 +103,30 @@
       </div>
       <div class="features">
         <div class="onlyFeatures onlyFeaturesTwo">
-          <div class="title">
-            免费使用
-          </div>
-          <div class="info">
-            无需任何费用，即刻下载，即刻使用
-          </div>
+          <div class="title">免费使用</div>
+          <div class="info">无需任何费用，即刻下载，即刻使用</div>
           <div class="more">
             <!-- 安全 -->
             <div class="only">
               <div class="icon">
                 <a-icon type="key" />
               </div>
-              <div class="title">
-                无限制使用
-              </div>
-              <div class="info">
-                不限数量的网站账户信息记录
-              </div>
+              <div class="title">无限制使用</div>
+              <div class="info">不限数量的网站账户信息记录</div>
             </div>
             <!-- 云同步 -->
             <div class="only">
               <div class="icon">
                 <a-icon type="chrome" />
               </div>
-              <div class="title">
-                支持主流浏览器
-              </div>
-              <div class="info">
-                支持基于Chrome制作的所有主流浏览器
-              </div>
+              <div class="title">支持主流浏览器</div>
+              <div class="info">支持基于Chrome制作的所有主流浏览器</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <FooterVue />
+    <FooterVue></FooterVue>
   </div>
 </template>
 
@@ -171,13 +141,13 @@ import * as lodash from 'lodash'
 
 @Component({
   components: {
-    FooterVue
+    FooterVue,
   },
-  head () {
+  head() {
     return {
-      title: '密码保管箱 - 强密码解决方案'
+      title: '密码保管箱 - 强密码解决方案',
     }
-  }
+  },
 })
 export default class Index extends Vue {
   // 是否已经登录
@@ -187,7 +157,7 @@ export default class Index extends Vue {
     id: null,
     uid: 'B23028DA-E444-4C1F-BB5E-E6AB09746372',
     user: 'a',
-    code: 0
+    code: 0,
   }
 
   // 下载URL
@@ -201,7 +171,7 @@ export default class Index extends Vue {
   @(namespace('url').Getter('ssoSignOutUrl')) ssoSignOutUrl: string | undefined
 
   // 初始化下载地址
-  downloadReady () {
+  downloadReady() {
     apiDownload
       .downloadList()
       .then((e: any) => {
@@ -223,56 +193,56 @@ export default class Index extends Vue {
 
   // 下载事件throttle
   downloadBuuton = lodash.throttle(this.downloadBuuton_, 1000, {
-    trailing: false
+    trailing: false,
   })
 
   // 注册账号事件throttle
   ssoRegistered = lodash.throttle(this.ssoRegistered_, 1000, {
-    trailing: false
+    trailing: false,
   })
 
   // 登录账号事件throttle
   ssoLogin = lodash.throttle(this.ssoLogin_, 1000, {
-    trailing: false
+    trailing: false,
   })
 
   // 注销账号事件throttle
   ssoSignOut = lodash.throttle(this.ssoSignOut_, 1000, {
-    trailing: false
+    trailing: false,
   })
 
   // 下载事件
-  downloadBuuton_ (key: string) {
-    if (key === null) { return }
+  downloadBuuton_(key: string) {
+    if (key === null) return
     this.downloadLog(key)
     const url = this.downloadUrlList.get(key)
-    if (url === undefined) { return }
+    if (url === undefined) return
     window.open(url)
   }
 
   // 注册账号事件
-  ssoRegistered_ () {
+  ssoRegistered_() {
     const url = this.ssoRegisteredUrl + encodeURIComponent(location.href)
-    if (url === undefined) { return }
+    if (url === undefined) return
     window.open(url)
   }
 
   // 登录账号事件
-  ssoLogin_ () {
+  ssoLogin_() {
     const url = this.ssoLoginUrl + encodeURIComponent(location.href)
-    if (url === undefined) { return }
+    if (url === undefined) return
     location.href = url
   }
 
   // 注销账号
-  ssoSignOut_ () {
+  ssoSignOut_() {
     const url = this.ssoSignOutUrl + encodeURIComponent(location.href)
-    if (url === undefined) { return }
+    if (url === undefined) return
     location.href = url
   }
 
   // 尝试获取登录信息
-  getLoggedInfo () {
+  getLoggedInfo() {
     apiSSO
       .getInfo()
       .then((e: any) => {
@@ -289,9 +259,9 @@ export default class Index extends Vue {
   }
 
   // 访问日志
-  downloadLog (key: String) {
-    if (location.hostname === '127.0.0.1') { return }
-    if (this.$common.getQueryVariable('w') === '1') { return }
+  downloadLog(key: String) {
+    if (location.hostname === '127.0.0.1') return
+    if (this.$common.getQueryVariable('w') === '1') return
     apiDownload.downloadLog({ type: key }).catch((e: object) => {
       window.console.error(e)
     })
@@ -301,14 +271,14 @@ export default class Index extends Vue {
    * Default
    */
   // 全局错误提示
-  showErrorInfo (msg: string | undefined) {
+  showErrorInfo(msg: string | undefined) {
     if (msg) {
       this.$message.destroy()
       this.$message.error(msg)
     }
   }
 
-  mounted () {
+  mounted() {
     this.downloadReady()
     this.getLoggedInfo()
     this.downloadLog('website')
@@ -602,7 +572,7 @@ export default class Index extends Vue {
         width: 95vw;
         margin: 0 auto;
       }
-
+      
       > .featuresNoneBorder {
         border-top: none !important;
       }
@@ -655,7 +625,7 @@ export default class Index extends Vue {
       }
 
     }
-
+   
     .inline() {
       display: inline-block;
       vertical-align: top;

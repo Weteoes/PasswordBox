@@ -1,16 +1,16 @@
-import request from '@/util/request'
+import request from '@/plugins/request'
 
-export function downloadList() {
+export function downloadList () {
   return request({
     method: 'post',
-    url: '/download/get',
+    url: '/download/get'
   })
 }
 
-export function downloadLog(data: object) {
+export function downloadLog (data: object) {
   return request({
     method: 'post',
     url: '/download/log',
-    data,
+    data
   })
 }

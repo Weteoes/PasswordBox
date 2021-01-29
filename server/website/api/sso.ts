@@ -1,8 +1,8 @@
-import request from '@/util/request'
+import request from '@/plugins/request'
 
-export function getInfo() {
+export function getInfo () {
   return request({
     method: 'post',
-    url: '/sso/login',
+    url: '/sso/login'
   })
 }
