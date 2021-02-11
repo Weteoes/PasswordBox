@@ -354,6 +354,7 @@ chrome.runtime.onConnect.addListener(function (client) {
     return false;
   }
 });
+
 function ready() {
   switch (Weteoes.config.useType) {
     case "browser":

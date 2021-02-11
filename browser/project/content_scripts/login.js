@@ -47,18 +47,30 @@ function socketConnect() {
       switch (msg.api) {
         // 判断是否有保存账户的网站
         case "getUserPassbyUrl":
-          variable.input.userInput.focus()
-          variable.input.userInput.value = msg.user;
-          variable.input.userInput.dispatchEvent(new Event('input'));
-          variable.input.passInput.focus()
-          variable.input.passInput.value = msg.pass;
-          variable.input.passInput.dispatchEvent(new Event('input'));
+          setInputValue(variable.input.userInput, msg.user)
+          setInputValue(variable.input.passInput, msg.pass)
           break;
       }
     });
   } catch (e) {
     log(e);
   }
+}
+
+function setInputValue(input, value) {
+  input.focus()
+  input.value = value
+  input.dispatchEvent(new Event("input", {
+    bubbles: !0,
+    cancelable: !0
+  }))
+  input.dispatchEvent(new Event("change", {
+    bubbles: !0,
+    cancelable: !0
+  }))
+  setTimeout(() => {
+    input.blur()
+  }, 10)
 }
 
 function addDocumentEvent() {

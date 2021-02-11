@@ -8,12 +8,13 @@ body {
 }
 
 #app {
-  width: 200px;
+  /* width: 200px; */
   height: auto;
   /* border: 1px solid #000; */
 }
 
 .console {
+  width: 200px;
   height: auto;
   padding: 5px;
 }
@@ -51,7 +52,7 @@ body {
 
 #initAESPass {
   width: 300px;
-  border:1px solid #000;
+  /* border:1px solid #000; */
   font-size: 18px;
   padding:5px;
 }

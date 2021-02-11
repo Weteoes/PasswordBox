@@ -80,9 +80,9 @@ new Vue({
     }
   },
   mounted() {
-    // this.readyBrowser()
+    this.readyBrowser()
     this.options_readAll()
-    this.useType = 'browser'
-    this.browser.configEmpty = true
+    // this.useType = 'browser'
+    // this.browser.configEmpty = true
   },
 })
