@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "密码保管箱 (Password Box)",
-    "version": "1.1",
+    "version": "1.2",
     "description": "可实现网页保存账户,下次即可自动输入账户",
     "author": "Weteoes",
     "homepage_url": "https://github.com/Weteoes/",

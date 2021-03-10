@@ -15,7 +15,10 @@ new Vue({
       },
       console_options: [
         {
-          name: "passwordBox", title: "密码保管箱", options: [
+          name: "passwordBox", 
+          image: "../img/icon.png",
+          title: "密码保管箱", subTitle: "PasswordBox", 
+          options: [
             { key: "passwordBox_options_on", type: "switch", title: "全局开关", status: true },
             { key: "passwordBox_options_autosave", type: "switch", title: "自动保存", status: true }
           ]
@@ -34,7 +37,6 @@ new Vue({
           this.browser.configEmpty = this.backgroundPage.Weteoes.browser.data.configEmpty
           break
       }
-
     },
     initAESPassClick() {
       this.$message('这是一条消息提示');
@@ -43,6 +45,7 @@ new Vue({
       this.options_save(value.key, value.status);
       this.log(value.key, value.status);
     },
+    // 保存配置
     options_save(key, value) {
       window.localStorage.setItem(key, value);
       // const that = this
@@ -53,9 +56,11 @@ new Vue({
       //   that.log('保存成功!');
       // });
     },
+    // 读取配置（单独）
     options_read(key) {
       return window.localStorage.getItem(key);
     },
+    // 读取配置
     options_readAll() {
       for (let name_only of this.console_options) {
         for (let options_only of name_only.options) {

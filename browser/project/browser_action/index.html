@@ -3,6 +3,8 @@
 <head>
   <link rel="stylesheet" type="text/css" href="css/index.css" />
   <link rel="stylesheet" type="text/css" href="../modules/element/index.css" />
+  <script src="../modules/vue.min.js"></script>
+  <script src="../modules/element/index.js"></script>
 </head>
 
 </html>
@@ -24,7 +26,17 @@
       </div>
     </div>
     <div class="console" v-for="console_name in console_options" v-else>
-      <div class="title" v-text="console_name.title"></div>
+      <div class="top">
+        <!-- 有图标 -->
+        <div class="image" v-if="typeof console_name.image !== 'undefined'">
+          <img :src="console_name.image" />
+        </div>
+        <!-- 标题 -->
+        <div class="data">
+          <div class="title" v-text="console_name.title"></div>
+          <div class="subTitle" v-text="console_name.subTitle"></div>
+        </div>
+      </div>
       <div class="options">
         <div class="options_only" v-for="value,key in console_name.options">
           <!-- 如果是switch -->
@@ -38,7 +50,5 @@
       </div>
     </div>
   </div>
-  <script src="../modules/vue.min.js"></script>
-  <script src="../modules/element/index.js"></script>
   <script src="js/index.js"></script>
 </body>
