@@ -1,4 +1,6 @@
 addDocumentEvent();
+// readyBrowserAES()
+
 // 保存全局变量
 let variable = {
   RunTimeConnect: null, // socket长连接
@@ -30,6 +32,7 @@ function main() {
 
 // 只会执行一次
 function readyFunction() {
+  // 是否已经执行过
   if (variable.readyFunction) {
     return;
   }
@@ -74,7 +77,8 @@ function setInputValue(input, value) {
 }
 
 function addDocumentEvent() {
-  document.body.onclick = main;
+  if (isIpv4()) { return }
+  document.body.onclick = main
 }
 
 function addInputEvent(userInput, passInput) {
@@ -175,7 +179,7 @@ function findUserInput(passInput) {
       let userInputList = passInputParent.querySelectorAll(userInputType);
       // 如果有多个用户框的时候
       for (let i of userInputList) {
-        if (i.style.display == "none") {
+        if (i.style.display == "none" || i.hidden) {
           // 如果是隐藏的话就跳过
           continue;
         }
@@ -186,6 +190,11 @@ function findUserInput(passInput) {
   }
   const result = findByList() || findByType() || findByPassInput();
   return result;
+}
+
+// 判断是否是ipv4地址
+function isIpv4() {
+  return new RegExp("^[0-9]+.[0-9]+.[0-9]+.[0-9]+").test(location.host)
 }
 
 // 监听URL
@@ -203,7 +212,6 @@ function URL() {
 
 
 
-readyBrowserAES()
 /**
  * 浏览器解密
  */
@@ -224,8 +232,6 @@ function getLoginSession() {
   });
   return getCookie("w")
 }
-
-
 
 /**
  * Basic
