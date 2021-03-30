@@ -1,4 +1,5 @@
-﻿var Weteoes = {
+﻿// 全局变量
+var Weteoes = {
   // 配置
   config: {
     // 使用存储类型
@@ -20,6 +21,7 @@
       configGet: "/config/get", // apiHost + configGet
       configSet: "/config/set", // apiHost + configSet
     },
+    // 操作
     operating: {
       // 尝试解密，并初始化
       aesPass(pass) {
@@ -47,9 +49,9 @@
         let list = []
         for (let only of queryList) {
           let onlyList = {
-            Host: only.getAttribute("Host"),
-            User: only.getAttribute("User"),
-            Pass: only.getAttribute("Pass")
+            host: only.getAttribute("host"),
+            user: only.getAttribute("user"),
+            pass: only.getAttribute("pass")
           }
           list.push(onlyList)
         }
@@ -68,6 +70,7 @@
         }
         return false
       },
+      // 获取配置
       getConfig() {
         Weteoes.basic.axios(
           Weteoes.browser.url.configGet,
@@ -92,14 +95,15 @@
             log(e);
           });
       },
+      // 设置配置
       setConfig() {
         // 创建一个新的、文档元素为<root>的xml文档
         var xmldom = document.implementation.createDocument('', 'Weteoes', null)
         for (let i of Weteoes.browser.data.list) {
           let only = xmldom.createElement('UserAndPassword')
-          only.setAttribute("Host", i.Host)
-          only.setAttribute("User", i.User)
-          only.setAttribute("Pass", i.Pass)
+          only.setAttribute("host", i.host)
+          only.setAttribute("user", i.user)
+          only.setAttribute("pass", i.pass)
           xmldom.documentElement.appendChild(only)
         }
         let config = (new XMLSerializer()).serializeToString(xmldom)
@@ -123,12 +127,13 @@
       /**
        * 基础操作
        */
+      // 删除账号
       del(host) {
         if (!Weteoes.browser.data.aesDecrypt) {
           return
         }
         for (let i = Weteoes.browser.data.list.length - 1; i > 0; i--) {
-          if (Weteoes.browser.data.list[i].Host === host) {
+          if (Weteoes.browser.data.list[i].host === host) {
             Weteoes.browser.data.list.splice(i, 1)
             break
           }
@@ -136,31 +141,33 @@
         // 保存配置
         Weteoes.browser.operating.setConfig()
       },
+      // 获取账号
       get(client, host) {
         if (!Weteoes.browser.data.aesDecrypt) {
           return
         }
         for (let i of Weteoes.browser.data.list) {
-          if (i.Host === host) {
-            client.postMessage({ api: "getUserPassbyUrl", "user": i.User, "pass": i.Pass }, () => { })
+          if (i.host === host) {
+            client.postMessage({ api: "getUserPassbyUrl", "user": i.user, "pass": i.pass }, () => { })
           }
         }
       },
+      // 创建账号
       create(host, user, pass) {
         if (!Weteoes.browser.data.aesDecrypt) {
           return
         }
         let hasData = false
         for (let i of Weteoes.browser.data.list) {
-          if (i.Host === host) {
+          if (i.host === host) {
             hasData = true
-            i.User = user
-            i.Pass = pass
+            i.user = user
+            i.pass = pass
           }
         }
         // 如果没有数据，添加
         if (!hasData) {
-          let data = { Host: host, User: user, Pass: pass };
+          let data = { host: host, user: user, pass: pass };
           Weteoes.browser.data.list.push(data)
         }
         // 保存配置
@@ -171,11 +178,16 @@
   // 连接软件
   software: {
     url: {
+      // 获取账号
       get: "http://127.0.0.1:23340/operating/browser/get",
+      // 创建账号
       create: "http://127.0.0.1:23340/operating/browser/create",
+      // 删除账号
       del: "http://127.0.0.1:23340/operating/browser/del",
     },
+    // 操作
     operating: {
+      // 获取账号
       get(client, host) {
         let data = { Host: host };
         Weteoes.basic.axios(
@@ -184,14 +196,12 @@
           (data) => {
             if (data.Code == 0) {
               client.postMessage({ api: "getUserPassbyUrl", "user": data.Data.User, "pass": data.Data.Pass }, () => { })
-              log("get ok");
-            } else {
-              log("get error")
             }
           }, (e) => {
             log(e);
           });
       },
+      // 创建账号
       create(host, user, pass) {
         let data = { Host: host, User: user, Pass: pass };
         Weteoes.basic.axios(
@@ -207,6 +217,7 @@
             log(e);
           });
       },
+      // 删除账号
       del(host) {
         let data = { Host: host };
         Weteoes.basic.axios(
@@ -224,9 +235,11 @@
       },
     }
   },
-  // 本地操作
+  // 本地操作(使用localStorage进行储存)
   localStorage: {
+    // 操作
     operating: {
+      // 获取账号
       get(client, host) {
         let a = localStorage.getItem(host);
         if (a == null) { return; }
@@ -237,12 +250,15 @@
           client.postMessage({ api: "getUserPassbyUrl", "user": user, "pass": pass }, () => { })
         }
       },
-      create(host) {
+      // 创建账号
+      create(host, variable) {
         localStorage.setItem(host, JSON.stringify(variable));
       },
     }
   },
+  // 通用函数
   basic: {
+    // axios
     axios(url, data, success, error, type = 'get') {
       if (typeof success != "function") { success = () => { }; }
       if (typeof error != "function") { error = () => { }; }
@@ -270,64 +286,69 @@
   }
 };
 
+// 初始化
+ready()
+
+// 全局监听socket，等待browser_action连接
 chrome.runtime.onConnect.addListener(function (client) {
   // 全局变量
   let variable = {};
   // 保存访问URL
   saveUrl();
-  log(variable.Host, "connect");
+  log(variable.host, "connect");
   // 获取账户信息
-  getUserPassbyUrl();
+  getUserPassbyUrl(client);
 
+  // 浏览器socket断开事件
   client.onDisconnect.addListener(function () {
     if (!isOptionsOn()) { return }
     if (!isOptionsAutoSave()) { return }
-    log(variable.Host, "disconnect");
+    log(variable.host, "disconnect");
     if (pd_data()) {
       switch (Weteoes.config.useType) {
         case "browser":
           break
         case "software":
-          Weteoes.software.operating.create(variable.Host, variable.User, variable.Pass);
+          Weteoes.software.operating.create(variable.host, variable.user, variable.pass);
           break
         case "localStorage":
-          Weteoes.localStorage.operating.create(variable.Host);
+          Weteoes.localStorage.operating.create(variable.host, variable);
           break
       }
     } else {
       log(variable, "数据不合格")
     }
   });
-
+  // 浏览器socket收到消息事件
   client.onMessage.addListener(function (msg) {
     if (!isOptionsOn()) { return }
     switch (msg.api) {
       // 用户名提交api
       case "user":
-        variable.User = msg.user;
+        variable.user = msg.user;
         break;
-
       // 密码提交api
       case "pass":
-        variable.Pass = msg.pass;
+        variable.pass = msg.pass;
         break;
     }
   });
 
-  function getUserPassbyUrl() {
+  // 统一-获取用户名和密码通过HOST(会自动根据client发送)
+  function getUserPassbyUrl(client) {
     if (!isOptionsOn()) { return }
     switch (Weteoes.config.useType) {
       case "browser":
         break
       case "software":
-        Weteoes.software.operating.get(client, variable.Host);
+        Weteoes.software.operating.get(client, variable.host);
         break
       case "localStorage":
-        Weteoes.localStorage.operating.get(client, variable.Host);
+        Weteoes.localStorage.operating.get(client, variable.host);
         break
     }
   }
-
+  // 获取并保存当前客户端HOST地址
   function saveUrl() {
     let url;
     if (typeof client.sender.origin != "undefined") {
@@ -339,15 +360,14 @@ chrome.runtime.onConnect.addListener(function (client) {
       let b = a.substr(0, a.indexOf("/", 8));
       url = b;
     }
-    variable.Host = url;
+    variable.host = url;
   }
-
   // 判断数据是否有效
   function pd_data() {
     if (
-      typeof variable.Host != "undefined" &&
-      typeof variable.User != "undefined" &&
-      typeof variable.Pass != "undefined"
+      typeof variable.host != "undefined" &&
+      typeof variable.user != "undefined" &&
+      typeof variable.pass != "undefined"
     ) {
       return true;
     }
@@ -355,7 +375,10 @@ chrome.runtime.onConnect.addListener(function (client) {
   }
 });
 
+// 初始化事件
 function ready() {
+  readyAxios() // 初始化axios
+  // 获取软件使用方式
   switch (Weteoes.config.useType) {
     case "browser":
       log("将使用插件云存储,安全性较高");
@@ -370,9 +393,10 @@ function ready() {
       log("将使用插件本地存储,安全性较低");
       break
   }
-  Weteoes.browser.operating.getConfig()
+  // 浏览器AES
+  // Weteoes.browser.operating.getConfig()
 }
-
+// 初始化axios配置
 function readyAxios() {
   axios.interceptors.response.use((response) => {
     switch (response.data.code) {
@@ -390,27 +414,25 @@ function readyAxios() {
   })
 }
 
-// 全局开关
+// 获取软件配置-全局开关
 function isOptionsOn() {
   let a = options_read("passwordBox_options_on")
   if (a === 'true') return true
   return false
 }
-
-// 自动保存开关
+// 获取软件配置-自动保存开关
 function isOptionsAutoSave() {
   let a = options_read("passwordBox_options_autosave")
   if (a === 'true') return true
   return false
 }
 
+// 统一-日志
 function log(...msg) {
   console.log(...msg);
 }
-
+// 统一获取软件配置方式
 function options_read(key) {
   return window.localStorage.getItem(key);
 }
 
-readyAxios()
-ready()

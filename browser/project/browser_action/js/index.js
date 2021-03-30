@@ -15,9 +15,9 @@ new Vue({
       },
       console_options: [
         {
-          name: "passwordBox", 
+          name: "passwordBox",
           image: "../img/icon.png",
-          title: "密码保管箱", subTitle: "PasswordBox", 
+          title: "密码保管箱", subTitle: "PasswordBox",
           options: [
             { key: "passwordBox_options_on", type: "switch", title: "全局开关", status: true },
             { key: "passwordBox_options_autosave", type: "switch", title: "自动保存", status: true }
