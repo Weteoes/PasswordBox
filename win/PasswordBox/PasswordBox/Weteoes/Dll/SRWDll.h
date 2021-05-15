@@ -9,6 +9,7 @@ private:
 	typedef int(__stdcall* AES_Encode_)(char* data, int dataLen, char* key, char*& result);
 	typedef int(__stdcall* AES_UnEncode_)(char* data, int dataLen, char* key, char*& result);
 	typedef bool(__stdcall* Set_Variable_)(char* key, char* value);
+	typedef char*(__stdcall* Get_Variable_)(char* key);
 
 public:
 	static bool Ready();
@@ -18,5 +19,6 @@ public:
 	static AES_Encode_ AES_Encode;			// AES 加密
 	static AES_UnEncode_ AES_UnEncode;		// AES 解密
 	static Set_Variable_ Set_Variable;		// Dll全局变量保存
+	static Get_Variable_ Get_Variable;		// Dll全局变量获取
 };
 #endif

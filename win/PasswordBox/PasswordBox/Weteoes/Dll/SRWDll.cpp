@@ -7,6 +7,7 @@ SRWDll::RSA_UnEncode_ SRWDll::RSA_UnEncode;
 SRWDll::AES_Encode_ SRWDll::AES_Encode;
 SRWDll::AES_UnEncode_ SRWDll::AES_UnEncode;
 SRWDll::Set_Variable_ SRWDll::Set_Variable;
+SRWDll::Get_Variable_ SRWDll::Get_Variable;
 
 bool SRWDll::Ready() {
 	HMODULE dll = LoadLibrary(TEXT("SRW.dll")); //º”‘ÿdll
@@ -16,6 +17,7 @@ bool SRWDll::Ready() {
 	RSA_UnEncode =  (RSA_UnEncode_)GetProcAddress(dll, "RSA_UnEncode");
 	AES_Encode =	(AES_Encode_)GetProcAddress(dll, "AES_Encode");
 	AES_UnEncode =  (AES_UnEncode_)GetProcAddress(dll, "AES_UnEncode");
-	Set_Variable =  (Set_Variable_)GetProcAddress(dll, "Set_Variable");
+	Set_Variable = (Set_Variable_)GetProcAddress(dll, "Set_Variable");
+	Get_Variable =  (Get_Variable_)GetProcAddress(dll, "Get_Variable");
 	return true;
 }

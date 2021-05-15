@@ -84,3 +84,8 @@ extern "C" _declspec(dllexport) bool Set_Variable(char* key, char* value) {
 	VariableClass::setVariable(key, value);
 	return true;
 }
+
+extern "C" _declspec(dllexport) char* Get_Variable(char* key) {
+	if (!Ready()) { return NULL; }
+	return GetChars(VariableClass::getVariable(key));
+}
